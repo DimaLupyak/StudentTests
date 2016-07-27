@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="33526452-67c7-4a02-9756-e18a63a89443" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:23235/StudentTestService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="StudentTestService.disco" MetadataType="Disco" ID="95bbdd17-0e9f-4f24-a6f6-e377d76e6b10" SourceId="1" SourceUrl="http://localhost:23235/StudentTestService.svc?disco" />
+    <MetadataFile FileName="StudentTestService.wsdl" MetadataType="Wsdl" ID="945ee613-a5c6-47ac-87a4-3d9588c2b231" SourceId="1" SourceUrl="http://localhost:23235/StudentTestService.svc?wsdl" />
+    <MetadataFile FileName="StudentTestService.xsd" MetadataType="Schema" ID="91143fe1-709e-4c1c-9131-ba37de3b5594" SourceId="1" SourceUrl="http://localhost:23235/StudentTestService.svc?xsd=xsd0" />
+    <MetadataFile FileName="StudentTestService1.xsd" MetadataType="Schema" ID="1979637c-02cf-4975-806c-774569126441" SourceId="1" SourceUrl="http://localhost:23235/StudentTestService.svc?xsd=xsd1" />
+    <MetadataFile FileName="StudentTestService2.xsd" MetadataType="Schema" ID="1b0637ad-ee66-474e-a5d9-2273f0c2ddec" SourceId="1" SourceUrl="http://localhost:23235/StudentTestService.svc?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

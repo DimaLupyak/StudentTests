@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e75f5c0bcb3c45c4979352d63c67f4a7" Name="Diagram1">
+        <EntityTypeShape EntityType="StudentTestDBModel.Access" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentTestDBModel.Answer" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentTestDBModel.Group" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentTestDBModel.Question" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentTestDBModel.Result" Width="1.5" PointX="6" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentTestDBModel.Student" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentTestDBModel.Test" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentTestDBModel.ResultAnswer" Width="1.5" PointX="7.5" PointY="7.375" IsExpanded="true" />
+        <AssociationConnector Association="StudentTestDBModel.FK_Accesses_Groups" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentTestDBModel.FK_Accesses_Tests" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentTestDBModel.FK_Answers_Questions" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentTestDBModel.FK_ResultAnswers_Answers" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentTestDBModel.FK_Students_Groups" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentTestDBModel.FK_Questions_Tests" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentTestDBModel.FK_ResultAnswers_Questions" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentTestDBModel.FK_ResultAnswers_Results" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentTestDBModel.FK_Results_Students" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentTestDBModel.FK_Results_Tests" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
