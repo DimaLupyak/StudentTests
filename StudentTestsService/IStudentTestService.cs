@@ -17,6 +17,8 @@ namespace StudentTestsService
         [OperationContract]
         IEnumerable<GroupViewModel> GetGroups();
         [OperationContract]
+        IEnumerable<TestViewModel> GetTests();
+        [OperationContract]
         IEnumerable<TestViewModel> GetStudentTests(int studentId);
         [OperationContract]
         IEnumerable<QuestionViewModel> GetTestQuestions(int testId);
@@ -31,6 +33,8 @@ namespace StudentTestsService
         void CreateStudent(StudentViewModel student);
         [OperationContract]
         void CreateGroup(GroupViewModel group);
+        [OperationContract]
+        void CreateTest(TestViewModel test);
         #endregion
 
         #region Update 
@@ -38,6 +42,8 @@ namespace StudentTestsService
         void UpdateStudent(StudentViewModel student);
         [OperationContract]
         void UpdateGroup(GroupViewModel group);
+        [OperationContract]
+        void UpdateTest(TestViewModel test);
         #endregion
 
         #region Delete 
@@ -45,6 +51,8 @@ namespace StudentTestsService
         void DeleteStudent(StudentViewModel student);
         [OperationContract]
         void DeleteGroup(GroupViewModel group);
+        [OperationContract]
+        void DeleteTest(TestViewModel test);
         #endregion
     }
 }

@@ -12,6 +12,7 @@
     <Grid Style="{StaticResource ContentRoot}">
         <mui:ModernTab SelectedSource="/Content/StudentList.xaml" Layout="Tab">
             <mui:ModernTab.Links>
+                <mui:Link DisplayName="Тести" Source="/Content/TestList.xaml" />
                 <mui:Link DisplayName="Студенти" Source="/Content/StudentList.xaml" />
                 <mui:Link DisplayName="Групи" Source="/Content/GroupList.xaml" />
             </mui:ModernTab.Links>

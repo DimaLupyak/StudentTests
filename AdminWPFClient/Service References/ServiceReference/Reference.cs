@@ -571,6 +571,12 @@ namespace AdminWPFClient.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/GetGroups", ReplyAction="http://tempuri.org/IStudentTestService/GetGroupsResponse")]
         System.Threading.Tasks.Task<AdminWPFClient.ServiceReference.GroupViewModel[]> GetGroupsAsync();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/GetTests", ReplyAction="http://tempuri.org/IStudentTestService/GetTestsResponse")]
+        AdminWPFClient.ServiceReference.TestViewModel[] GetTests();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/GetTests", ReplyAction="http://tempuri.org/IStudentTestService/GetTestsResponse")]
+        System.Threading.Tasks.Task<AdminWPFClient.ServiceReference.TestViewModel[]> GetTestsAsync();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/GetStudentTests", ReplyAction="http://tempuri.org/IStudentTestService/GetStudentTestsResponse")]
         AdminWPFClient.ServiceReference.TestViewModel[] GetStudentTests(int studentId);
         
@@ -607,6 +613,12 @@ namespace AdminWPFClient.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/CreateGroup", ReplyAction="http://tempuri.org/IStudentTestService/CreateGroupResponse")]
         System.Threading.Tasks.Task CreateGroupAsync(AdminWPFClient.ServiceReference.GroupViewModel group);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/CreateTest", ReplyAction="http://tempuri.org/IStudentTestService/CreateTestResponse")]
+        void CreateTest(AdminWPFClient.ServiceReference.TestViewModel test);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/CreateTest", ReplyAction="http://tempuri.org/IStudentTestService/CreateTestResponse")]
+        System.Threading.Tasks.Task CreateTestAsync(AdminWPFClient.ServiceReference.TestViewModel test);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/UpdateStudent", ReplyAction="http://tempuri.org/IStudentTestService/UpdateStudentResponse")]
         void UpdateStudent(AdminWPFClient.ServiceReference.StudentViewModel student);
         
@@ -619,6 +631,12 @@ namespace AdminWPFClient.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/UpdateGroup", ReplyAction="http://tempuri.org/IStudentTestService/UpdateGroupResponse")]
         System.Threading.Tasks.Task UpdateGroupAsync(AdminWPFClient.ServiceReference.GroupViewModel group);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/UpdateTest", ReplyAction="http://tempuri.org/IStudentTestService/UpdateTestResponse")]
+        void UpdateTest(AdminWPFClient.ServiceReference.TestViewModel test);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/UpdateTest", ReplyAction="http://tempuri.org/IStudentTestService/UpdateTestResponse")]
+        System.Threading.Tasks.Task UpdateTestAsync(AdminWPFClient.ServiceReference.TestViewModel test);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/DeleteStudent", ReplyAction="http://tempuri.org/IStudentTestService/DeleteStudentResponse")]
         void DeleteStudent(AdminWPFClient.ServiceReference.StudentViewModel student);
         
@@ -630,6 +648,12 @@ namespace AdminWPFClient.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/DeleteGroup", ReplyAction="http://tempuri.org/IStudentTestService/DeleteGroupResponse")]
         System.Threading.Tasks.Task DeleteGroupAsync(AdminWPFClient.ServiceReference.GroupViewModel group);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/DeleteTest", ReplyAction="http://tempuri.org/IStudentTestService/DeleteTestResponse")]
+        void DeleteTest(AdminWPFClient.ServiceReference.TestViewModel test);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/DeleteTest", ReplyAction="http://tempuri.org/IStudentTestService/DeleteTestResponse")]
+        System.Threading.Tasks.Task DeleteTestAsync(AdminWPFClient.ServiceReference.TestViewModel test);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -673,6 +697,14 @@ namespace AdminWPFClient.ServiceReference {
         
         public System.Threading.Tasks.Task<AdminWPFClient.ServiceReference.GroupViewModel[]> GetGroupsAsync() {
             return base.Channel.GetGroupsAsync();
+        }
+        
+        public AdminWPFClient.ServiceReference.TestViewModel[] GetTests() {
+            return base.Channel.GetTests();
+        }
+        
+        public System.Threading.Tasks.Task<AdminWPFClient.ServiceReference.TestViewModel[]> GetTestsAsync() {
+            return base.Channel.GetTestsAsync();
         }
         
         public AdminWPFClient.ServiceReference.TestViewModel[] GetStudentTests(int studentId) {
@@ -723,6 +755,14 @@ namespace AdminWPFClient.ServiceReference {
             return base.Channel.CreateGroupAsync(group);
         }
         
+        public void CreateTest(AdminWPFClient.ServiceReference.TestViewModel test) {
+            base.Channel.CreateTest(test);
+        }
+        
+        public System.Threading.Tasks.Task CreateTestAsync(AdminWPFClient.ServiceReference.TestViewModel test) {
+            return base.Channel.CreateTestAsync(test);
+        }
+        
         public void UpdateStudent(AdminWPFClient.ServiceReference.StudentViewModel student) {
             base.Channel.UpdateStudent(student);
         }
@@ -739,6 +779,14 @@ namespace AdminWPFClient.ServiceReference {
             return base.Channel.UpdateGroupAsync(group);
         }
         
+        public void UpdateTest(AdminWPFClient.ServiceReference.TestViewModel test) {
+            base.Channel.UpdateTest(test);
+        }
+        
+        public System.Threading.Tasks.Task UpdateTestAsync(AdminWPFClient.ServiceReference.TestViewModel test) {
+            return base.Channel.UpdateTestAsync(test);
+        }
+        
         public void DeleteStudent(AdminWPFClient.ServiceReference.StudentViewModel student) {
             base.Channel.DeleteStudent(student);
         }
@@ -753,6 +801,14 @@ namespace AdminWPFClient.ServiceReference {
         
         public System.Threading.Tasks.Task DeleteGroupAsync(AdminWPFClient.ServiceReference.GroupViewModel group) {
             return base.Channel.DeleteGroupAsync(group);
+        }
+        
+        public void DeleteTest(AdminWPFClient.ServiceReference.TestViewModel test) {
+            base.Channel.DeleteTest(test);
+        }
+        
+        public System.Threading.Tasks.Task DeleteTestAsync(AdminWPFClient.ServiceReference.TestViewModel test) {
+            return base.Channel.DeleteTestAsync(test);
         }
     }
 }

@@ -21,6 +21,11 @@ namespace StudentTestsService
             StudentRepisitory.Instance.Create(student);
         }
 
+        public void CreateTest(TestViewModel test)
+        {
+            TestRepisitory.Instance.Create(test);
+        }
+
         public void DeleteGroup(GroupViewModel group)
         {
             GroupRepisitory.Instance.Destroy(group);
@@ -29,6 +34,11 @@ namespace StudentTestsService
         public void DeleteStudent(StudentViewModel student)
         {
             StudentRepisitory.Instance.Destroy(student);
+        }
+
+        public void DeleteTest(TestViewModel test)
+        {
+            TestRepisitory.Instance.Destroy(test);
         }
 
         public IEnumerable<GroupViewModel> GetGroups()
@@ -64,6 +74,11 @@ namespace StudentTestsService
             return QuestionRepisitory.Instance.Read().Where(x => x.TestId == testId);
         }
 
+        public IEnumerable<TestViewModel> GetTests()
+        {
+            return TestRepisitory.Instance.Read();
+        }
+
         public void UpdateGroup(GroupViewModel group)
         {
             GroupRepisitory.Instance.Update(group);
@@ -72,6 +87,11 @@ namespace StudentTestsService
         public void UpdateStudent(StudentViewModel student)
         {
             StudentRepisitory.Instance.Update(student);
+        }
+
+        public void UpdateTest(TestViewModel test)
+        {
+            TestRepisitory.Instance.Update(test);
         }
     }
 }

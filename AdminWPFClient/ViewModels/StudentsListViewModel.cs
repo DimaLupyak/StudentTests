@@ -24,7 +24,7 @@ namespace AdminClient.ViewModels
                 {
                     if (x as StudentViewModel != null)
                     {
-                        var result = ModernDialog.ShowMessage("Всі дані пов'язані з даним студентом будуть видалені. Продовжити видалення?", "Message Dialog", MessageBoxButton.YesNo);
+                        var result = ModernDialog.ShowMessage("Всі дані пов'язані з даним студентом будуть видалені. Продовжити видалення?", "Видалення студента", MessageBoxButton.YesNo);
                         if (result == MessageBoxResult.Yes)
                         {
                             service.DeleteStudent(x as StudentViewModel);

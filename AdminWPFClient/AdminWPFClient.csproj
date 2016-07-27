@@ -63,6 +63,12 @@
     <Compile Include="Content\GroupList.xaml.cs">
       <DependentUpon>GroupList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Content\QuestionControl.xaml.cs">
+      <DependentUpon>QuestionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\TestList.xaml.cs">
+      <DependentUpon>TestList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Content\StudentList.xaml.cs">
       <DependentUpon>StudentList.xaml</DependentUpon>
     </Compile>
@@ -77,13 +83,25 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="ValidationRules\AnswerValidationRule.cs" />
     <Compile Include="ValidationRules\GroupValidationRule.cs" />
+    <Compile Include="ValidationRules\TestValidationRule.cs" />
     <Compile Include="ValidationRules\StudentValidationRule.cs" />
+    <Compile Include="ViewModels\QuestionControlViewModel.cs" />
     <Compile Include="ViewModels\SimpleCommand.cs" />
     <Compile Include="ViewModels\GroupListViewModel.cs" />
     <Compile Include="ViewModels\StudentsListViewModel.cs" />
     <Compile Include="ViewModels\StudentsPageViewModel.cs" />
+    <Compile Include="ViewModels\TestListViewModel.cs" />
     <Page Include="Content\GroupList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\QuestionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\TestList.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

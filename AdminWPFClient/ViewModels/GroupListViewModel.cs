@@ -24,7 +24,7 @@ namespace AdminClient.ViewModels
                 {
                     if (x as GroupViewModel != null)
                     {
-                        var result = ModernDialog.ShowMessage("Всі дані пов'язані з даною групою будуть видалені. Продовжити видалення?", "Message Dialog", MessageBoxButton.YesNo);
+                        var result = ModernDialog.ShowMessage("Всі дані пов'язані з даною групою будуть видалені. Продовжити видалення?", "Видалення групи", MessageBoxButton.YesNo);
                         if (result == MessageBoxResult.Yes)
                         {
                             service.DeleteGroup(x as GroupViewModel);
