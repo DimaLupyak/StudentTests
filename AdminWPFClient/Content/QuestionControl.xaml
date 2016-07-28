@@ -10,7 +10,7 @@
              d:DesignHeight="300" d:DesignWidth="300" Margin="0,0,0,8">
     <UserControl.Resources>
         <ContextMenu  x:Key="RowMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
-            <MenuItem Header="Видалити" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" CommandParameter="{Binding}"/>
+            <MenuItem Header="Видалити" Command="{Binding DataContext.AnswerDeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" CommandParameter="{Binding}"/>
         </ContextMenu>
         <Style x:Key="DefaultRowStyle" TargetType="{x:Type DataGridRow}">
             <Setter Property="ContextMenu" Value="{StaticResource RowMenu}" />
@@ -18,10 +18,11 @@
     </UserControl.Resources>
     
     <DockPanel>
-        <TextBlock TextWrapping="WrapWithOverflow" DockPanel.Dock="Top" Text="{Binding Question.Text}" Style="{StaticResource Heading2}" Margin="0,0,0,8"/>
+        <TextBox TextWrapping="WrapWithOverflow" DockPanel.Dock="Top" Text="{Binding Text , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,8" FontWeight="Bold" FontSize="14"/>
         <DataGrid DockPanel.Dock="Bottom" ItemsSource="{Binding Answers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                       AutoGenerateColumns="False"  RowEditEnding="DataGrid_RowEditEnding"
-                      RowStyle="{StaticResource DefaultRowStyle}" HeadersVisibility="None">
+                      RowStyle="{StaticResource DefaultRowStyle}" HeadersVisibility="None" PreviewMouseWheel="DataGrid_PreviewMouseWheel" >
+            
             <DataGrid.RowValidationRules>
                 <validation:AnswerValidationRule ValidationStep="UpdatedValue"/>
             </DataGrid.RowValidationRules>
@@ -32,28 +33,19 @@
                         FindAncestor, AncestorType={x:Type DataGridRow}},
                         Path=(Validation.Errors)[0].ErrorContent}">
                         <Path Width="15" Height="15"  Stretch="Fill" Fill="Red" Data="F1 M 38,19C 48.4934,19 57,27.5066 57,38C 57,48.4934 48.4934,57 38,57C 27.5066,57 19,48.4934 19,38C 19,27.5066 27.5066,19 38,19 Z M 34.0417,25.7292L 36.0208,41.9584L 39.9792,41.9583L 41.9583,25.7292L 34.0417,25.7292 Z M 38,44.3333C 36.2511,44.3333 34.8333,45.7511 34.8333,47.5C 34.8333,49.2489 36.2511,50.6667 38,50.6667C 39.7489,50.6667 41.1667,49.2489 41.1667,47.5C 41.1667,45.7511 39.7489,44.3333 38,44.3333 Z "/>
-
                     </Grid>
                 </ControlTemplate>
             </DataGrid.RowValidationErrorTemplate>
-            <!--<DataGrid.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem Header="Delete" Click="Delete_Click">
-                            <MenuItem.Icon>
-                                <Image Name="Delete" Source="delete.png" Height="20" Width="20"></Image>
-                            </MenuItem.Icon>
-                        </MenuItem>
-                    </ContextMenu>
-                </DataGrid.ContextMenu>-->
+            
             <DataGrid.Columns>
                 <mui:DataGridTextColumn Binding="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="1*">
                     <mui:DataGridTextColumn.ElementStyle>
                         <Style>
                             <Setter Property="TextBlock.TextWrapping" Value="WrapWithOverflow" />
                         </Style>
-                    </mui:DataGridTextColumn.ElementStyle>
+                    </mui:DataGridTextColumn.ElementStyle>                    
                 </mui:DataGridTextColumn>
-                
+                <mui:DataGridCheckBoxColumn  Binding="{Binding IsCorrect, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </DataGrid.Columns>
         </DataGrid>
     </DockPanel>

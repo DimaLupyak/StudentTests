@@ -19,22 +19,22 @@ namespace AdminWPFClient.ViewModels
 
         public QuestionControlViewModel(QuestionViewModel question)
         {
-            //this.DeleteCommand = new SimpleCommand
-            //{
-            //    ExecuteDelegate = x =>
-            //    {
-            //        if (x as TestViewModel != null)
-            //        {
-            //            var result = ModernDialog.ShowMessage("Всі дані пов'язані з даним тестом будуть видалені. Продовжити видалення?", "Видалення тесту", MessageBoxButton.YesNo);
-            //            if (result == MessageBoxResult.Yes)
-            //            {
-            //                service.DeleteTest(x as TestViewModel);
-            //                Tests.Remove(x as TestViewModel);
-            //            }
-            //        }
-            //    },
-            //    CanExecuteDelegate = x => true
-            //};
+            this.AnswerDeleteCommand = new SimpleCommand
+            {
+                ExecuteDelegate = x =>
+                {
+                    if (x as AnswerViewModel != null)
+                    {
+                        var result = ModernDialog.ShowMessage("Всі дані пов'язані з даною відповіддю будуть видалені. Продовжити видалення?", "Видалення відповіді", MessageBoxButton.YesNo);
+                        if (result == MessageBoxResult.Yes)
+                        {
+                            service.DeleteAnswer(x as AnswerViewModel);
+                            Answers.Remove(x as AnswerViewModel);
+                        }
+                    }
+                },
+                CanExecuteDelegate = x => true
+            };
             Question = question;
         }
         private QuestionViewModel question;
@@ -45,10 +45,22 @@ namespace AdminWPFClient.ViewModels
             {
                 this.question = value;
                 Answers = new ObservableCollection<AnswerViewModel>(service.GetQuestionAnswers(value.Id));
+                Text = value.Text;
                 this.OnPropertyChanged("Question");
             }
         }
-
+        private string text;
+        public string Text
+        {
+            get { return this.text; }
+            set
+            {
+                this.text = value;
+                question.Text = value;
+                service.UpdateQuestion(question);
+                this.OnPropertyChanged("Text");
+            }
+        }
         private ObservableCollection<AnswerViewModel> answers;
         public ObservableCollection<AnswerViewModel> Answers
         {
@@ -60,16 +72,16 @@ namespace AdminWPFClient.ViewModels
             }
         }
 
-        public void CreateAnswer(AnswerViewModel test)
+        public void CreateAnswer(AnswerViewModel answer)
         {
-            //service.CreateTest(test);
+            service.CreateAnswer(answer);
         }
-        public void UpdateAnswer(AnswerViewModel test)
+        public void UpdateAnswer(AnswerViewModel answer)
         {
-            //service.UpdateTest(test);
+            service.UpdateAnswer(answer);
         }
 
-        public ICommand DeleteCommand { get; set; }
+        public ICommand AnswerDeleteCommand { get; set; }
 
         private void OnPropertyChanged(string propertyName)
         {

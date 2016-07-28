@@ -49,9 +49,6 @@
                                             Binding="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <!--<ListBox ItemsSource="{Binding Path=Tests}"
-                      DisplayMemberPath="Name"
-                     SelectedItem="{Binding Path=SelectedTest, Mode=TwoWay}"/>-->
         </StackPanel>
         <GridSplitter  Grid.Column="1" Opacity="0"></GridSplitter>
         <DockPanel Grid.Column="2">

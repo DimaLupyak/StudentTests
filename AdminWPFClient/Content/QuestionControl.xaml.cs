@@ -1,4 +1,5 @@
 ﻿using AdminWPFClient.ServiceReference;
+using AdminWPFClient.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,14 +28,32 @@ namespace AdminWPFClient.Content
         }
         private void DataGrid_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
+            QuestionControlViewModel viewModel = this.DataContext as QuestionControlViewModel;
             AnswerViewModel answer = e.Row.DataContext as AnswerViewModel;
-            if (answer.Text != "" && answer.Text != null && answer.Image != null)
+            if (viewModel != null && (answer.Text != null || answer.Image != null))
             {
-                //if (answer.Id == 0)
-                //    viewModel.CreateStudent(answer);
-                //else viewModel.UpdateStudent(answer);
+                if (answer.Id == 0)
+                {
+                    answer.QuestionId = viewModel.Question.Id;
+                    viewModel.CreateAnswer(answer);
+                }
             }
+            else viewModel.UpdateAnswer(answer);
         }
 
+        private void DataGrid_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (!e.Handled)
+            {
+                e.Handled = true;
+                var eventArg = new MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta);
+                eventArg.RoutedEvent = UIElement.MouseWheelEvent;
+                eventArg.Source = sender;
+                var parent = ((Control)sender).Parent as UIElement;
+                parent.RaiseEvent(eventArg);
+            }
+        }
     }
+
 }
+

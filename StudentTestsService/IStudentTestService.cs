@@ -35,6 +35,10 @@ namespace StudentTestsService
         void CreateGroup(GroupViewModel group);
         [OperationContract]
         void CreateTest(TestViewModel test);
+        [OperationContract]
+        void CreateQuestion(QuestionViewModel question);
+        [OperationContract]
+        void CreateAnswer(AnswerViewModel answer);
         #endregion
 
         #region Update 
@@ -44,6 +48,10 @@ namespace StudentTestsService
         void UpdateGroup(GroupViewModel group);
         [OperationContract]
         void UpdateTest(TestViewModel test);
+        [OperationContract]
+        void UpdateQuestion(QuestionViewModel question);
+        [OperationContract]
+        void UpdateAnswer(AnswerViewModel answer);
         #endregion
 
         #region Delete 
@@ -53,6 +61,10 @@ namespace StudentTestsService
         void DeleteGroup(GroupViewModel group);
         [OperationContract]
         void DeleteTest(TestViewModel test);
+        [OperationContract]
+        void DeleteQuestion(QuestionViewModel question);
+        [OperationContract]
+        void DeleteAnswer(AnswerViewModel answer);
         #endregion
     }
 }

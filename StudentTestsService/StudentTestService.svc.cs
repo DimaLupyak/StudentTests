@@ -11,9 +11,19 @@ namespace StudentTestsService
 {
     public class StudentTestService : IStudentTestService
     {
+        public void CreateAnswer(AnswerViewModel answer)
+        {
+            AnswerRepisitory.Instance.Create(answer);
+        }
+
         public void CreateGroup(GroupViewModel group)
         {
             GroupRepisitory.Instance.Create(group);
+        }
+
+        public void CreateQuestion(QuestionViewModel question)
+        {
+            QuestionRepisitory.Instance.Create(question);
         }
 
         public void CreateStudent(StudentViewModel student)
@@ -26,9 +36,19 @@ namespace StudentTestsService
             TestRepisitory.Instance.Create(test);
         }
 
+        public void DeleteAnswer(AnswerViewModel answer)
+        {
+            AnswerRepisitory.Instance.Destroy(answer);
+        }
+
         public void DeleteGroup(GroupViewModel group)
         {
             GroupRepisitory.Instance.Destroy(group);
+        }
+
+        public void DeleteQuestion(QuestionViewModel question)
+        {
+            QuestionRepisitory.Instance.Destroy(question);
         }
 
         public void DeleteStudent(StudentViewModel student)
@@ -79,9 +99,19 @@ namespace StudentTestsService
             return TestRepisitory.Instance.Read();
         }
 
+        public void UpdateAnswer(AnswerViewModel answer)
+        {
+            AnswerRepisitory.Instance.Update(answer);
+        }
+
         public void UpdateGroup(GroupViewModel group)
         {
             GroupRepisitory.Instance.Update(group);
+        }
+
+        public void UpdateQuestion(QuestionViewModel question)
+        {
+            QuestionRepisitory.Instance.Update(question);
         }
 
         public void UpdateStudent(StudentViewModel student)

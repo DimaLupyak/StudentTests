@@ -619,6 +619,18 @@ namespace AdminWPFClient.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/CreateTest", ReplyAction="http://tempuri.org/IStudentTestService/CreateTestResponse")]
         System.Threading.Tasks.Task CreateTestAsync(AdminWPFClient.ServiceReference.TestViewModel test);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/CreateQuestion", ReplyAction="http://tempuri.org/IStudentTestService/CreateQuestionResponse")]
+        void CreateQuestion(AdminWPFClient.ServiceReference.QuestionViewModel question);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/CreateQuestion", ReplyAction="http://tempuri.org/IStudentTestService/CreateQuestionResponse")]
+        System.Threading.Tasks.Task CreateQuestionAsync(AdminWPFClient.ServiceReference.QuestionViewModel question);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/CreateAnswer", ReplyAction="http://tempuri.org/IStudentTestService/CreateAnswerResponse")]
+        void CreateAnswer(AdminWPFClient.ServiceReference.AnswerViewModel answer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/CreateAnswer", ReplyAction="http://tempuri.org/IStudentTestService/CreateAnswerResponse")]
+        System.Threading.Tasks.Task CreateAnswerAsync(AdminWPFClient.ServiceReference.AnswerViewModel answer);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/UpdateStudent", ReplyAction="http://tempuri.org/IStudentTestService/UpdateStudentResponse")]
         void UpdateStudent(AdminWPFClient.ServiceReference.StudentViewModel student);
         
@@ -637,6 +649,18 @@ namespace AdminWPFClient.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/UpdateTest", ReplyAction="http://tempuri.org/IStudentTestService/UpdateTestResponse")]
         System.Threading.Tasks.Task UpdateTestAsync(AdminWPFClient.ServiceReference.TestViewModel test);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/UpdateQuestion", ReplyAction="http://tempuri.org/IStudentTestService/UpdateQuestionResponse")]
+        void UpdateQuestion(AdminWPFClient.ServiceReference.QuestionViewModel question);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/UpdateQuestion", ReplyAction="http://tempuri.org/IStudentTestService/UpdateQuestionResponse")]
+        System.Threading.Tasks.Task UpdateQuestionAsync(AdminWPFClient.ServiceReference.QuestionViewModel question);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/UpdateAnswer", ReplyAction="http://tempuri.org/IStudentTestService/UpdateAnswerResponse")]
+        void UpdateAnswer(AdminWPFClient.ServiceReference.AnswerViewModel answer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/UpdateAnswer", ReplyAction="http://tempuri.org/IStudentTestService/UpdateAnswerResponse")]
+        System.Threading.Tasks.Task UpdateAnswerAsync(AdminWPFClient.ServiceReference.AnswerViewModel answer);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/DeleteStudent", ReplyAction="http://tempuri.org/IStudentTestService/DeleteStudentResponse")]
         void DeleteStudent(AdminWPFClient.ServiceReference.StudentViewModel student);
         
@@ -654,6 +678,18 @@ namespace AdminWPFClient.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/DeleteTest", ReplyAction="http://tempuri.org/IStudentTestService/DeleteTestResponse")]
         System.Threading.Tasks.Task DeleteTestAsync(AdminWPFClient.ServiceReference.TestViewModel test);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/DeleteQuestion", ReplyAction="http://tempuri.org/IStudentTestService/DeleteQuestionResponse")]
+        void DeleteQuestion(AdminWPFClient.ServiceReference.QuestionViewModel question);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/DeleteQuestion", ReplyAction="http://tempuri.org/IStudentTestService/DeleteQuestionResponse")]
+        System.Threading.Tasks.Task DeleteQuestionAsync(AdminWPFClient.ServiceReference.QuestionViewModel question);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/DeleteAnswer", ReplyAction="http://tempuri.org/IStudentTestService/DeleteAnswerResponse")]
+        void DeleteAnswer(AdminWPFClient.ServiceReference.AnswerViewModel answer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/DeleteAnswer", ReplyAction="http://tempuri.org/IStudentTestService/DeleteAnswerResponse")]
+        System.Threading.Tasks.Task DeleteAnswerAsync(AdminWPFClient.ServiceReference.AnswerViewModel answer);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -763,6 +799,22 @@ namespace AdminWPFClient.ServiceReference {
             return base.Channel.CreateTestAsync(test);
         }
         
+        public void CreateQuestion(AdminWPFClient.ServiceReference.QuestionViewModel question) {
+            base.Channel.CreateQuestion(question);
+        }
+        
+        public System.Threading.Tasks.Task CreateQuestionAsync(AdminWPFClient.ServiceReference.QuestionViewModel question) {
+            return base.Channel.CreateQuestionAsync(question);
+        }
+        
+        public void CreateAnswer(AdminWPFClient.ServiceReference.AnswerViewModel answer) {
+            base.Channel.CreateAnswer(answer);
+        }
+        
+        public System.Threading.Tasks.Task CreateAnswerAsync(AdminWPFClient.ServiceReference.AnswerViewModel answer) {
+            return base.Channel.CreateAnswerAsync(answer);
+        }
+        
         public void UpdateStudent(AdminWPFClient.ServiceReference.StudentViewModel student) {
             base.Channel.UpdateStudent(student);
         }
@@ -787,6 +839,22 @@ namespace AdminWPFClient.ServiceReference {
             return base.Channel.UpdateTestAsync(test);
         }
         
+        public void UpdateQuestion(AdminWPFClient.ServiceReference.QuestionViewModel question) {
+            base.Channel.UpdateQuestion(question);
+        }
+        
+        public System.Threading.Tasks.Task UpdateQuestionAsync(AdminWPFClient.ServiceReference.QuestionViewModel question) {
+            return base.Channel.UpdateQuestionAsync(question);
+        }
+        
+        public void UpdateAnswer(AdminWPFClient.ServiceReference.AnswerViewModel answer) {
+            base.Channel.UpdateAnswer(answer);
+        }
+        
+        public System.Threading.Tasks.Task UpdateAnswerAsync(AdminWPFClient.ServiceReference.AnswerViewModel answer) {
+            return base.Channel.UpdateAnswerAsync(answer);
+        }
+        
         public void DeleteStudent(AdminWPFClient.ServiceReference.StudentViewModel student) {
             base.Channel.DeleteStudent(student);
         }
@@ -809,6 +877,22 @@ namespace AdminWPFClient.ServiceReference {
         
         public System.Threading.Tasks.Task DeleteTestAsync(AdminWPFClient.ServiceReference.TestViewModel test) {
             return base.Channel.DeleteTestAsync(test);
+        }
+        
+        public void DeleteQuestion(AdminWPFClient.ServiceReference.QuestionViewModel question) {
+            base.Channel.DeleteQuestion(question);
+        }
+        
+        public System.Threading.Tasks.Task DeleteQuestionAsync(AdminWPFClient.ServiceReference.QuestionViewModel question) {
+            return base.Channel.DeleteQuestionAsync(question);
+        }
+        
+        public void DeleteAnswer(AdminWPFClient.ServiceReference.AnswerViewModel answer) {
+            base.Channel.DeleteAnswer(answer);
+        }
+        
+        public System.Threading.Tasks.Task DeleteAnswerAsync(AdminWPFClient.ServiceReference.AnswerViewModel answer) {
+            return base.Channel.DeleteAnswerAsync(answer);
         }
     }
 }
