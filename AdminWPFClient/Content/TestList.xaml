@@ -61,7 +61,7 @@
         <DockPanel Grid.Column="2">
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
                 <TextBlock Text="{Binding Path=SelectedTest.Name}" Style="{StaticResource Title}" Margin="0,0,0,8"/>
-                <TextBlock Text="{Binding Path=SelectedTest.Time}" Style="{StaticResource Heading2}" Margin="16,8,0,0"/>
+                <TextBox Text="{Binding Path=SelectedTestTime}" Margin="16,8,0,0" FontWeight="Bold" FontSize="16"/>
             </StackPanel>
             <TabControl>
                 <TabItem Header="Питання">

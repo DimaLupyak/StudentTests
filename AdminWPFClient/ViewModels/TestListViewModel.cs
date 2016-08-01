@@ -56,12 +56,26 @@ namespace AdminWPFClient.ViewModels
                 {
                     UpdateQuestions();
                     UpdateGroups();
+                    SelectedTestTime = selectedTest.Time;
                     this.OnPropertyChanged("SelectedTest");
                 }
                 else Questions = null;
                 NewQuestion = null;
 
 
+            }
+        }
+
+        private TimeSpan selectedTestTime;
+        public TimeSpan SelectedTestTime
+        {
+            get { return this.selectedTestTime; }
+            set
+            {
+                this.selectedTestTime = value;
+                selectedTest.Time = value;
+                service.UpdateTest(selectedTest);
+                this.OnPropertyChanged("SelectedTestTime");
             }
         }
 
@@ -87,6 +101,7 @@ namespace AdminWPFClient.ViewModels
             set
             {
                 this.tests = value;
+                if (selectedTest == null) SelectedTest = this.tests.First();
                 this.OnPropertyChanged("Tests");
             }
         }
