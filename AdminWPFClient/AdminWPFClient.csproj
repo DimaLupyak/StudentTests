@@ -60,6 +60,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Content\AccessControl.xaml.cs">
+      <DependentUpon>AccessControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Content\GroupList.xaml.cs">
       <DependentUpon>GroupList.xaml</DependentUpon>
     </Compile>
@@ -75,6 +78,8 @@
     <Compile Include="Content\StudentInfo.xaml.cs">
       <DependentUpon>StudentInfo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\SelectedTestConvertor.cs" />
+    <Compile Include="Converters\NewQuestionConvertor.cs" />
     <Compile Include="Pages\EditPage.xaml.cs">
       <DependentUpon>EditPage.xaml</DependentUpon>
     </Compile>
@@ -87,12 +92,17 @@
     <Compile Include="ValidationRules\GroupValidationRule.cs" />
     <Compile Include="ValidationRules\TestValidationRule.cs" />
     <Compile Include="ValidationRules\StudentValidationRule.cs" />
+    <Compile Include="ViewModels\AccessControlViewModel.cs" />
     <Compile Include="ViewModels\QuestionControlViewModel.cs" />
     <Compile Include="ViewModels\SimpleCommand.cs" />
     <Compile Include="ViewModels\GroupListViewModel.cs" />
     <Compile Include="ViewModels\StudentsListViewModel.cs" />
     <Compile Include="ViewModels\StudentsPageViewModel.cs" />
     <Compile Include="ViewModels\TestListViewModel.cs" />
+    <Page Include="Content\AccessControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Content\GroupList.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -209,9 +219,7 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Converters\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

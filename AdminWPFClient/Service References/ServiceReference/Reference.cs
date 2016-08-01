@@ -601,6 +601,18 @@ namespace AdminWPFClient.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/GetStudentResults", ReplyAction="http://tempuri.org/IStudentTestService/GetStudentResultsResponse")]
         System.Threading.Tasks.Task<AdminWPFClient.ServiceReference.ResultViewModel[]> GetStudentResultsAsync(int studentId);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/GetTestGroups", ReplyAction="http://tempuri.org/IStudentTestService/GetTestGroupsResponse")]
+        AdminWPFClient.ServiceReference.GroupViewModel[] GetTestGroups(int testId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/GetTestGroups", ReplyAction="http://tempuri.org/IStudentTestService/GetTestGroupsResponse")]
+        System.Threading.Tasks.Task<AdminWPFClient.ServiceReference.GroupViewModel[]> GetTestGroupsAsync(int testId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/IsAcceess", ReplyAction="http://tempuri.org/IStudentTestService/IsAcceessResponse")]
+        bool IsAcceess(int groupId, int testId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/IsAcceess", ReplyAction="http://tempuri.org/IStudentTestService/IsAcceessResponse")]
+        System.Threading.Tasks.Task<bool> IsAcceessAsync(int groupId, int testId);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/CreateStudent", ReplyAction="http://tempuri.org/IStudentTestService/CreateStudentResponse")]
         void CreateStudent(AdminWPFClient.ServiceReference.StudentViewModel student);
         
@@ -630,6 +642,12 @@ namespace AdminWPFClient.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/CreateAnswer", ReplyAction="http://tempuri.org/IStudentTestService/CreateAnswerResponse")]
         System.Threading.Tasks.Task CreateAnswerAsync(AdminWPFClient.ServiceReference.AnswerViewModel answer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/CreateAccess", ReplyAction="http://tempuri.org/IStudentTestService/CreateAccessResponse")]
+        void CreateAccess(int groupId, int testId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/CreateAccess", ReplyAction="http://tempuri.org/IStudentTestService/CreateAccessResponse")]
+        System.Threading.Tasks.Task CreateAccessAsync(int groupId, int testId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/UpdateStudent", ReplyAction="http://tempuri.org/IStudentTestService/UpdateStudentResponse")]
         void UpdateStudent(AdminWPFClient.ServiceReference.StudentViewModel student);
@@ -690,6 +708,12 @@ namespace AdminWPFClient.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/DeleteAnswer", ReplyAction="http://tempuri.org/IStudentTestService/DeleteAnswerResponse")]
         System.Threading.Tasks.Task DeleteAnswerAsync(AdminWPFClient.ServiceReference.AnswerViewModel answer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/DeleteAccess", ReplyAction="http://tempuri.org/IStudentTestService/DeleteAccessResponse")]
+        void DeleteAccess(int groupId, int testId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/DeleteAccess", ReplyAction="http://tempuri.org/IStudentTestService/DeleteAccessResponse")]
+        System.Threading.Tasks.Task DeleteAccessAsync(int groupId, int testId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -775,6 +799,22 @@ namespace AdminWPFClient.ServiceReference {
             return base.Channel.GetStudentResultsAsync(studentId);
         }
         
+        public AdminWPFClient.ServiceReference.GroupViewModel[] GetTestGroups(int testId) {
+            return base.Channel.GetTestGroups(testId);
+        }
+        
+        public System.Threading.Tasks.Task<AdminWPFClient.ServiceReference.GroupViewModel[]> GetTestGroupsAsync(int testId) {
+            return base.Channel.GetTestGroupsAsync(testId);
+        }
+        
+        public bool IsAcceess(int groupId, int testId) {
+            return base.Channel.IsAcceess(groupId, testId);
+        }
+        
+        public System.Threading.Tasks.Task<bool> IsAcceessAsync(int groupId, int testId) {
+            return base.Channel.IsAcceessAsync(groupId, testId);
+        }
+        
         public void CreateStudent(AdminWPFClient.ServiceReference.StudentViewModel student) {
             base.Channel.CreateStudent(student);
         }
@@ -813,6 +853,14 @@ namespace AdminWPFClient.ServiceReference {
         
         public System.Threading.Tasks.Task CreateAnswerAsync(AdminWPFClient.ServiceReference.AnswerViewModel answer) {
             return base.Channel.CreateAnswerAsync(answer);
+        }
+        
+        public void CreateAccess(int groupId, int testId) {
+            base.Channel.CreateAccess(groupId, testId);
+        }
+        
+        public System.Threading.Tasks.Task CreateAccessAsync(int groupId, int testId) {
+            return base.Channel.CreateAccessAsync(groupId, testId);
         }
         
         public void UpdateStudent(AdminWPFClient.ServiceReference.StudentViewModel student) {
@@ -893,6 +941,14 @@ namespace AdminWPFClient.ServiceReference {
         
         public System.Threading.Tasks.Task DeleteAnswerAsync(AdminWPFClient.ServiceReference.AnswerViewModel answer) {
             return base.Channel.DeleteAnswerAsync(answer);
+        }
+        
+        public void DeleteAccess(int groupId, int testId) {
+            base.Channel.DeleteAccess(groupId, testId);
+        }
+        
+        public System.Threading.Tasks.Task DeleteAccessAsync(int groupId, int testId) {
+            return base.Channel.DeleteAccessAsync(groupId, testId);
         }
     }
 }

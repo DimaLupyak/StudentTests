@@ -19,6 +19,8 @@ namespace AdminWPFClient.ViewModels
 
         public TestListViewModel()
         {
+            
+
             this.DeleteCommand = new SimpleCommand
             {
                 ExecuteDelegate = x =>
@@ -30,9 +32,15 @@ namespace AdminWPFClient.ViewModels
                         {
                             service.DeleteTest(x as TestViewModel);
                             Tests.Remove(x as TestViewModel);
+                            SelectedTest = null;
                         }
                     }
                 },
+                CanExecuteDelegate = x => true
+            };
+            this.AddQuestionCommand = new SimpleCommand()
+            {
+                ExecuteDelegate = x => AddQuestion(),
                 CanExecuteDelegate = x => true
             };
             Tests = new ObservableCollection<TestViewModel>(service.GetTests());
@@ -44,10 +52,32 @@ namespace AdminWPFClient.ViewModels
             set
             {
                 this.selectedTest = value;
-                Questions = new ObservableCollection<QuestionControlViewModel>(service.GetTestQuestions(value.Id)
-                    .Select(x=>new QuestionControlViewModel(x)));
-                this.OnPropertyChanged("SelectedTest");
+                if (value != null && value.Id != 0)
+                {
+                    UpdateQuestions();
+                    UpdateGroups();
+                    this.OnPropertyChanged("SelectedTest");
+                }
+                else Questions = null;
+                NewQuestion = null;
+
+
             }
+        }
+
+        private void UpdateQuestions()
+        {
+            Questions = new ObservableCollection<QuestionControlViewModel>(service.GetTestQuestions(SelectedTest.Id)
+                        .Select(x => new QuestionControlViewModel(x)));
+            foreach (var item in questions)
+            {
+                item.DeleteEvent += UpdateQuestions;
+            }
+        }
+        private void UpdateGroups()
+        {
+            Groups = new ObservableCollection<AccessControlViewModel>(service.GetGroups()
+                .Select(x=>new AccessControlViewModel(x, SelectedTest.Id)));
         }
 
         private ObservableCollection<TestViewModel> tests;
@@ -58,6 +88,30 @@ namespace AdminWPFClient.ViewModels
             {
                 this.tests = value;
                 this.OnPropertyChanged("Tests");
+            }
+        }
+
+        private ObservableCollection<AccessControlViewModel> groups;
+        public ObservableCollection<AccessControlViewModel> Groups
+        {
+            get { return this.groups; }
+            set
+            {
+                this.groups = value;
+                this.OnPropertyChanged("Groups");
+            }
+        }
+
+        private QuestionControlViewModel newQuestion;
+        public QuestionControlViewModel NewQuestion
+        {
+            get { return this.newQuestion; }
+            set
+            {
+                this.newQuestion = value;
+                if (value != null)
+                    this.newQuestion.Question.TestId = selectedTest.Id;
+                this.OnPropertyChanged("NewQuestion");
             }
         }
 
@@ -75,13 +129,33 @@ namespace AdminWPFClient.ViewModels
         public void CreateTest(TestViewModel test)
         {
             service.CreateTest(test);
+            Tests = new ObservableCollection<TestViewModel>(service.GetTests());
         }
         public void UpdateTest(TestViewModel test)
         {
             service.UpdateTest(test);
         }
-
+        
+        
         public ICommand DeleteCommand { get; set; }
+        public ICommand AddQuestionCommand { get; set; }
+
+        private void AddQuestion()
+        {
+            if (newQuestion == null)
+            {
+                NewQuestion = new QuestionControlViewModel(new QuestionViewModel());
+            }
+            else
+            {
+                if (NewQuestion.Question.Text != null || NewQuestion.Question.Image != null)
+                {
+                    service.CreateQuestion(NewQuestion.Question);
+                    UpdateQuestions();
+                    NewQuestion = null;
+                }
+            }
+        }
 
         private void OnPropertyChanged(string propertyName)
         {

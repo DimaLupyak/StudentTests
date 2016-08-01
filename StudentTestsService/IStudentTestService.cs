@@ -26,6 +26,10 @@ namespace StudentTestsService
         IEnumerable<AnswerViewModel> GetQuestionAnswers(int questionId);
         [OperationContract]
         IEnumerable<ResultViewModel> GetStudentResults(int studentId);
+        [OperationContract]
+        IEnumerable<GroupViewModel> GetTestGroups(int testId);
+        [OperationContract]
+        bool IsAcceess(int groupId, int testId);
         #endregion
 
         #region Create 
@@ -39,6 +43,8 @@ namespace StudentTestsService
         void CreateQuestion(QuestionViewModel question);
         [OperationContract]
         void CreateAnswer(AnswerViewModel answer);
+        [OperationContract]
+        void CreateAccess(int groupId, int testId);
         #endregion
 
         #region Update 
@@ -65,6 +71,8 @@ namespace StudentTestsService
         void DeleteQuestion(QuestionViewModel question);
         [OperationContract]
         void DeleteAnswer(AnswerViewModel answer);
+        [OperationContract]
+        void DeleteAccess(int groupId, int testId);
         #endregion
     }
 }

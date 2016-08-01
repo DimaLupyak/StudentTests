@@ -11,6 +11,12 @@ namespace StudentTestsService
 {
     public class StudentTestService : IStudentTestService
     {
+        public void CreateAccess(int groupId, int testId)
+        {
+            AccessViewModel access = new AccessViewModel {GroupId = groupId, TestId = testId };
+            AccessRepisitory.Instance.Create(access);
+        }
+
         public void CreateAnswer(AnswerViewModel answer)
         {
             AnswerRepisitory.Instance.Create(answer);
@@ -34,6 +40,14 @@ namespace StudentTestsService
         public void CreateTest(TestViewModel test)
         {
             TestRepisitory.Instance.Create(test);
+        }
+
+        public void DeleteAccess(int groupId, int testId)
+        {
+             foreach (var item in AccessRepisitory.Instance.Read().Where(x => x.GroupId == groupId && x.TestId == testId))
+            {
+                AccessRepisitory.Instance.Destroy(item);
+            }
         }
 
         public void DeleteAnswer(AnswerViewModel answer)
@@ -86,7 +100,17 @@ namespace StudentTestsService
             return from t in TestRepisitory.Instance.Read()
                    join a in AccessRepisitory.Instance.Read() on t.Id equals a.TestId
                    join g in GroupRepisitory.Instance.Read() on a.GroupId equals g.Id
+                   join s in StudentRepisitory.Instance.Read()
+                   .Where(x=>x.Id == studentId) on g.Id equals s.GroupID
                    select t;
+        }
+
+        public IEnumerable<GroupViewModel> GetTestGroups(int testId)
+        {
+            return from t in TestRepisitory.Instance.Read().Where(x => x.Id == testId)
+                   join a in AccessRepisitory.Instance.Read() on t.Id equals a.TestId
+                   join g in GroupRepisitory.Instance.Read() on a.GroupId equals g.Id
+                   select g;
         }
 
         public IEnumerable<QuestionViewModel> GetTestQuestions(int testId)
@@ -97,6 +121,11 @@ namespace StudentTestsService
         public IEnumerable<TestViewModel> GetTests()
         {
             return TestRepisitory.Instance.Read();
+        }
+
+        public bool IsAcceess(int groupId, int testId)
+        {
+            return AccessRepisitory.Instance.Read().Where(x => x.GroupId == groupId && x.TestId == testId).Count() > 0;
         }
 
         public void UpdateAnswer(AnswerViewModel answer)

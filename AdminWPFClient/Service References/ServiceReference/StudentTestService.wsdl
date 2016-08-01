@@ -362,6 +362,82 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IStudentTestService_GetTestGroups_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IStudentTestService_GetTestGroups_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IStudentTestService_IsAcceess_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IStudentTestService_IsAcceess_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="WSHttpBinding_IStudentTestService_CreateStudent_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -534,6 +610,44 @@
     </wsp:ExactlyOne>
   </wsp:Policy>
   <wsp:Policy wsu:Id="WSHttpBinding_IStudentTestService_CreateAnswer_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IStudentTestService_CreateAccess_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IStudentTestService_CreateAccess_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -932,6 +1046,44 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IStudentTestService_DeleteAccess_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IStudentTestService_DeleteAccess_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:23235/StudentTestService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
@@ -981,6 +1133,18 @@
   <wsdl:message name="IStudentTestService_GetStudentResults_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetStudentResultsResponse" />
   </wsdl:message>
+  <wsdl:message name="IStudentTestService_GetTestGroups_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTestGroups" />
+  </wsdl:message>
+  <wsdl:message name="IStudentTestService_GetTestGroups_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTestGroupsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStudentTestService_IsAcceess_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsAcceess" />
+  </wsdl:message>
+  <wsdl:message name="IStudentTestService_IsAcceess_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsAcceessResponse" />
+  </wsdl:message>
   <wsdl:message name="IStudentTestService_CreateStudent_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateStudent" />
   </wsdl:message>
@@ -1010,6 +1174,12 @@
   </wsdl:message>
   <wsdl:message name="IStudentTestService_CreateAnswer_OutputMessage">
     <wsdl:part name="parameters" element="tns:CreateAnswerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IStudentTestService_CreateAccess_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateAccess" />
+  </wsdl:message>
+  <wsdl:message name="IStudentTestService_CreateAccess_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateAccessResponse" />
   </wsdl:message>
   <wsdl:message name="IStudentTestService_UpdateStudent_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdateStudent" />
@@ -1071,6 +1241,12 @@
   <wsdl:message name="IStudentTestService_DeleteAnswer_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteAnswerResponse" />
   </wsdl:message>
+  <wsdl:message name="IStudentTestService_DeleteAccess_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteAccess" />
+  </wsdl:message>
+  <wsdl:message name="IStudentTestService_DeleteAccess_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteAccessResponse" />
+  </wsdl:message>
   <wsdl:portType name="IStudentTestService">
     <wsdl:operation name="GetStudents">
       <wsdl:input wsaw:Action="http://tempuri.org/IStudentTestService/GetStudents" message="tns:IStudentTestService_GetStudents_InputMessage" />
@@ -1100,6 +1276,14 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IStudentTestService/GetStudentResults" message="tns:IStudentTestService_GetStudentResults_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IStudentTestService/GetStudentResultsResponse" message="tns:IStudentTestService_GetStudentResults_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetTestGroups">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStudentTestService/GetTestGroups" message="tns:IStudentTestService_GetTestGroups_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStudentTestService/GetTestGroupsResponse" message="tns:IStudentTestService_GetTestGroups_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsAcceess">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStudentTestService/IsAcceess" message="tns:IStudentTestService_IsAcceess_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStudentTestService/IsAcceessResponse" message="tns:IStudentTestService_IsAcceess_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="CreateStudent">
       <wsdl:input wsaw:Action="http://tempuri.org/IStudentTestService/CreateStudent" message="tns:IStudentTestService_CreateStudent_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IStudentTestService/CreateStudentResponse" message="tns:IStudentTestService_CreateStudent_OutputMessage" />
@@ -1119,6 +1303,10 @@
     <wsdl:operation name="CreateAnswer">
       <wsdl:input wsaw:Action="http://tempuri.org/IStudentTestService/CreateAnswer" message="tns:IStudentTestService_CreateAnswer_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IStudentTestService/CreateAnswerResponse" message="tns:IStudentTestService_CreateAnswer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateAccess">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStudentTestService/CreateAccess" message="tns:IStudentTestService_CreateAccess_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStudentTestService/CreateAccessResponse" message="tns:IStudentTestService_CreateAccess_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="UpdateStudent">
       <wsdl:input wsaw:Action="http://tempuri.org/IStudentTestService/UpdateStudent" message="tns:IStudentTestService_UpdateStudent_InputMessage" />
@@ -1159,6 +1347,10 @@
     <wsdl:operation name="DeleteAnswer">
       <wsdl:input wsaw:Action="http://tempuri.org/IStudentTestService/DeleteAnswer" message="tns:IStudentTestService_DeleteAnswer_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IStudentTestService/DeleteAnswerResponse" message="tns:IStudentTestService_DeleteAnswer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAccess">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStudentTestService/DeleteAccess" message="tns:IStudentTestService_DeleteAccess_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStudentTestService/DeleteAccessResponse" message="tns:IStudentTestService_DeleteAccess_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSHttpBinding_IStudentTestService" type="tns:IStudentTestService">
@@ -1241,6 +1433,28 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetTestGroups">
+      <soap12:operation soapAction="http://tempuri.org/IStudentTestService/GetTestGroups" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_IStudentTestService_GetTestGroups_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_IStudentTestService_GetTestGroups_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsAcceess">
+      <soap12:operation soapAction="http://tempuri.org/IStudentTestService/IsAcceess" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_IStudentTestService_IsAcceess_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_IStudentTestService_IsAcceess_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="CreateStudent">
       <soap12:operation soapAction="http://tempuri.org/IStudentTestService/CreateStudent" style="document" />
       <wsdl:input>
@@ -1293,6 +1507,17 @@
       </wsdl:input>
       <wsdl:output>
         <wsp:PolicyReference URI="#WSHttpBinding_IStudentTestService_CreateAnswer_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateAccess">
+      <soap12:operation soapAction="http://tempuri.org/IStudentTestService/CreateAccess" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_IStudentTestService_CreateAccess_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_IStudentTestService_CreateAccess_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
@@ -1403,6 +1628,17 @@
       </wsdl:input>
       <wsdl:output>
         <wsp:PolicyReference URI="#WSHttpBinding_IStudentTestService_DeleteAnswer_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAccess">
+      <soap12:operation soapAction="http://tempuri.org/IStudentTestService/DeleteAccess" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_IStudentTestService_DeleteAccess_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_IStudentTestService_DeleteAccess_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>

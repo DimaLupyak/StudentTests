@@ -37,8 +37,9 @@ namespace AdminWPFClient.Content
                     answer.QuestionId = viewModel.Question.Id;
                     viewModel.CreateAnswer(answer);
                 }
+                else viewModel.UpdateAnswer(answer);
             }
-            else viewModel.UpdateAnswer(answer);
+            
         }
 
         private void DataGrid_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
