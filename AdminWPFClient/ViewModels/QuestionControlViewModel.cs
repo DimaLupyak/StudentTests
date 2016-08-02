@@ -1,6 +1,8 @@
 ﻿using AdminClient.ViewModels;
+using AdminWPFClient.Helpers;
 using AdminWPFClient.ServiceReference;
 using FirstFloor.ModernUI.Windows.Controls;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace AdminWPFClient.ViewModels
 {
@@ -24,6 +27,42 @@ namespace AdminWPFClient.ViewModels
         }
         public QuestionControlViewModel(QuestionViewModel question)
         {
+            this.AnswerImageDeleteCommand = new SimpleCommand
+            {
+                ExecuteDelegate = x =>
+                {
+                    AnswerViewModel answer = x as AnswerViewModel;
+                    if (answer != null)
+                    {
+                        var result = ModernDialog.ShowMessage("Видалити зображення?", "Видалення зображення", MessageBoxButton.YesNo);
+                        if (result == MessageBoxResult.Yes)
+                        {
+                            answer.Image = null;
+                            service.UpdateAnswer(answer);
+                        }
+                    }
+                },
+                CanExecuteDelegate = x => true
+            };
+            this.ImageDeleteCommand = new SimpleCommand
+            {
+                ExecuteDelegate = x =>
+                {
+                    if(image!=null)
+                    {
+                        var result = ModernDialog.ShowMessage("Видалити зображення?", "Видалення зображення", MessageBoxButton.YesNo);
+                        if (result == MessageBoxResult.Yes)
+                        {
+                            question.Image = null;
+                            Image = null;
+                            service.UpdateQuestion(question);
+                        }
+                    }                   
+
+                },
+                CanExecuteDelegate = x => true
+            };
+
             this.QuestionDeleteCommand = new SimpleCommand
             {
                 ExecuteDelegate = x =>
@@ -36,7 +75,6 @@ namespace AdminWPFClient.ViewModels
                         {
                             service.DeleteQuestion(questionControl.Question);
                             OnDeleteEvent();
-                            //Questions.Remove(questionControl);
                         }
                     }
                 },
@@ -58,6 +96,45 @@ namespace AdminWPFClient.ViewModels
                 },
                 CanExecuteDelegate = x => true
             };
+            this.UploadImageCommand = new SimpleCommand
+            {
+                ExecuteDelegate = x =>
+                {
+                    OpenFileDialog op = new OpenFileDialog();
+                    op.Title = "Select a picture";
+                    op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+                      "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+                      "Portable Network Graphic (*.png)|*.png";
+                    if (op.ShowDialog() == true)
+                    {
+                        Image = new BitmapImage(new Uri(op.FileName));
+                    }
+                },
+                CanExecuteDelegate = x => true
+            };
+            this.UploadAnswerImageCommand = new SimpleCommand
+            {
+                
+                ExecuteDelegate = x =>
+                {
+                    AnswerViewModel answer = x as AnswerViewModel;
+                    if(answer != null)
+                    {
+                        OpenFileDialog op = new OpenFileDialog();
+                        op.Title = "Select a picture";
+                        op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+                          "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+                          "Portable Network Graphic (*.png)|*.png";
+                        if (op.ShowDialog() == true)
+                        {
+                            answer.Image = ImageHelper.ToByteArray(new BitmapImage(new Uri(op.FileName)));
+                            service.UpdateAnswer(answer);
+                        }
+                    }                    
+                },
+                CanExecuteDelegate = x => true
+            };
+
             Question = question;
         }
         private QuestionViewModel question;
@@ -71,6 +148,10 @@ namespace AdminWPFClient.ViewModels
                 {
                     Answers = new ObservableCollection<AnswerViewModel>(service.GetQuestionAnswers(value.Id));
                     Text = value.Text;
+                    if (value.Image != null)
+                    {
+                        Image = ImageHelper.ToImage(value.Image);
+                    }
                 }
                 this.OnPropertyChanged("Question");
             }
@@ -88,6 +169,20 @@ namespace AdminWPFClient.ViewModels
                 this.OnPropertyChanged("Text");
             }
         }
+
+        private BitmapSource image;
+        public BitmapSource Image
+        {
+            get { return this.image; }
+            set
+            {
+                this.image = value;
+                this.question.Image = value == null ? null : ImageHelper.ToByteArray(value);
+                service.UpdateQuestion(this.question);
+                this.OnPropertyChanged("Image");
+            }
+        }
+
         private ObservableCollection<AnswerViewModel> answers;
         public ObservableCollection<AnswerViewModel> Answers
         {
@@ -108,8 +203,12 @@ namespace AdminWPFClient.ViewModels
         {
             service.UpdateAnswer(answer);
         }
+        public ICommand UploadImageCommand { get; set; }
+        public ICommand UploadAnswerImageCommand { get; set; }
         public ICommand QuestionDeleteCommand { get; set; }
         public ICommand AnswerDeleteCommand { get; set; }
+        public ICommand AnswerImageDeleteCommand { get; set; }
+        public ICommand ImageDeleteCommand { get; set; }
 
         private void OnPropertyChanged(string propertyName)
         {
@@ -119,7 +218,7 @@ namespace AdminWPFClient.ViewModels
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;
-        
+
     }
 }
 

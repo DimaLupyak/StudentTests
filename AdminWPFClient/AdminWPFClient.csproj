@@ -80,6 +80,7 @@
     </Compile>
     <Compile Include="Converters\SelectedTestConvertor.cs" />
     <Compile Include="Converters\NewQuestionConvertor.cs" />
+    <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Pages\EditPage.xaml.cs">
       <DependentUpon>EditPage.xaml</DependentUpon>
     </Compile>
@@ -220,6 +221,9 @@
     </None>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Content Include="Assets\PlaceHolder.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

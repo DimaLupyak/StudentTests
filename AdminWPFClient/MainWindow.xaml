@@ -4,7 +4,7 @@
         xmlns:mui="http://firstfloorsoftware.com/ModernUI"
         Title="Student tests - Admin" IsTitleVisible="True"
                   
-        ContentSource="/Pages/Home.xaml">
+        ContentSource="/Content/StudentInfo.xaml">
 
     <mui:ModernWindow.MenuLinkGroups>
         <mui:LinkGroup DisplayName="Перегляд">
