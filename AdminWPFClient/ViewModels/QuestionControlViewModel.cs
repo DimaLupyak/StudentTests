@@ -48,7 +48,7 @@ namespace AdminWPFClient.ViewModels
             {
                 ExecuteDelegate = x =>
                 {
-                    if(image!=null)
+                    if (image != null)
                     {
                         var result = ModernDialog.ShowMessage("Видалити зображення?", "Видалення зображення", MessageBoxButton.YesNo);
                         if (result == MessageBoxResult.Yes)
@@ -57,7 +57,7 @@ namespace AdminWPFClient.ViewModels
                             Image = null;
                             service.UpdateQuestion(question);
                         }
-                    }                   
+                    }
 
                 },
                 CanExecuteDelegate = x => true
@@ -107,18 +107,18 @@ namespace AdminWPFClient.ViewModels
                       "Portable Network Graphic (*.png)|*.png";
                     if (op.ShowDialog() == true)
                     {
-                        Image = new BitmapImage(new Uri(op.FileName));
+                        Image = ImageHelper.ToByteArray(new BitmapImage(new Uri(op.FileName)));
                     }
                 },
                 CanExecuteDelegate = x => true
             };
             this.UploadAnswerImageCommand = new SimpleCommand
             {
-                
+
                 ExecuteDelegate = x =>
                 {
                     AnswerViewModel answer = x as AnswerViewModel;
-                    if(answer != null)
+                    if (answer != null)
                     {
                         OpenFileDialog op = new OpenFileDialog();
                         op.Title = "Select a picture";
@@ -128,9 +128,10 @@ namespace AdminWPFClient.ViewModels
                         if (op.ShowDialog() == true)
                         {
                             answer.Image = ImageHelper.ToByteArray(new BitmapImage(new Uri(op.FileName)));
-                            service.UpdateAnswer(answer);
+                            if (answer.Id != 0)
+                                service.UpdateAnswer(answer);
                         }
-                    }                    
+                    }
                 },
                 CanExecuteDelegate = x => true
             };
@@ -148,10 +149,7 @@ namespace AdminWPFClient.ViewModels
                 {
                     Answers = new ObservableCollection<AnswerViewModel>(service.GetQuestionAnswers(value.Id));
                     Text = value.Text;
-                    if (value.Image != null)
-                    {
-                        Image = ImageHelper.ToImage(value.Image);
-                    }
+                    Image = value.Image;
                 }
                 this.OnPropertyChanged("Question");
             }
@@ -170,14 +168,14 @@ namespace AdminWPFClient.ViewModels
             }
         }
 
-        private BitmapSource image;
-        public BitmapSource Image
+        private byte[] image;
+        public byte[] Image
         {
             get { return this.image; }
             set
             {
                 this.image = value;
-                this.question.Image = value == null ? null : ImageHelper.ToByteArray(value);
+                this.question.Image = value;
                 service.UpdateQuestion(this.question);
                 this.OnPropertyChanged("Image");
             }

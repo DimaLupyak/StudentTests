@@ -9,8 +9,7 @@
     <mui:ModernWindow.MenuLinkGroups>
         <mui:LinkGroup DisplayName="Перегляд">
             <mui:LinkGroup.Links>
-                <mui:Link DisplayName="Панель" Source="/Pages/Home.xaml" />
-                <mui:Link DisplayName="Студенти" Source="/Content/StudentInfo.xaml" />
+                <mui:Link DisplayName="Результати студентів" Source="/Content/StudentInfo.xaml" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
         <mui:LinkGroup DisplayName="Редагування">

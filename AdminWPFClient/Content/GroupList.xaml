@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:AdminWPFClient.Content"
+             xmlns:local="clr-namespace:AdminWPFClient.Content"             
+             xmlns:converters="clr-namespace:AdminWPFClient.Converters"
              xmlns:validation="clr-namespace:AdminWPFClient.ValidationRules"
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" 
@@ -15,8 +16,15 @@
         <Style x:Key="DefaultRowStyle" TargetType="{x:Type DataGridRow}">
             <Setter Property="ContextMenu" Value="{StaticResource RowMenu}" />
         </Style>
+        <converters:DataContextConvertor x:Key="dataContextConvertor"/>
     </UserControl.Resources>
-    <Grid>
+    <StackPanel>
+        <ProgressBar Minimum="0" Maximum="1"  IsIndeterminate="True"  Height="30"
+                 Visibility="{Binding DataContext, RelativeSource={RelativeSource Self}, 
+                        Converter={StaticResource dataContextConvertor}, ConverterParameter='Null'}"/>
+        <Grid Visibility="{Binding DataContext, RelativeSource={RelativeSource Self}, 
+                        Converter={StaticResource dataContextConvertor}, ConverterParameter='NoNull'}">
+            
         <DockPanel>
             <DataGrid ItemsSource="{Binding Groups, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                       AutoGenerateColumns="False"  RowEditEnding="DataGrid_RowEditEnding"
@@ -42,4 +50,5 @@
             </DataGrid>
         </DockPanel>
     </Grid>
+        </StackPanel>
 </UserControl>

@@ -4,25 +4,41 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:AdminWPFClient.Content"
+      xmlns:converters="clr-namespace:AdminWPFClient.Converters"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300">
-
-    <Grid>
+    <UserControl.Resources>
+        <converters:DataContextConvertor x:Key="dataContextConvertor"/>
+        <DataTemplate x:Key="DataTemplate_Result">
+            <local:ResultControl DataContext="{Binding}" Margin="1,1,1,1"/>
+        </DataTemplate>
+    </UserControl.Resources>
+    <StackPanel>
+    <ProgressBar Minimum="0" Maximum="1"  IsIndeterminate="True"  Height="30"
+                 Visibility="{Binding DataContext, RelativeSource={RelativeSource Self}, 
+                        Converter={StaticResource dataContextConvertor}, ConverterParameter='Null'}"/>
+    <Grid Visibility="{Binding DataContext, RelativeSource={RelativeSource Self}, 
+                        Converter={StaticResource dataContextConvertor}, ConverterParameter='NoNull'}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="160" />
             <ColumnDefinition Width="10" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <StackPanel>
-            <ListBox ItemsSource="{Binding Path=Students}"
+                <Expander Header="Тести">
+                    <ListBox ItemsSource="{Binding Path=Tests}"
+                      DisplayMemberPath="Name"
+                     SelectedItem="{Binding Path=SelectedTest, Mode=TwoWay}"/>
+                </Expander>
+                <Expander Header="Студенти">
+                    <ListBox ItemsSource="{Binding Path=Students}"
                       DisplayMemberPath="Name"
                      SelectedItem="{Binding Path=SelectedStydent, Mode=TwoWay}"/>
-        </StackPanel>
+                </Expander>
+            </StackPanel>
         <GridSplitter  Grid.Column="1" Opacity="0"></GridSplitter>
-        <StackPanel Grid.Column="2">
-            <TextBlock Text="{Binding Path=SelectedStydent.Name}" Style="{StaticResource Heading2}" Margin="0,0,0,8"/>
-            <ListBox ItemsSource="{Binding Path=SelectedStydentTests}"
-                      DisplayMemberPath="Name"/>
-        </StackPanel>
+            <ItemsControl Grid.Column="2" ItemsSource="{Binding Results}" ItemTemplate="{StaticResource DataTemplate_Result}"/>
+            
     </Grid>
+    </StackPanel>
 </UserControl>

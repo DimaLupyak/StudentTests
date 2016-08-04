@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,12 +22,20 @@ namespace AdminWPFClient.Content
     /// </summary>
     public partial class StudentsInfo : UserControl
     {
-        private StudentsPageViewModel viewModel = new StudentsPageViewModel();
+        private StudentsResultsViewModel viewModel;
         public StudentsInfo()
         {
             InitializeComponent();
-            this.Loaded += (s, e) => { this.DataContext = this.viewModel; };
+            this.Loaded += (s, e) => { new Thread(InitializeData).Start(); };
             
+        }
+        void InitializeData()
+        {
+            viewModel = new StudentsResultsViewModel();
+            this.Dispatcher.Invoke((Action)(() =>
+            {
+                this.DataContext = this.viewModel;
+            }));            
         }
     }
 }

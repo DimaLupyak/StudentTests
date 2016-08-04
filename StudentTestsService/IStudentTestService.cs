@@ -25,9 +25,13 @@ namespace StudentTestsService
         [OperationContract]
         IEnumerable<AnswerViewModel> GetQuestionAnswers(int questionId);
         [OperationContract]
-        IEnumerable<ResultViewModel> GetStudentResults(int studentId);
+        IEnumerable<ResultViewModel> GetResults();
+        [OperationContract]
+        IEnumerable<QuestionViewModel> GetQuestions();
         [OperationContract]
         IEnumerable<GroupViewModel> GetTestGroups(int testId);
+        [OperationContract]
+        IEnumerable<ResultAnswerViewModel> GetResultAnswers(int resultId);
         [OperationContract]
         bool IsAcceess(int groupId, int testId);
         #endregion

@@ -69,6 +69,12 @@
     <Compile Include="Content\QuestionControl.xaml.cs">
       <DependentUpon>QuestionControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Content\ResultAnswerControl.xaml.cs">
+      <DependentUpon>ResultAnswerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\ResultControl.xaml.cs">
+      <DependentUpon>ResultControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Content\TestList.xaml.cs">
       <DependentUpon>TestList.xaml</DependentUpon>
     </Compile>
@@ -78,6 +84,9 @@
     <Compile Include="Content\StudentInfo.xaml.cs">
       <DependentUpon>StudentInfo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\DataContextConvertor.cs" />
+    <Compile Include="Converters\ImageConvertor.cs" />
+    <Compile Include="Converters\IsCorrectConvertor.cs" />
     <Compile Include="Converters\SelectedTestConvertor.cs" />
     <Compile Include="Converters\NewQuestionConvertor.cs" />
     <Compile Include="Helpers\ImageHelper.cs" />
@@ -95,10 +104,12 @@
     <Compile Include="ValidationRules\StudentValidationRule.cs" />
     <Compile Include="ViewModels\AccessControlViewModel.cs" />
     <Compile Include="ViewModels\QuestionControlViewModel.cs" />
+    <Compile Include="ViewModels\ResultAnswerControlViewModel.cs" />
+    <Compile Include="ViewModels\ResultControlViewModel.cs" />
     <Compile Include="ViewModels\SimpleCommand.cs" />
     <Compile Include="ViewModels\GroupListViewModel.cs" />
     <Compile Include="ViewModels\StudentsListViewModel.cs" />
-    <Compile Include="ViewModels\StudentsPageViewModel.cs" />
+    <Compile Include="ViewModels\StudentsResultsViewModel.cs" />
     <Compile Include="ViewModels\TestListViewModel.cs" />
     <Page Include="Content\AccessControl.xaml">
       <SubType>Designer</SubType>
@@ -109,6 +120,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Content\QuestionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\ResultAnswerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\ResultControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -147,17 +166,10 @@
       <DependentUpon>Appearance.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Settings\AppearanceViewModel.cs" />
-    <Page Include="Pages\Home.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\SettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Compile Include="Pages\Home.xaml.cs">
-      <DependentUpon>Home.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
@@ -177,6 +189,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ServiceReference\AdminWPFClient.ServiceReference.QuestionViewModel.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServiceReference\AdminWPFClient.ServiceReference.ResultAnswerViewModel.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ServiceReference\AdminWPFClient.ServiceReference.ResultViewModel.datasource">

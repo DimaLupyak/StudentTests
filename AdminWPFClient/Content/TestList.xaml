@@ -12,6 +12,7 @@
     <UserControl.Resources>
         <converters:NewQuestionConvertor x:Key="newQuestionConvertor"/>
         <converters:SelectedTestConvertor x:Key="selectedTestConvertor"/>
+        <converters:DataContextConvertor x:Key="dataContextConvertor"/>
         <ContextMenu  x:Key="RowMenu" DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
             <MenuItem Header="Видалити тест" Command="{Binding DataContext.DeleteCommand, 
                 RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" CommandParameter="{Binding}"/>
@@ -26,62 +27,69 @@
             <local:AccessControl DataContext="{Binding}" Margin="1,1,1,1"/>
         </DataTemplate>
     </UserControl.Resources>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="160" />
-            <ColumnDefinition Width="10" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <StackPanel>
-            <DataGrid ItemsSource="{Binding Tests, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+    <DockPanel>
+        <ProgressBar Minimum="0" Maximum="1"  IsIndeterminate="True"  Height="30"
+                 Visibility="{Binding DataContext, RelativeSource={RelativeSource Self}, 
+                        Converter={StaticResource dataContextConvertor}, ConverterParameter='Null'}"/>
+        <Grid Visibility="{Binding DataContext, RelativeSource={RelativeSource Self}, 
+                        Converter={StaticResource dataContextConvertor}, ConverterParameter='NoNull'}">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="160" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel>
+                <DataGrid ItemsSource="{Binding Tests, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                       SelectedItem="{Binding Path=SelectedTest, Mode=TwoWay}"
                       AutoGenerateColumns="False"  RowEditEnding="DataGrid_RowEditEnding"
                       RowStyle="{StaticResource DefaultRowStyle}">
-                <DataGrid.RowValidationRules>
-                    <validation:TestValidationRule ValidationStep="UpdatedValue"/>
-                </DataGrid.RowValidationRules>
-                <DataGrid.RowValidationErrorTemplate>
-                    <ControlTemplate>
-                        <Grid
+                    <DataGrid.RowValidationRules>
+                        <validation:TestValidationRule ValidationStep="UpdatedValue"/>
+                    </DataGrid.RowValidationRules>
+                    <DataGrid.RowValidationErrorTemplate>
+                        <ControlTemplate>
+                            <Grid
                         ToolTip="{Binding RelativeSource={RelativeSource
                         FindAncestor, AncestorType={x:Type DataGridRow}},
                         Path=(Validation.Errors)[0].ErrorContent}">
-                            <Path Width="15" Height="15"  Stretch="Fill" Fill="Red" Data="F1 M 38,19C 48.4934,19 57,27.5066 57,38C 57,48.4934 48.4934,57 38,57C 27.5066,57 19,48.4934 19,38C 19,27.5066 27.5066,19 38,19 Z M 34.0417,25.7292L 36.0208,41.9584L 39.9792,41.9583L 41.9583,25.7292L 34.0417,25.7292 Z M 38,44.3333C 36.2511,44.3333 34.8333,45.7511 34.8333,47.5C 34.8333,49.2489 36.2511,50.6667 38,50.6667C 39.7489,50.6667 41.1667,49.2489 41.1667,47.5C 41.1667,45.7511 39.7489,44.3333 38,44.3333 Z "/>
+                                <Path Width="15" Height="15"  Stretch="Fill" Fill="Red" Data="F1 M 38,19C 48.4934,19 57,27.5066 57,38C 57,48.4934 48.4934,57 38,57C 27.5066,57 19,48.4934 19,38C 19,27.5066 27.5066,19 38,19 Z M 34.0417,25.7292L 36.0208,41.9584L 39.9792,41.9583L 41.9583,25.7292L 34.0417,25.7292 Z M 38,44.3333C 36.2511,44.3333 34.8333,45.7511 34.8333,47.5C 34.8333,49.2489 36.2511,50.6667 38,50.6667C 39.7489,50.6667 41.1667,49.2489 41.1667,47.5C 41.1667,45.7511 39.7489,44.3333 38,44.3333 Z "/>
 
-                        </Grid>
-                    </ControlTemplate>
-                </DataGrid.RowValidationErrorTemplate>
-                <DataGrid.Columns>
-                    <mui:DataGridTextColumn Header="Назва"  
+                            </Grid>
+                        </ControlTemplate>
+                    </DataGrid.RowValidationErrorTemplate>
+                    <DataGrid.Columns>
+                        <mui:DataGridTextColumn Header="Назва"  
                                             Binding="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                </DataGrid.Columns>
-            </DataGrid>
-        </StackPanel>
-        <GridSplitter  Grid.Column="1" Opacity="0"></GridSplitter>
-        <DockPanel Grid.Column="2">
-            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-                <TextBlock Text="{Binding Path=SelectedTest.Name}" Style="{StaticResource Title}" Margin="0,0,0,8"/>
-                <TextBox Text="{Binding Path=SelectedTestTime}" Margin="16,8,0,0" FontWeight="Bold" FontSize="16"/>
+                    </DataGrid.Columns>
+                </DataGrid>
             </StackPanel>
-            <TabControl>
-                <TabItem Header="Питання">
-                    <ScrollViewer DockPanel.Dock="Bottom" VerticalScrollBarVisibility="Auto">
-                        <StackPanel>
-                            <ItemsControl ItemsSource="{Binding Questions}" ItemTemplate="{StaticResource DataTemplate_Question}"/>
-                            <local:QuestionControl DataContext="{Binding NewQuestion}" Margin="1,1,1,1" 
+            <GridSplitter  Grid.Column="1" Opacity="0"></GridSplitter>
+            <DockPanel Grid.Column="2">
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+                    <TextBlock Text="{Binding Path=SelectedTest.Name}" Style="{StaticResource Title}" Margin="0,0,0,8"/>
+                    <TextBox Text="{Binding Path=SelectedTestTime}" Margin="16,8,0,0" FontWeight="Bold" FontSize="16"/>
+                </StackPanel>
+                <TabControl>
+                    <TabItem Header="Питання">
+                        <ScrollViewer DockPanel.Dock="Bottom" VerticalScrollBarVisibility="Auto">
+                            <StackPanel>
+                                <ItemsControl ItemsSource="{Binding Questions}" ItemTemplate="{StaticResource DataTemplate_Question}"/>
+                                <local:QuestionControl DataContext="{Binding NewQuestion}" Margin="1,1,1,1" 
                                            Visibility="{Binding DataContext, RelativeSource={RelativeSource Self}, 
                         Converter={StaticResource newQuestionConvertor}, ConverterParameter='Visibility'}"/>
-                            <Button Command="{Binding AddQuestionCommand}" Content="{Binding NewQuestion, 
+                                <Button Command="{Binding AddQuestionCommand}" Content="{Binding NewQuestion, 
                         Converter={StaticResource newQuestionConvertor}, ConverterParameter='ButtonText'}" 
                             Visibility="{Binding SelectedTest, 
                         Converter={StaticResource selectedTestConvertor}, ConverterParameter='Visibility'}"/>
-                        </StackPanel>
-                    </ScrollViewer>
-                </TabItem>
-                <TabItem Header="Групи">
-                    <ItemsControl ItemsSource="{Binding Groups}" ItemTemplate="{StaticResource DataTemplate_Access}"/>                   
-                </TabItem>
-            </TabControl>
-        </DockPanel>
-    </Grid>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </TabItem>
+                    <TabItem Header="Групи">
+                        <ItemsControl ItemsSource="{Binding Groups}" ItemTemplate="{StaticResource DataTemplate_Access}"/>
+                    </TabItem>
+                </TabControl>
+            </DockPanel>
+        </Grid>
+    </DockPanel>
 </UserControl>

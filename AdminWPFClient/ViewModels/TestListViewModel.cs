@@ -18,9 +18,7 @@ namespace AdminWPFClient.ViewModels
         private StudentTestServiceClient service = new StudentTestServiceClient();
 
         public TestListViewModel()
-        {
-            
-
+        {     
             this.DeleteCommand = new SimpleCommand
             {
                 ExecuteDelegate = x =>

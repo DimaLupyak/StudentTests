@@ -555,6 +555,83 @@ namespace AdminWPFClient.ServiceReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ResultAnswerViewModel", Namespace="http://schemas.datacontract.org/2004/07/DataViewModels")]
+    [System.SerializableAttribute()]
+    public partial class ResultAnswerViewModel : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int AnswerIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int QuestionIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ResultIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int AnswerId {
+            get {
+                return this.AnswerIdField;
+            }
+            set {
+                if ((this.AnswerIdField.Equals(value) != true)) {
+                    this.AnswerIdField = value;
+                    this.RaisePropertyChanged("AnswerId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int QuestionId {
+            get {
+                return this.QuestionIdField;
+            }
+            set {
+                if ((this.QuestionIdField.Equals(value) != true)) {
+                    this.QuestionIdField = value;
+                    this.RaisePropertyChanged("QuestionId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ResultId {
+            get {
+                return this.ResultIdField;
+            }
+            set {
+                if ((this.ResultIdField.Equals(value) != true)) {
+                    this.ResultIdField = value;
+                    this.RaisePropertyChanged("ResultId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference.IStudentTestService")]
     public interface IStudentTestService {
@@ -595,17 +672,29 @@ namespace AdminWPFClient.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/GetQuestionAnswers", ReplyAction="http://tempuri.org/IStudentTestService/GetQuestionAnswersResponse")]
         System.Threading.Tasks.Task<AdminWPFClient.ServiceReference.AnswerViewModel[]> GetQuestionAnswersAsync(int questionId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/GetStudentResults", ReplyAction="http://tempuri.org/IStudentTestService/GetStudentResultsResponse")]
-        AdminWPFClient.ServiceReference.ResultViewModel[] GetStudentResults(int studentId);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/GetResults", ReplyAction="http://tempuri.org/IStudentTestService/GetResultsResponse")]
+        AdminWPFClient.ServiceReference.ResultViewModel[] GetResults();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/GetStudentResults", ReplyAction="http://tempuri.org/IStudentTestService/GetStudentResultsResponse")]
-        System.Threading.Tasks.Task<AdminWPFClient.ServiceReference.ResultViewModel[]> GetStudentResultsAsync(int studentId);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/GetResults", ReplyAction="http://tempuri.org/IStudentTestService/GetResultsResponse")]
+        System.Threading.Tasks.Task<AdminWPFClient.ServiceReference.ResultViewModel[]> GetResultsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/GetQuestions", ReplyAction="http://tempuri.org/IStudentTestService/GetQuestionsResponse")]
+        AdminWPFClient.ServiceReference.QuestionViewModel[] GetQuestions();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/GetQuestions", ReplyAction="http://tempuri.org/IStudentTestService/GetQuestionsResponse")]
+        System.Threading.Tasks.Task<AdminWPFClient.ServiceReference.QuestionViewModel[]> GetQuestionsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/GetTestGroups", ReplyAction="http://tempuri.org/IStudentTestService/GetTestGroupsResponse")]
         AdminWPFClient.ServiceReference.GroupViewModel[] GetTestGroups(int testId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/GetTestGroups", ReplyAction="http://tempuri.org/IStudentTestService/GetTestGroupsResponse")]
         System.Threading.Tasks.Task<AdminWPFClient.ServiceReference.GroupViewModel[]> GetTestGroupsAsync(int testId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/GetResultAnswers", ReplyAction="http://tempuri.org/IStudentTestService/GetResultAnswersResponse")]
+        AdminWPFClient.ServiceReference.ResultAnswerViewModel[] GetResultAnswers(int resultId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/GetResultAnswers", ReplyAction="http://tempuri.org/IStudentTestService/GetResultAnswersResponse")]
+        System.Threading.Tasks.Task<AdminWPFClient.ServiceReference.ResultAnswerViewModel[]> GetResultAnswersAsync(int resultId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/IsAcceess", ReplyAction="http://tempuri.org/IStudentTestService/IsAcceessResponse")]
         bool IsAcceess(int groupId, int testId);
@@ -791,12 +880,20 @@ namespace AdminWPFClient.ServiceReference {
             return base.Channel.GetQuestionAnswersAsync(questionId);
         }
         
-        public AdminWPFClient.ServiceReference.ResultViewModel[] GetStudentResults(int studentId) {
-            return base.Channel.GetStudentResults(studentId);
+        public AdminWPFClient.ServiceReference.ResultViewModel[] GetResults() {
+            return base.Channel.GetResults();
         }
         
-        public System.Threading.Tasks.Task<AdminWPFClient.ServiceReference.ResultViewModel[]> GetStudentResultsAsync(int studentId) {
-            return base.Channel.GetStudentResultsAsync(studentId);
+        public System.Threading.Tasks.Task<AdminWPFClient.ServiceReference.ResultViewModel[]> GetResultsAsync() {
+            return base.Channel.GetResultsAsync();
+        }
+        
+        public AdminWPFClient.ServiceReference.QuestionViewModel[] GetQuestions() {
+            return base.Channel.GetQuestions();
+        }
+        
+        public System.Threading.Tasks.Task<AdminWPFClient.ServiceReference.QuestionViewModel[]> GetQuestionsAsync() {
+            return base.Channel.GetQuestionsAsync();
         }
         
         public AdminWPFClient.ServiceReference.GroupViewModel[] GetTestGroups(int testId) {
@@ -805,6 +902,14 @@ namespace AdminWPFClient.ServiceReference {
         
         public System.Threading.Tasks.Task<AdminWPFClient.ServiceReference.GroupViewModel[]> GetTestGroupsAsync(int testId) {
             return base.Channel.GetTestGroupsAsync(testId);
+        }
+        
+        public AdminWPFClient.ServiceReference.ResultAnswerViewModel[] GetResultAnswers(int resultId) {
+            return base.Channel.GetResultAnswers(resultId);
+        }
+        
+        public System.Threading.Tasks.Task<AdminWPFClient.ServiceReference.ResultAnswerViewModel[]> GetResultAnswersAsync(int resultId) {
+            return base.Channel.GetResultAnswersAsync(resultId);
         }
         
         public bool IsAcceess(int groupId, int testId) {

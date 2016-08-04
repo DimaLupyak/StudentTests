@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,19 +24,27 @@ namespace AdminWPFClient.Content
     /// </summary>
     public partial class StudentList : UserControl
     {
-        private StudentsListViewModel viewModel = new StudentsListViewModel();
+        private StudentsListViewModel viewModel;
 
         public StudentList()
         {
             InitializeComponent();
-            this.Loaded += (s, e) => { this.DataContext = this.viewModel; };
+            this.Loaded += (s, e) => { new Thread(InitializeData).Start(); };
             this.IsVisibleChanged += (s, e) =>
             {
-                if ((bool)e.NewValue)
+                if ((bool)e.NewValue && viewModel!=null)
                     viewModel.RefreshGroups();
             };
-        }
 
+        }
+        void InitializeData()
+        {
+            viewModel = new StudentsListViewModel();
+            this.Dispatcher.Invoke((Action)(() =>
+            {
+                this.DataContext = this.viewModel;
+            }));
+        }
         private void DataGrid_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
             StudentViewModel student = e.Row.DataContext as StudentViewModel;

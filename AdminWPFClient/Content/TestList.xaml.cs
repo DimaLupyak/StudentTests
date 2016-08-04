@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,10 +28,17 @@ namespace AdminWPFClient.Content
         public TestList()
         {
             InitializeComponent();
-            this.Loaded += (s, e) => { this.DataContext = this.viewModel; };
+            this.Loaded += (s, e) => { new Thread(InitializeData).Start(); };
             
         }
-
+        void InitializeData()
+        {
+            viewModel = new TestListViewModel();
+            this.Dispatcher.Invoke((Action)(() =>
+            {
+                this.DataContext = this.viewModel;
+            }));
+        }
         private void DataGrid_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
             TestViewModel test = e.Row.DataContext as TestViewModel;

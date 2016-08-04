@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,14 +24,22 @@ namespace AdminWPFClient.Content
     /// </summary>
     public partial class GroupList : UserControl
     {
-        private GroupListViewModel viewModel = new GroupListViewModel();
+        private GroupListViewModel viewModel;
 
         public GroupList()
         {
             InitializeComponent();
-            this.Loaded += (s, e) => { this.DataContext = this.viewModel; };
-        }
+            this.Loaded += (s, e) => { new Thread(InitializeData).Start(); };
 
+        }
+        void InitializeData()
+        {
+            viewModel = new GroupListViewModel();
+            this.Dispatcher.Invoke((Action)(() =>
+            {
+                this.DataContext = this.viewModel;
+            }));
+        }
         private void DataGrid_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
             GroupViewModel group = e.Row.DataContext as GroupViewModel;

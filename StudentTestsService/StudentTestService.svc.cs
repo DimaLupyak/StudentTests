@@ -85,9 +85,19 @@ namespace StudentTestsService
             return AnswerRepisitory.Instance.Read().Where(x => x.QuestionId == questionId);
         }
 
-        public IEnumerable<ResultViewModel> GetStudentResults(int studentId)
+        public IEnumerable<QuestionViewModel> GetQuestions()
         {
-            return ResultRepisitory.Instance.Read().Where(x => x.StudentId == studentId);
+            return QuestionRepisitory.Instance.Read();
+        }
+
+        public IEnumerable<ResultAnswerViewModel> GetResultAnswers(int resultId)
+        {
+            return ResultAnswerRepisitory.Instance.Read().Where(x => x.ResultId == resultId);
+        }
+
+        public IEnumerable<ResultViewModel> GetResults()
+        {
+            return ResultRepisitory.Instance.Read();
         }
 
         public IEnumerable<StudentViewModel> GetStudents()
