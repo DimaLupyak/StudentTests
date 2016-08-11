@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="StudentTestDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="StudentTestDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Accesses">
           <Key>
             <PropertyRef Name="AccessId" />
@@ -79,7 +79,9 @@ warning 6002: The table/view 'StudentTestDB.dbo.ResultAnswers' does not have a p
           <Property Name="TestTime" Type="time" Precision="1" Nullable="false" />
         </EntityType>
         <Association Name="FK_Accesses_Groups">
-          <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
+          <End Role="Groups" Type="Self.Groups" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Accesses" Type="Self.Accesses" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Groups">
@@ -91,7 +93,9 @@ warning 6002: The table/view 'StudentTestDB.dbo.ResultAnswers' does not have a p
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Accesses_Tests">
-          <End Role="Tests" Type="Self.Tests" Multiplicity="1" />
+          <End Role="Tests" Type="Self.Tests" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Accesses" Type="Self.Accesses" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tests">
@@ -103,7 +107,9 @@ warning 6002: The table/view 'StudentTestDB.dbo.ResultAnswers' does not have a p
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Answers_Questions">
-          <End Role="Questions" Type="Self.Questions" Multiplicity="1" />
+          <End Role="Questions" Type="Self.Questions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Answers" Type="Self.Answers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Questions">
@@ -115,7 +121,9 @@ warning 6002: The table/view 'StudentTestDB.dbo.ResultAnswers' does not have a p
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Questions_Tests">
-          <End Role="Tests" Type="Self.Tests" Multiplicity="0..1" />
+          <End Role="Tests" Type="Self.Tests" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Questions" Type="Self.Questions" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tests">
@@ -163,7 +171,9 @@ warning 6002: The table/view 'StudentTestDB.dbo.ResultAnswers' does not have a p
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Results_Students">
-          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Results" Type="Self.Results" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Students">
@@ -175,7 +185,9 @@ warning 6002: The table/view 'StudentTestDB.dbo.ResultAnswers' does not have a p
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Results_Tests">
-          <End Role="Tests" Type="Self.Tests" Multiplicity="1" />
+          <End Role="Tests" Type="Self.Tests" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Results" Type="Self.Results" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tests">
@@ -187,7 +199,9 @@ warning 6002: The table/view 'StudentTestDB.dbo.ResultAnswers' does not have a p
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Students_Groups">
-          <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
+          <End Role="Groups" Type="Self.Groups" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Students" Type="Self.Students" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Groups">
@@ -254,8 +268,7 @@ FROM [dbo].[ResultAnswers] AS [ResultAnswers]</DefiningQuery>
             <End Role="Students" EntitySet="Students" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="StudentTestDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
