@@ -1,9 +1,9 @@
-﻿using FirstFloor.ModernUI.Windows.Controls;
-using StudentWpfClient.ViewModels;
+﻿using StudentWpfClient.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,18 +15,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace StudentWpfClient
+namespace StudentWpfClient.Pages
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for TabPage.xaml
     /// </summary>
-    public partial class MainWindow : ModernWindow
+    public partial class TabPage : UserControl
     {
-        private MainWindowViewModel viewModel = new MainWindowViewModel();
-        public MainWindow()
+        public TabPage()
         {
             InitializeComponent();
-            this.Loaded += (s, e) => this.DataContext = viewModel;
         }
     }
 }

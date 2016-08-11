@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="StudentWpfClient.Pages.LogonPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"              
+             xmlns:converters="clr-namespace:StudentWpfClient.Converters"
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <converters:IsNullToVisibilityConvertor x:Key="isNullToVisibilityConvertor"/>
+    </UserControl.Resources>
+    <DockPanel>
+        <ProgressBar DockPanel.Dock="Top" Minimum="0" Maximum="1"  IsIndeterminate="True"  Height="30"
+                 Visibility="{Binding DataContext, RelativeSource={RelativeSource Self}, 
+                        Converter={StaticResource isNullToVisibilityConvertor}, ConverterParameter='Null'}"/>
+        <TextBlock DockPanel.Dock="Top" Text="Загрузка даних" 
+                   Visibility="{Binding DataContext, RelativeSource={RelativeSource Self}, 
+                        Converter={StaticResource isNullToVisibilityConvertor}, ConverterParameter='Null'}" HorizontalAlignment="Center" FontSize="18" IsEnabled="False"/>
+        <ProgressBar DockPanel.Dock="Top" Minimum="0" Maximum="1"  IsIndeterminate="True"  Height="30"
+                 Visibility="{Binding DataContext, RelativeSource={RelativeSource Self}, 
+                        Converter={StaticResource isNullToVisibilityConvertor}, ConverterParameter='Null'}"/>
+        <Grid Visibility="{Binding DataContext, RelativeSource={RelativeSource Self}, 
+                        Converter={StaticResource isNullToVisibilityConvertor}, ConverterParameter='NoNull'}">
+            <StackPanel MinWidth="200">
+                <TextBlock Text="Виберіть групу:" />
+                <ComboBox ItemsSource="{Binding Path=Groups}" 
+                DisplayMemberPath="Name" 
+                SelectedValuePath="" 
+                SelectedValue="{Binding Path=SelectedGroup}" />
+                <TextBlock Text="Виберіть студента:" 
+                           Visibility="{Binding Students, 
+                        Converter={StaticResource isNullToVisibilityConvertor}, ConverterParameter='NoNull'}"/>
+                <ComboBox ItemsSource="{Binding Path=Students}" 
+                DisplayMemberPath="Name" 
+                SelectedValuePath="" 
+                SelectedValue="{Binding Path=DataContext.SelectedStudent,
+                            RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
+                          Visibility="{Binding Students, 
+                        Converter={StaticResource isNullToVisibilityConvertor}, ConverterParameter='NoNull'}"/>
+                <Button Content="Увійти"
+                        Visibility="{Binding DataContext.SelectedStudent,
+                            RelativeSource={RelativeSource AncestorType={x:Type Window}}, 
+                        Converter={StaticResource isNullToVisibilityConvertor}, ConverterParameter='NoNull'}"
+                        Command="mui:LinkCommands.NavigateLink"
+                            CommandParameter="/Pages/TabPage.xaml"/>
+            </StackPanel>
+        </Grid>
+    </DockPanel>
+</UserControl>

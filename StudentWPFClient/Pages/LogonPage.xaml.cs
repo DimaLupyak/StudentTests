@@ -1,6 +1,4 @@
-﻿using AdminClient.ViewModels;
-using AdminWPFClient.ServiceReference;
-using AdminWPFClient.ViewModels;
+﻿using StudentWpfClient.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,38 +15,29 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace AdminWPFClient.Content
+namespace StudentWpfClient.Pages
 {
     /// <summary>
-    /// Interaction logic for StudentsInfo.xaml
+    /// Interaction logic for Home.xaml
     /// </summary>
-    public partial class TestList : UserControl
+    public partial class LogonPage : UserControl
     {
-        private TestListViewModel viewModel;
-        public TestList()
+
+        private LogonPageViewModel viewModel;
+        public LogonPage()
         {
             InitializeComponent();
+            this.DataContext = null;
             this.Loaded += (s, e) => { new Thread(InitializeData).Start(); };
-            
+
         }
         void InitializeData()
         {
-            viewModel = new TestListViewModel();
+            viewModel = new LogonPageViewModel();
             this.Dispatcher.Invoke((Action)(() =>
             {
                 this.DataContext = this.viewModel;
             }));
         }
-        private void DataGrid_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
-        {
-            TestViewModel test = e.Row.DataContext as TestViewModel;
-            if (test.Name != "" && test.Name != null)
-            {
-                if (test.Id == 0)
-                    viewModel.CreateTest(test);
-                else viewModel.UpdateTest(test);
-            }
-        }
-
     }
 }

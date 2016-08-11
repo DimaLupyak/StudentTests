@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace StudentWPFClient.Pages
+namespace StudentWpfClient.Content
 {
     /// <summary>
-    /// Interaction logic for Home.xaml
+    /// Interaction logic for ResultsListControl.xaml
     /// </summary>
-    public partial class Home : UserControl
+    public partial class ResultsListControl : UserControl
     {
-        public Home()
+        public ResultsListControl()
         {
             InitializeComponent();
         }

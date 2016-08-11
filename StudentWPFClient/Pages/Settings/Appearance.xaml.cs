@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace StudentWPFClient.Pages.Settings
+namespace StudentWpfClient.Pages.Settings
 {
     /// <summary>
     /// Interaction logic for Appearance.xaml

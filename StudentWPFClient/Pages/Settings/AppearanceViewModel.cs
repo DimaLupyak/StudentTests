@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 
-namespace StudentWPFClient.Pages.Settings
+namespace StudentWpfClient.Pages.Settings
 {
     /// <summary>
     /// A simple view model for configuring theme, font and accent colors.

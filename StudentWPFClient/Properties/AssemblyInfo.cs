@@ -6,11 +6,11 @@ using System.Windows.Media;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("StudentWPFClient")]
+[assembly: AssemblyTitle("StudentWpfClient")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("StudentWPFClient")]
+[assembly: AssemblyProduct("StudentWpfClient")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -21,7 +21,7 @@ using System.Windows.Media;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("f89d5907-6d1c-457d-aa48-a20de19828a1")]
+[assembly: Guid("5a660b9d-984f-420f-83da-b5c2f9615b4f")]
 
 // required to support per-monitor DPI awareness in Windows 8.1+
 // see also https://mui.codeplex.com/wikipage?title=Per-monitor%20DPI%20awareness

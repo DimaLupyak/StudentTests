@@ -1,6 +1,4 @@
-﻿using FirstFloor.ModernUI.Windows.Controls;
-using StudentWpfClient.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,18 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace StudentWpfClient
+namespace StudentWpfClient.Content
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for TestListControl.xaml
     /// </summary>
-    public partial class MainWindow : ModernWindow
+    public partial class TestListControl : UserControl
     {
-        private MainWindowViewModel viewModel = new MainWindowViewModel();
-        public MainWindow()
+        public TestListControl()
         {
             InitializeComponent();
-            this.Loaded += (s, e) => this.DataContext = viewModel;
         }
     }
 }
