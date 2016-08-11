@@ -22,6 +22,12 @@ namespace AdminClient.ViewModels
 
         public event EventHandler CanExecuteChanged;
 
+        protected void RaiseCanExecuteChangedEvent()
+        {
+            if (CanExecuteChanged != null)
+                CanExecuteChanged(this, null);
+        }
+
         public void Execute(object parameter)
         {
             if (ExecuteDelegate != null)
