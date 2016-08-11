@@ -17,9 +17,8 @@ namespace StudentWpfClient.ViewModels
 
         public TestsListViewModel(int studentId)
         {
-            Tests = service.GetStudentTests(studentId);
+            Tests = service.GetStudentTests(studentId);           
         }
-
 
         private IEnumerable<TestViewModel> tests;
         public IEnumerable<TestViewModel> Tests

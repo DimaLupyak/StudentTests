@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace StudentWpfClient.ViewModels
 {
@@ -20,9 +21,29 @@ namespace StudentWpfClient.ViewModels
                         .Select(x => new QuestionControlViewModel(x))
                         .ToArray();
             LeftTime = test.Time;
+
+            this.NextQuestionCommand = new SimpleCommand
+            {
+                ExecuteDelegate = x =>
+                {
+                    CurrentQuestionsNumber++;
+                },
+                CanExecuteDelegate = x => CurrentQuestionsNumber < QuestionsCount
+            };
+
+            this.PreviousQuestionCommand = new SimpleCommand
+            {
+                ExecuteDelegate = x =>
+                {
+                    CurrentQuestionsNumber--;
+                },
+                CanExecuteDelegate = x => CurrentQuestionsNumber>1
+            };
         }
 
-
+        public ICommand NextQuestionCommand { get; set; }
+        public ICommand PreviousQuestionCommand { get; set; }
+               
         private TestViewModel test;
         public TestViewModel Test
         {
@@ -53,19 +74,24 @@ namespace StudentWpfClient.ViewModels
             set
             {
                 this.questions = value;
+                QuestionsCount = value.Count();
+                if (value.Count() > 0)
+                {
+                    CurrentQuestionsNumber = 1;
+                }
                 this.OnPropertyChanged("Questions");
             }
         }
 
-        private QuestionControlViewModel currentQuestions;
+        private QuestionControlViewModel currentQuestion;
 
-        public QuestionControlViewModel CurrentQuestions
+        public QuestionControlViewModel CurrentQuestion
         {
-            get { return this.currentQuestions; }
+            get { return this.currentQuestion; }
             set
             {
-                this.currentQuestions = value;
-                this.OnPropertyChanged("CurrentQuestions");
+                this.currentQuestion = value;
+                this.OnPropertyChanged("CurrentQuestion");
             }
         }
 
@@ -76,12 +102,24 @@ namespace StudentWpfClient.ViewModels
             get { return this.currentQuestionsNumber; }
             set
             {
-                if(value< Questions.Count())
+                if (Questions != null)
                 {
                     this.currentQuestionsNumber = value;
-                    CurrentQuestions = Questions[value];
+                    CurrentQuestion = Questions[value-1];
                     this.OnPropertyChanged("CurrentQuestionsNumber");
-                }                
+                }
+            }
+        }
+
+        private int questionsCount;
+
+        public int QuestionsCount
+        {
+            get { return this.questionsCount; }
+            set
+            {
+                this.questionsCount = value;
+                this.OnPropertyChanged("QuestionsCount");
             }
         }
 

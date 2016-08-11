@@ -22,6 +22,8 @@ namespace StudentWpfClient.ViewModels
         {    
             Question = question;
         }
+
+
         private QuestionViewModel question;
         public QuestionViewModel Question
         {
@@ -67,6 +69,7 @@ namespace StudentWpfClient.ViewModels
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;
+
 
     }
 }

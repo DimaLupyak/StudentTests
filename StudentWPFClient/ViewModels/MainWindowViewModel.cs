@@ -1,4 +1,5 @@
-﻿using StudentWpfClient.ServiceReference;
+﻿using FirstFloor.ModernUI.Windows.Navigation;
+using StudentWpfClient.ServiceReference;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,15 +14,38 @@ namespace StudentWpfClient.ViewModels
 {
     class MainWindowViewModel : INotifyPropertyChanged
     {
+        public MainWindowViewModel()
+        {
+            this.OpenTestCommand = new SimpleCommand
+            {
+                ExecuteDelegate = x =>
+                {
+                    TestViewModel test = x as TestViewModel;
+                    if (test != null)
+                    {
+                        TestingViewModel = new TestingViewModel(SelectedStudent.Id, test);
+                        IInputElement target = NavigationHelper.FindFrame("_top", Application.Current.MainWindow); 
+                        NavigationCommands.GoToPage.Execute("/Pages/TestingPage.xaml", target);
+                    }
+                },
+                CanExecuteDelegate = x => true
+            };
+        }
+
+        public ICommand OpenTestCommand { get; set; }
+
         private StudentViewModel selectedStudent;
         public StudentViewModel SelectedStudent
         {
             get { return this.selectedStudent; }
             set
             {
-                this.selectedStudent = value;
-                TestsList = new TestsListViewModel(value.Id);
-                ResultsList = new ResultsListViewModel(value.Id);
+                if (value != null)
+                {
+                this.selectedStudent = value;                
+                    TestsList = new TestsListViewModel(value.Id);
+                    ResultsList = new ResultsListViewModel(value.Id);
+                }
                 this.OnPropertyChanged("SelectedStudent");
             }
         }
