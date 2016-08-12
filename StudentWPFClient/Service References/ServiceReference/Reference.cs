@@ -738,6 +738,12 @@ namespace StudentWpfClient.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/CreateAccess", ReplyAction="http://tempuri.org/IStudentTestService/CreateAccessResponse")]
         System.Threading.Tasks.Task CreateAccessAsync(int groupId, int testId);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/CreateResult", ReplyAction="http://tempuri.org/IStudentTestService/CreateResultResponse")]
+        int CreateResult(StudentWpfClient.ServiceReference.ResultViewModel result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/CreateResult", ReplyAction="http://tempuri.org/IStudentTestService/CreateResultResponse")]
+        System.Threading.Tasks.Task<int> CreateResultAsync(StudentWpfClient.ServiceReference.ResultViewModel result);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/UpdateStudent", ReplyAction="http://tempuri.org/IStudentTestService/UpdateStudentResponse")]
         void UpdateStudent(StudentWpfClient.ServiceReference.StudentViewModel student);
         
@@ -966,6 +972,14 @@ namespace StudentWpfClient.ServiceReference {
         
         public System.Threading.Tasks.Task CreateAccessAsync(int groupId, int testId) {
             return base.Channel.CreateAccessAsync(groupId, testId);
+        }
+        
+        public int CreateResult(StudentWpfClient.ServiceReference.ResultViewModel result) {
+            return base.Channel.CreateResult(result);
+        }
+        
+        public System.Threading.Tasks.Task<int> CreateResultAsync(StudentWpfClient.ServiceReference.ResultViewModel result) {
+            return base.Channel.CreateResultAsync(result);
         }
         
         public void UpdateStudent(StudentWpfClient.ServiceReference.StudentViewModel student) {

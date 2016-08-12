@@ -27,7 +27,7 @@ namespace BusinessLogic
         protected ResultRepisitory() { }
         #endregion
         #region CRUD
-        public void Create(ResultViewModel item)
+        public int Create(ResultViewModel item)
         {
             using (StudentTestDBEntities entities = new StudentTestDBEntities())
             {
@@ -40,6 +40,7 @@ namespace BusinessLogic
                 entities.Results.Add(result);
                 entities.SaveChanges();
                 item.Id = result.TestResultId;
+                return item.Id;
             }
         }
 
@@ -90,5 +91,6 @@ namespace BusinessLogic
             }
         }
         #endregion
+
     }
 }

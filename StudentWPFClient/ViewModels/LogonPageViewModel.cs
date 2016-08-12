@@ -14,11 +14,11 @@ namespace StudentWpfClient.ViewModels
     class LogonPageViewModel : INotifyPropertyChanged
     {
         private StudentTestServiceClient service = new StudentTestServiceClient();
+        public event Action ResetSelectedStudent;
 
         public LogonPageViewModel()
         {
-            Groups = service.GetGroups();
-           
+            Groups = service.GetGroups();           
         }
 
         private GroupViewModel selectedGroup;
@@ -29,6 +29,7 @@ namespace StudentWpfClient.ViewModels
             {
                 this.selectedGroup = value;
                 Students = service.GetStudents().Where(x => x.GroupID == value.Id);
+                if (ResetSelectedStudent != null) ResetSelectedStudent();
                 this.OnPropertyChanged("SelectedGroup");
             }
         }
@@ -43,16 +44,6 @@ namespace StudentWpfClient.ViewModels
             }
         }
 
-        private StudentViewModel selectedStudent;
-        public StudentViewModel SelectedStudent
-        {
-            get { return this.selectedStudent; }
-            set
-            {
-                this.selectedStudent = value;
-                this.OnPropertyChanged("SelectedStudent");
-            }
-        }
         private IEnumerable<StudentViewModel> students;
         public IEnumerable<StudentViewModel> Students
         {

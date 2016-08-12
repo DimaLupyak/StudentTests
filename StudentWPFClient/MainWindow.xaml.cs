@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,11 +23,19 @@ namespace StudentWpfClient
     /// </summary>
     public partial class MainWindow : ModernWindow
     {
-        private MainWindowViewModel viewModel = new MainWindowViewModel();
+        private MainWindowViewModel viewModel;
         public MainWindow()
         {
             InitializeComponent();
-            this.Loaded += (s, e) => this.DataContext = viewModel;
+            this.Loaded += (s, e) => { new Thread(InitializeData).Start(); };
+        }
+        void InitializeData()
+        {
+            viewModel = new MainWindowViewModel();
+            this.Dispatcher.Invoke((Action)(() =>
+            {
+                this.DataContext = new MainWindowViewModel();
+            }));
         }
     }
 }

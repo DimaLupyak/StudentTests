@@ -13,9 +13,12 @@ using System.Windows.Input;
 namespace StudentWpfClient.ViewModels
 {
     class MainWindowViewModel : INotifyPropertyChanged
-    {
+    { 
         public MainWindowViewModel()
         {
+            LogonPage = new LogonPageViewModel();
+            LogonPage.ResetSelectedStudent += () => { SelectedStudent = null; };
+
             this.OpenTestCommand = new SimpleCommand
             {
                 ExecuteDelegate = x =>
@@ -24,15 +27,26 @@ namespace StudentWpfClient.ViewModels
                     if (test != null)
                     {
                         TestingViewModel = new TestingViewModel(SelectedStudent.Id, test);
-                        IInputElement target = NavigationHelper.FindFrame("_top", Application.Current.MainWindow); 
+                        IInputElement target = NavigationHelper.FindFrame("_top", Application.Current.MainWindow);
                         NavigationCommands.GoToPage.Execute("/Pages/TestingPage.xaml", target);
                     }
                 },
                 CanExecuteDelegate = x => true
-            };
+            };            
         }
 
         public ICommand OpenTestCommand { get; set; }
+
+        private LogonPageViewModel logonPage;
+        public LogonPageViewModel LogonPage
+        {
+            get { return this.logonPage; }
+            set
+            {
+                this.logonPage = value;
+                this.OnPropertyChanged("LogonPage");
+            }
+        }
 
         private StudentViewModel selectedStudent;
         public StudentViewModel SelectedStudent
@@ -40,11 +54,16 @@ namespace StudentWpfClient.ViewModels
             get { return this.selectedStudent; }
             set
             {
+                this.selectedStudent = value;
                 if (value != null)
-                {
-                this.selectedStudent = value;                
+                {                   
                     TestsList = new TestsListViewModel(value.Id);
                     ResultsList = new ResultsListViewModel(value.Id);
+                }
+                else
+                {
+                    TestsList = null;
+                    ResultsList = null;
                 }
                 this.OnPropertyChanged("SelectedStudent");
             }
@@ -83,7 +102,7 @@ namespace StudentWpfClient.ViewModels
                 this.OnPropertyChanged("ResultsList");
             }
         }
-        
+
         private TestingViewModel testingViewModel;
         public TestingViewModel TestingViewModel
         {
@@ -95,7 +114,7 @@ namespace StudentWpfClient.ViewModels
             }
         }
 
-        
+
         private void OnPropertyChanged(string propertyName)
         {
             if (this.PropertyChanged != null)
@@ -105,6 +124,6 @@ namespace StudentWpfClient.ViewModels
         }
         public event PropertyChangedEventHandler PropertyChanged;
 
-        
+
     }
 }

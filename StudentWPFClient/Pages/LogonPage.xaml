@@ -24,23 +24,21 @@
                         Converter={StaticResource isNullToVisibilityConvertor}, ConverterParameter='NoNull'}">
             <StackPanel MinWidth="200">
                 <TextBlock Text="Виберіть групу:" />
-                <ComboBox ItemsSource="{Binding Path=Groups}" 
+                <ComboBox ItemsSource="{Binding Path=LogonPage.Groups}" 
                 DisplayMemberPath="Name" 
                 SelectedValuePath="" 
-                SelectedValue="{Binding Path=SelectedGroup}" />
+                SelectedValue="{Binding Path=LogonPage.SelectedGroup}" />
                 <TextBlock Text="Виберіть студента:" 
-                           Visibility="{Binding Students, 
+                           Visibility="{Binding LogonPage.Students, 
                         Converter={StaticResource isNullToVisibilityConvertor}, ConverterParameter='NoNull'}"/>
-                <ComboBox ItemsSource="{Binding Path=Students}" 
+                <ComboBox ItemsSource="{Binding Path=LogonPage.Students}" 
                 DisplayMemberPath="Name" 
                 SelectedValuePath="" 
-                SelectedValue="{Binding Path=DataContext.SelectedStudent,
-                            RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
-                          Visibility="{Binding Students, 
+                SelectedValue="{Binding Path=SelectedStudent}" 
+                          Visibility="{Binding LogonPage.Students, 
                         Converter={StaticResource isNullToVisibilityConvertor}, ConverterParameter='NoNull'}"/>
                 <Button Content="Увійти"
-                        Visibility="{Binding DataContext.SelectedStudent,
-                            RelativeSource={RelativeSource AncestorType={x:Type Window}}, 
+                        Visibility="{Binding SelectedStudent, 
                         Converter={StaticResource isNullToVisibilityConvertor}, ConverterParameter='NoNull'}"
                         Command="mui:LinkCommands.NavigateLink"
                             CommandParameter="/Pages/TabPage.xaml"/>

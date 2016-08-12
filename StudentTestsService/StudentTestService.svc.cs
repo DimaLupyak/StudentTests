@@ -162,5 +162,11 @@ namespace StudentTestsService
         {
             TestRepisitory.Instance.Update(test);
         }
+
+
+        public int CreateResult(ResultViewModel result)
+        {
+            return ResultRepisitory.Instance.Create(result);
+        }
     }
 }

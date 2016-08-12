@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StudentWpfClient.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,27 @@ namespace StudentWpfClient.Pages
         public TestingPage()
         {
             InitializeComponent();
+        }
+
+        private void TestingPageKeyDown(object sender, KeyEventArgs e)
+        {
+            if (!e.Handled)
+            {
+                e.Handled = true;
+                switch (e.Key)
+                {
+                    case Key.Left:
+                        if ((this.DataContext as TestingViewModel).PreviousQuestionCommand.CanExecute(null))
+                            (this.DataContext as TestingViewModel).PreviousQuestionCommand.Execute(null);
+                        break;
+                    case Key.Right:
+                        if ((this.DataContext as TestingViewModel).NextQuestionCommand.CanExecute(null))
+                            (this.DataContext as TestingViewModel).NextQuestionCommand.Execute(null);
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
     }
 }

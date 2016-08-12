@@ -1,10 +1,12 @@
-﻿using StudentWpfClient.ServiceReference;
+﻿using FirstFloor.ModernUI.Windows.Controls;
+using StudentWpfClient.ServiceReference;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace StudentWpfClient.ViewModels
@@ -12,15 +14,21 @@ namespace StudentWpfClient.ViewModels
     class TestingViewModel : INotifyPropertyChanged
     {
         private StudentTestServiceClient service = new StudentTestServiceClient();
-
+        private int studentId;
         public TestingViewModel(int studentId, TestViewModel test)
         {
-            Test = test;
-            CurrentQuestionsNumber = 0;
-            Questions = service.GetTestQuestions(test.Id)
+            this.studentId = studentId;
+            this.Test = test;
+            this.CurrentQuestionsNumber = 0;
+            this.Questions = service.GetTestQuestions(test.Id)
                         .Select(x => new QuestionControlViewModel(x))
                         .ToArray();
-            LeftTime = test.Time;
+            foreach (var item in Questions)
+            {
+                item.AnswerSelected += UpdateLeftQuestionsCount;
+            }
+            this.LeftTime = test.Time;
+            UpdateLeftQuestionsCount();
 
             this.NextQuestionCommand = new SimpleCommand
             {
@@ -37,13 +45,49 @@ namespace StudentWpfClient.ViewModels
                 {
                     CurrentQuestionsNumber--;
                 },
-                CanExecuteDelegate = x => CurrentQuestionsNumber>1
+                CanExecuteDelegate = x => CurrentQuestionsNumber > 1
             };
+
+            this.SaveResult = new SimpleCommand
+            {
+                ExecuteDelegate = x => SaveResults()
+            };
+        }
+
+        private void SaveResults()
+        {
+            var result = ModernDialog.ShowMessage(LeftQuestionsCount > 0 ?
+                        "Ви не дали відповідь на всі питання. Завершити тест?" :
+                        "Завершити тест?",
+                        "Збереження результату",
+                        MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                ResultViewModel testResult = new ResultViewModel
+                {
+                    CorrectCount = Questions.Where(x => x.SelectedAnswer != null && x.SelectedAnswer.IsCorrect == true).Count(),
+                    StudentId = studentId,
+                    TestId = Test.Id,
+                    SpentTime = Test.Time - LeftTime,
+                    ResultDate = DateTime.Now
+                };
+                testResult.Id = service.CreateResult(testResult);
+                foreach (var item in Questions.Where(x => x.SelectedAnswer != null ))
+                {
+                    
+                }
+            }
+        }
+
+        protected void UpdateLeftQuestionsCount()
+        {
+            LeftQuestionsCount = Questions.Where(x => x.SelectedAnswer == null).Count();
         }
 
         public ICommand NextQuestionCommand { get; set; }
         public ICommand PreviousQuestionCommand { get; set; }
-               
+        public ICommand SaveResult { get; set; }
+
         private TestViewModel test;
         public TestViewModel Test
         {
@@ -83,6 +127,8 @@ namespace StudentWpfClient.ViewModels
             }
         }
 
+
+
         private QuestionControlViewModel currentQuestion;
 
         public QuestionControlViewModel CurrentQuestion
@@ -105,7 +151,7 @@ namespace StudentWpfClient.ViewModels
                 if (Questions != null)
                 {
                     this.currentQuestionsNumber = value;
-                    CurrentQuestion = Questions[value-1];
+                    CurrentQuestion = Questions[value - 1];
                     this.OnPropertyChanged("CurrentQuestionsNumber");
                 }
             }
@@ -120,6 +166,18 @@ namespace StudentWpfClient.ViewModels
             {
                 this.questionsCount = value;
                 this.OnPropertyChanged("QuestionsCount");
+            }
+        }
+
+        private int leftQuestionsCount;
+
+        public int LeftQuestionsCount
+        {
+            get { return this.leftQuestionsCount; }
+            set
+            {
+                this.leftQuestionsCount = value;
+                this.OnPropertyChanged("LeftQuestionsCount");
             }
         }
 

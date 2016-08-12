@@ -17,12 +17,21 @@ namespace StudentWpfClient.ViewModels
     public class QuestionControlViewModel : INotifyPropertyChanged
     {
         private StudentTestServiceClient service = new StudentTestServiceClient();
-        
+
+        public event Action AnswerSelected;
+
         public QuestionControlViewModel(QuestionViewModel question)
         {    
             Question = question;
         }
 
+        protected void OnAnswerSelected()
+        {
+            if(AnswerSelected != null)
+            {
+                AnswerSelected();
+            }
+        }
 
         private QuestionViewModel question;
         public QuestionViewModel Question
@@ -46,6 +55,7 @@ namespace StudentWpfClient.ViewModels
             set
             {
                 this.selectedAnswer = value;
+                OnAnswerSelected();
                 this.OnPropertyChanged("SelectedAnswer");
             }
         }

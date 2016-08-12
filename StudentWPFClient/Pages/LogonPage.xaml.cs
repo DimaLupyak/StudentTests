@@ -22,22 +22,9 @@ namespace StudentWpfClient.Pages
     /// </summary>
     public partial class LogonPage : UserControl
     {
-
-        private LogonPageViewModel viewModel;
         public LogonPage()
         {
             InitializeComponent();
-            this.DataContext = null;
-            this.Loaded += (s, e) => { new Thread(InitializeData).Start(); };
-
-        }
-        void InitializeData()
-        {
-            viewModel = new LogonPageViewModel();
-            this.Dispatcher.Invoke((Action)(() =>
-            {
-                this.DataContext = this.viewModel;
-            }));
         }
     }
 }
