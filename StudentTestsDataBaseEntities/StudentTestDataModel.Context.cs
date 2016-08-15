@@ -29,9 +29,9 @@ namespace StudentTestsDataBaseEntities
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<Question> Questions { get; set; }
+        public DbSet<ResultAnswer> ResultAnswers { get; set; }
         public DbSet<Result> Results { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Test> Tests { get; set; }
-        public DbSet<ResultAnswer> ResultAnswers { get; set; }
     }
 }

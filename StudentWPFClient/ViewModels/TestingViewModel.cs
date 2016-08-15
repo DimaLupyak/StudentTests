@@ -1,4 +1,5 @@
 ﻿using FirstFloor.ModernUI.Windows.Controls;
+using FirstFloor.ModernUI.Windows.Navigation;
 using StudentWpfClient.ServiceReference;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Navigation;
+using System.Windows.Threading;
 
 namespace StudentWpfClient.ViewModels
 {
@@ -15,13 +18,17 @@ namespace StudentWpfClient.ViewModels
     {
         private StudentTestServiceClient service = new StudentTestServiceClient();
         private int studentId;
+        private DispatcherTimer timer;
+        public event Action TestingFinish;
+
         public TestingViewModel(int studentId, TestViewModel test)
         {
+            Random random = new Random();
             this.studentId = studentId;
             this.Test = test;
             this.CurrentQuestionsNumber = 0;
             this.Questions = service.GetTestQuestions(test.Id)
-                        .Select(x => new QuestionControlViewModel(x))
+                        .Select(x => new QuestionControlViewModel(x)).OrderBy(x => random.Next())
                         .ToArray();
             foreach (var item in Questions)
             {
@@ -29,6 +36,12 @@ namespace StudentWpfClient.ViewModels
             }
             this.LeftTime = test.Time;
             UpdateLeftQuestionsCount();
+            //  установка таймера
+            timer = new DispatcherTimer();
+            timer.Tick += new EventHandler(TimerTick);
+            timer.Interval = new TimeSpan(0, 0, 1);
+            timer.Start();
+
 
             this.NextQuestionCommand = new SimpleCommand
             {
@@ -54,16 +67,27 @@ namespace StudentWpfClient.ViewModels
             };
         }
 
+        private void TimerTick(object sender, EventArgs e)
+        {
+            LeftTime -= new TimeSpan(0, 0, 1);
+            if (LeftTime.TotalSeconds == 0) SaveResults();
+        }
+
         private void SaveResults()
         {
-            var result = ModernDialog.ShowMessage(LeftQuestionsCount > 0 ?
-                        "Ви не дали відповідь на всі питання. Завершити тест?" :
-                        "Завершити тест?",
-                        "Збереження результату",
-                        MessageBoxButton.YesNo);
-            if (result == MessageBoxResult.Yes)
+            MessageBoxResult result = MessageBoxResult.Yes;
+            if (LeftTime.TotalSeconds != 0)
+                result = ModernDialog.ShowMessage(LeftQuestionsCount > 0 ?
+                            "Ви не дали відповідь на всі питання. Завершити тест?" :
+                            "Завершити тест?",
+                            "Збереження результату",
+                            MessageBoxButton.YesNo);
+            else result = ModernDialog.ShowMessage("Час вичерпано",
+                            "Збереження результату",
+                            MessageBoxButton.OK);
+            if (result == MessageBoxResult.Yes || result == MessageBoxResult.OK)
             {
-                ResultViewModel testResult = new ResultViewModel
+                TestResult = new ResultViewModel
                 {
                     CorrectCount = Questions.Where(x => x.SelectedAnswer != null && x.SelectedAnswer.IsCorrect == true).Count(),
                     StudentId = studentId,
@@ -71,11 +95,19 @@ namespace StudentWpfClient.ViewModels
                     SpentTime = Test.Time - LeftTime,
                     ResultDate = DateTime.Now
                 };
-                testResult.Id = service.CreateResult(testResult);
-                foreach (var item in Questions.Where(x => x.SelectedAnswer != null ))
+                TestResult.Id = service.CreateResult(TestResult);
+                foreach (var question in Questions.Where(x => x.SelectedAnswer != null))
                 {
-                    
+                    ResultAnswerViewModel resultAnswer = new ResultAnswerViewModel
+                    {
+                        AnswerId = question.SelectedAnswer.Id,
+                        QuestionId = question.Question.Id,
+                        ResultId = TestResult.Id
+                    };
+                    service.CreateResultAnswer(resultAnswer);
                 }
+                if (TestingFinish != null) 
+                    TestingFinish();
             }
         }
 
@@ -99,6 +131,17 @@ namespace StudentWpfClient.ViewModels
             }
         }
 
+        private ResultViewModel testResult;
+        public ResultViewModel TestResult
+        {
+            get { return this.testResult; }
+            set
+            {
+                this.testResult = value;
+                this.OnPropertyChanged("TestResult");
+            }
+        }
+
         private TimeSpan leftTime;
         public TimeSpan LeftTime
         {
@@ -117,7 +160,9 @@ namespace StudentWpfClient.ViewModels
             get { return this.questions; }
             set
             {
+                Random random = new Random();
                 this.questions = value;
+               
                 QuestionsCount = value.Count();
                 if (value.Count() > 0)
                 {

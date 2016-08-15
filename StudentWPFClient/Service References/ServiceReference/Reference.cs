@@ -744,6 +744,12 @@ namespace StudentWpfClient.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/CreateResult", ReplyAction="http://tempuri.org/IStudentTestService/CreateResultResponse")]
         System.Threading.Tasks.Task<int> CreateResultAsync(StudentWpfClient.ServiceReference.ResultViewModel result);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/CreateResultAnswer", ReplyAction="http://tempuri.org/IStudentTestService/CreateResultAnswerResponse")]
+        void CreateResultAnswer(StudentWpfClient.ServiceReference.ResultAnswerViewModel resultAnswer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/CreateResultAnswer", ReplyAction="http://tempuri.org/IStudentTestService/CreateResultAnswerResponse")]
+        System.Threading.Tasks.Task CreateResultAnswerAsync(StudentWpfClient.ServiceReference.ResultAnswerViewModel resultAnswer);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/UpdateStudent", ReplyAction="http://tempuri.org/IStudentTestService/UpdateStudentResponse")]
         void UpdateStudent(StudentWpfClient.ServiceReference.StudentViewModel student);
         
@@ -980,6 +986,14 @@ namespace StudentWpfClient.ServiceReference {
         
         public System.Threading.Tasks.Task<int> CreateResultAsync(StudentWpfClient.ServiceReference.ResultViewModel result) {
             return base.Channel.CreateResultAsync(result);
+        }
+        
+        public void CreateResultAnswer(StudentWpfClient.ServiceReference.ResultAnswerViewModel resultAnswer) {
+            base.Channel.CreateResultAnswer(resultAnswer);
+        }
+        
+        public System.Threading.Tasks.Task CreateResultAnswerAsync(StudentWpfClient.ServiceReference.ResultAnswerViewModel resultAnswer) {
+            return base.Channel.CreateResultAnswerAsync(resultAnswer);
         }
         
         public void UpdateStudent(StudentWpfClient.ServiceReference.StudentViewModel student) {

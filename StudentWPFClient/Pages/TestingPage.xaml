@@ -2,12 +2,21 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"              
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:StudentWpfClient.Converters"
              xmlns:content="clr-namespace:StudentWpfClient.Content"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              DataContext="{Binding TestingViewModel}" PreviewKeyDown="TestingPageKeyDown">
-    <DockPanel>
+    <UserControl.Resources>
+        <converters:IsNullToVisibilityConvertor x:Key="isNullToVisibilityConvertor"/>
+    </UserControl.Resources>
+    <Grid>
+        <content:FinishTestingControl DockPanel.Dock="Bottom" DataContext="{Binding TestResult}" Margin="0,10,0,0"
+                                      Visibility="{Binding DataContext, RelativeSource={RelativeSource Self}, 
+                        Converter={StaticResource isNullToVisibilityConvertor}, ConverterParameter='NoNull'}"/>
+    <DockPanel Visibility="{Binding TestResult, 
+                        Converter={StaticResource isNullToVisibilityConvertor}, ConverterParameter='Null'}">
         <DockPanel DockPanel.Dock="Top">
             <TextBlock Text="Номер питання: " VerticalAlignment="Center"/>
             <Button Content="&lt;" HorizontalAlignment="Left" BorderThickness="0"
@@ -25,4 +34,5 @@
         <Button DockPanel.Dock="Bottom" Content="Завершити тест" Command="{Binding SaveResult}"/>
         <content:QuestionControl DockPanel.Dock="Bottom" DataContext="{Binding CurrentQuestion}" Margin="0,10,0,0"/>
     </DockPanel>
+    </Grid>
 </UserControl>

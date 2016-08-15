@@ -76,7 +76,7 @@ namespace StudentWpfClient.ViewModels
             set
             {
                 this.selectedTest = value;
-                TestingViewModel = new TestingViewModel(selectedStudent.Id, value);
+                TestingViewModel = new TestingViewModel(selectedStudent.Id, value);                
                 this.OnPropertyChanged("SelectedTest");
             }
         }
@@ -110,6 +110,7 @@ namespace StudentWpfClient.ViewModels
             set
             {
                 this.testingViewModel = value;
+                testingViewModel.TestingFinish += () => ResultsList = new ResultsListViewModel(SelectedStudent.Id);
                 this.OnPropertyChanged("TestingViewModel");
             }
         }

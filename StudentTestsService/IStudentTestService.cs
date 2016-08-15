@@ -51,6 +51,8 @@ namespace StudentTestsService
         void CreateAccess(int groupId, int testId);
         [OperationContract]
         int CreateResult(ResultViewModel result);
+        [OperationContract]
+        void CreateResultAnswer(ResultAnswerViewModel resultAnswer);
         #endregion
 
         #region Update 

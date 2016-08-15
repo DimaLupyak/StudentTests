@@ -168,5 +168,11 @@ namespace StudentTestsService
         {
             return ResultRepisitory.Instance.Create(result);
         }
+
+
+        public void CreateResultAnswer(ResultAnswerViewModel resultAnswer)
+        {
+            ResultAnswerRepisitory.Instance.Create(resultAnswer);
+        }
     }
 }

@@ -63,6 +63,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Content\FinishTestingControl.xaml.cs">
+      <DependentUpon>FinishTestingControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Content\QuestionControl.xaml.cs">
       <DependentUpon>QuestionControl.xaml</DependentUpon>
     </Compile>
@@ -98,6 +101,10 @@
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\LogonPageViewModel.cs" />
     <Compile Include="ViewModels\SimpleCommand.cs" />
+    <Page Include="Content\FinishTestingControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Content\QuestionControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

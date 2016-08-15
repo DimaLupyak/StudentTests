@@ -27,6 +27,7 @@ namespace StudentWpfClient
         public MainWindow()
         {
             InitializeComponent();
+            Application.Current.MainWindow = this;
             this.Loaded += (s, e) => { new Thread(InitializeData).Start(); };
         }
         void InitializeData()

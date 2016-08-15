@@ -233,10 +233,22 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="CreateResultAnswer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/DataViewModels" minOccurs="0" name="resultAnswer" nillable="true" type="q17:ResultAnswerViewModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateResultAnswerResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="UpdateStudent">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/DataViewModels" minOccurs="0" name="student" nillable="true" type="q17:StudentViewModel" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/DataViewModels" minOccurs="0" name="student" nillable="true" type="q18:StudentViewModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -248,7 +260,7 @@
   <xs:element name="UpdateGroup">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/DataViewModels" minOccurs="0" name="group" nillable="true" type="q18:GroupViewModel" />
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/DataViewModels" minOccurs="0" name="group" nillable="true" type="q19:GroupViewModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -260,7 +272,7 @@
   <xs:element name="UpdateTest">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/DataViewModels" minOccurs="0" name="test" nillable="true" type="q19:TestViewModel" />
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/DataViewModels" minOccurs="0" name="test" nillable="true" type="q20:TestViewModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -272,7 +284,7 @@
   <xs:element name="UpdateQuestion">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/DataViewModels" minOccurs="0" name="question" nillable="true" type="q20:QuestionViewModel" />
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/DataViewModels" minOccurs="0" name="question" nillable="true" type="q21:QuestionViewModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -284,7 +296,7 @@
   <xs:element name="UpdateAnswer">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/DataViewModels" minOccurs="0" name="answer" nillable="true" type="q21:AnswerViewModel" />
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/DataViewModels" minOccurs="0" name="answer" nillable="true" type="q22:AnswerViewModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -296,7 +308,7 @@
   <xs:element name="DeleteStudent">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/DataViewModels" minOccurs="0" name="student" nillable="true" type="q22:StudentViewModel" />
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/DataViewModels" minOccurs="0" name="student" nillable="true" type="q23:StudentViewModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -308,7 +320,7 @@
   <xs:element name="DeleteGroup">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/DataViewModels" minOccurs="0" name="group" nillable="true" type="q23:GroupViewModel" />
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/DataViewModels" minOccurs="0" name="group" nillable="true" type="q24:GroupViewModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -320,7 +332,7 @@
   <xs:element name="DeleteTest">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/DataViewModels" minOccurs="0" name="test" nillable="true" type="q24:TestViewModel" />
+        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/DataViewModels" minOccurs="0" name="test" nillable="true" type="q25:TestViewModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -332,7 +344,7 @@
   <xs:element name="DeleteQuestion">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/DataViewModels" minOccurs="0" name="question" nillable="true" type="q25:QuestionViewModel" />
+        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/DataViewModels" minOccurs="0" name="question" nillable="true" type="q26:QuestionViewModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -344,7 +356,7 @@
   <xs:element name="DeleteAnswer">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/DataViewModels" minOccurs="0" name="answer" nillable="true" type="q26:AnswerViewModel" />
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/DataViewModels" minOccurs="0" name="answer" nillable="true" type="q27:AnswerViewModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

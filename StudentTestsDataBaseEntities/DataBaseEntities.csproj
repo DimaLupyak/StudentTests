@@ -94,29 +94,25 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="packages.config" />
     <EntityDeploy Include="StudentTestDataModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>StudentTestDataModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
-    <None Include="packages.config" />
-    <None Include="StudentTestDataModel.edmx.diagram">
-      <DependentUpon>StudentTestDataModel.edmx</DependentUpon>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="StudentTestDataModel.Context.tt">
+    <None Include="StudentTestDataModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>StudentTestDataModel.edmx</DependentUpon>
       <LastGenOutput>StudentTestDataModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="StudentTestDataModel.tt">
+    </None>
+    <None Include="StudentTestDataModel.edmx.diagram">
+      <DependentUpon>StudentTestDataModel.edmx</DependentUpon>
+    </None>
+    <None Include="StudentTestDataModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>StudentTestDataModel.edmx</DependentUpon>
       <LastGenOutput>StudentTestDataModel.cs</LastGenOutput>
-    </Content>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

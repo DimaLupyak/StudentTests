@@ -176,7 +176,8 @@ namespace AdminWPFClient.ViewModels
             {
                 this.image = value;
                 this.question.Image = value;
-                service.UpdateQuestion(this.question);
+                if (question.Id != 0)
+                    service.UpdateQuestion(this.question);
                 this.OnPropertyChanged("Image");
             }
         }

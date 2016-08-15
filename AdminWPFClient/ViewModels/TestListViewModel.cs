@@ -161,7 +161,9 @@ namespace AdminWPFClient.ViewModels
             }
             else
             {
-                if (NewQuestion.Question.Text != null || NewQuestion.Question.Image != null)
+                if (NewQuestion.Question.Image != null && NewQuestion.Question.Text == null)
+                    NewQuestion.Question.Text = "";
+                if (NewQuestion.Question.Text != null)
                 {
                     service.CreateQuestion(NewQuestion.Question);
                     UpdateQuestions();

@@ -42,7 +42,8 @@ namespace StudentWpfClient.ViewModels
                 this.question = value;
                 if (value.Id != 0)
                 {
-                    Answers = service.GetQuestionAnswers(value.Id);
+                    Random random = new Random();
+                    Answers = service.GetQuestionAnswers(value.Id).OrderBy(x => random.Next());
                 }
                 this.OnPropertyChanged("Question");
             }
