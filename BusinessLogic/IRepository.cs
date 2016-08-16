@@ -8,7 +8,7 @@ namespace BusinessLogic
 {
     public interface IRepository<T>
     {
-        //void Create(T item);
+        int Create(T item);
         List<T> Read();
         void Update(T item);
         void Destroy(T item);

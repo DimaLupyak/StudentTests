@@ -23,11 +23,13 @@ namespace BusinessLogic
             }
         }
         #endregion
+
         #region Constructors
         protected TestRepisitory() { }
         #endregion
+
         #region CRUD
-        public void Create(TestViewModel item)
+        public int Create(TestViewModel item)
         {
             using (StudentTestDBEntities entities = new StudentTestDBEntities())
             {
@@ -36,7 +38,7 @@ namespace BusinessLogic
                 test.TestTime = item.Time;
                 entities.Tests.Add(test);
                 entities.SaveChanges();
-                item.Id = test.TestId;
+                return item.Id = test.TestId;
             }
         }
 

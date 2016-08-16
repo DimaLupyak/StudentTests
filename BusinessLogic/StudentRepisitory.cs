@@ -23,11 +23,13 @@ namespace BusinessLogic
             }
         }
         #endregion
+
         #region Constructors
         protected StudentRepisitory() { }
         #endregion
+
         #region CRUD
-        public void Create(StudentViewModel item)
+        public int Create(StudentViewModel item)
         {
             using (StudentTestDBEntities entities = new StudentTestDBEntities())
             {
@@ -36,7 +38,7 @@ namespace BusinessLogic
                 student.GroupID = item.GroupID;
                 entities.Students.Add(student);
                 entities.SaveChanges();
-                item.Id = student.StudentID;
+                return item.Id = student.StudentID;
             }
         }
 

@@ -23,9 +23,11 @@ namespace BusinessLogic
             }
         }
         #endregion
+
         #region Constructors
         protected ResultRepisitory() { }
         #endregion
+
         #region CRUD
         public int Create(ResultViewModel item)
         {
@@ -91,6 +93,5 @@ namespace BusinessLogic
             }
         }
         #endregion
-
     }
 }

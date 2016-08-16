@@ -23,11 +23,13 @@ namespace BusinessLogic
             }
         }
         #endregion
+
         #region Constructors
         protected GroupRepisitory() { }
         #endregion
+
         #region CRUD
-        public void Create(GroupViewModel item)
+        public int Create(GroupViewModel item)
         {
             using (StudentTestDBEntities entities = new StudentTestDBEntities())
             {
@@ -35,7 +37,7 @@ namespace BusinessLogic
                 group.GroupName = item.Name;
                 entities.Groups.Add(group);
                 entities.SaveChanges();
-                item.Id = group.GroupID;
+                return item.Id = group.GroupID;
             }
         }
 

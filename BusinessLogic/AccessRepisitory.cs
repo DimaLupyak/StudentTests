@@ -1,8 +1,6 @@
 ﻿using DataViewModels;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using StudentTestsDataBaseEntities;
 using System.Data;
 
@@ -21,13 +19,15 @@ namespace BusinessLogic
                 return instance;
 
             }
-        }
+        }        
         #endregion
+
         #region Constructors
         protected AccessRepisitory() { }
         #endregion
+
         #region CRUD
-        public void Create(AccessViewModel item)
+        public int Create(AccessViewModel item)
         {
             using (StudentTestDBEntities entities = new StudentTestDBEntities())
             {
@@ -36,7 +36,7 @@ namespace BusinessLogic
                 access.TestId = item.TestId;
                 entities.Accesses.Add(access);
                 entities.SaveChanges();
-                item.Id = access.AccessId;
+                return item.Id = access.AccessId;
             }
         }
 

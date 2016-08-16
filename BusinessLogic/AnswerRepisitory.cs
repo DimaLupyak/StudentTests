@@ -23,11 +23,13 @@ namespace BusinessLogic
             }
         }
         #endregion
+
         #region Constructors
         protected AnswerRepisitory() { }
         #endregion
+
         #region CRUD
-        public void Create(AnswerViewModel item)
+        public int Create(AnswerViewModel item)
         {
             using (StudentTestDBEntities entities = new StudentTestDBEntities())
             {
@@ -38,7 +40,7 @@ namespace BusinessLogic
                 answer.QuestionId = item.QuestionId;
                 entities.Answers.Add(answer);
                 entities.SaveChanges();
-                item.Id = answer.AnswerId;
+                return item.Id = answer.AnswerId;
             }
         }
 
