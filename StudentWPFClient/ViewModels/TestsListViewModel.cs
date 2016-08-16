@@ -15,6 +15,8 @@ namespace StudentWpfClient.ViewModels
     {
         private StudentTestServiceClient service = new StudentTestServiceClient();
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public TestsListViewModel(int studentId)
         {
             Tests = service.GetStudentTests(studentId);           
@@ -37,7 +39,6 @@ namespace StudentWpfClient.ViewModels
             {
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
+        }        
     }
 }

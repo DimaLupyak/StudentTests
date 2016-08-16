@@ -1,42 +1,35 @@
 ﻿using FirstFloor.ModernUI.Windows.Navigation;
 using StudentWpfClient.ServiceReference;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace StudentWpfClient.ViewModels
 {
     class MainWindowViewModel : INotifyPropertyChanged
-    { 
+    {
+        #region Events
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
+
+        #region Commands
+        public ICommand OpenTestCommand { get; set; }
+        #endregion
+
+        #region Constructor
         public MainWindowViewModel()
         {
-            LogonPage = new LogonPageViewModel();
-            LogonPage.ResetSelectedStudent += () => { SelectedStudent = null; };
+            this.LogonPage = new LogonPageViewModel();
+            this.LogonPage.ResetSelectedStudent += () => { SelectedStudent = null; };
 
             this.OpenTestCommand = new SimpleCommand
             {
-                ExecuteDelegate = x =>
-                {
-                    TestViewModel test = x as TestViewModel;
-                    if (test != null)
-                    {
-                        TestingViewModel = new TestingViewModel(SelectedStudent.Id, test);
-                        IInputElement target = NavigationHelper.FindFrame("_top", Application.Current.MainWindow);
-                        NavigationCommands.GoToPage.Execute("/Pages/TestingPage.xaml", target);
-                    }
-                },
-                CanExecuteDelegate = x => true
+                ExecuteDelegate = x => OpenTest(x as TestViewModel)
             };            
         }
+        #endregion
 
-        public ICommand OpenTestCommand { get; set; }
-
+        #region Properties
         private LogonPageViewModel logonPage;
         public LogonPageViewModel LogonPage
         {
@@ -47,7 +40,7 @@ namespace StudentWpfClient.ViewModels
                 this.OnPropertyChanged("LogonPage");
             }
         }
-
+        
         private StudentViewModel selectedStudent;
         public StudentViewModel SelectedStudent
         {
@@ -114,7 +107,18 @@ namespace StudentWpfClient.ViewModels
                 this.OnPropertyChanged("TestingViewModel");
             }
         }
+        #endregion
 
+        #region Private Methods
+        private void OpenTest(TestViewModel test)
+        {
+            if (test != null)
+            {
+                TestingViewModel = new TestingViewModel(SelectedStudent.Id, test);
+                IInputElement target = NavigationHelper.FindFrame("_top", Application.Current.MainWindow);
+                NavigationCommands.GoToPage.Execute("/Pages/TestingPage.xaml", target);
+            }
+        }
 
         private void OnPropertyChanged(string propertyName)
         {
@@ -123,8 +127,6 @@ namespace StudentWpfClient.ViewModels
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-        public event PropertyChangedEventHandler PropertyChanged;
-
-
+        #endregion
     }
 }

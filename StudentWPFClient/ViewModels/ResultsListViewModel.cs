@@ -1,13 +1,7 @@
 ﻿using StudentWpfClient.ServiceReference;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace StudentWpfClient.ViewModels
 {
@@ -15,11 +9,15 @@ namespace StudentWpfClient.ViewModels
     {
         private StudentTestServiceClient service = new StudentTestServiceClient();
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public ResultsListViewModel(int studentId)
         {
-            Results = service.GetResults().Where(x => x.StudentId == studentId).OrderBy(x => x.ResultDate).Reverse();
+            Results = service.GetResults()
+                .Where(x => x.StudentId == studentId)
+                .OrderBy(x => x.ResultDate)
+                .Reverse();
         }
-
 
         private IEnumerable<ResultViewModel> results;
         public IEnumerable<ResultViewModel> Results
@@ -39,6 +37,6 @@ namespace StudentWpfClient.ViewModels
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-        public event PropertyChangedEventHandler PropertyChanged;
+        
     }
 }

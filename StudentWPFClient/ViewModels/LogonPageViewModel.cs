@@ -3,24 +3,28 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace StudentWpfClient.ViewModels
 {
     class LogonPageViewModel : INotifyPropertyChanged
     {
+        #region Private Variables
         private StudentTestServiceClient service = new StudentTestServiceClient();
-        public event Action ResetSelectedStudent;
+        #endregion
 
+        #region Events
+        public event PropertyChangedEventHandler PropertyChanged;
+        public event Action ResetSelectedStudent;
+        #endregion
+
+        #region Constructor
         public LogonPageViewModel()
         {
             Groups = service.GetGroups();           
         }
+        #endregion
 
+        #region Properties
         private GroupViewModel selectedGroup;
         public GroupViewModel SelectedGroup
         {
@@ -33,6 +37,7 @@ namespace StudentWpfClient.ViewModels
                 this.OnPropertyChanged("SelectedGroup");
             }
         }
+
         private IEnumerable<GroupViewModel> groups;
         public IEnumerable<GroupViewModel> Groups
         {
@@ -54,7 +59,9 @@ namespace StudentWpfClient.ViewModels
                 this.OnPropertyChanged("Students");
             }
         }
+        #endregion
 
+        #region Private Methods
         private void OnPropertyChanged(string propertyName)
         {
             if (this.PropertyChanged != null)
@@ -62,6 +69,6 @@ namespace StudentWpfClient.ViewModels
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
     }
 }

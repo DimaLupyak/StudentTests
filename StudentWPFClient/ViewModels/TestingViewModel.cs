@@ -1,26 +1,34 @@
 ﻿using FirstFloor.ModernUI.Windows.Controls;
-using FirstFloor.ModernUI.Windows.Navigation;
 using StudentWpfClient.ServiceReference;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Navigation;
 using System.Windows.Threading;
 
 namespace StudentWpfClient.ViewModels
 {
     class TestingViewModel : INotifyPropertyChanged
     {
+        #region Private Variables
         private StudentTestServiceClient service = new StudentTestServiceClient();
         private int studentId;
         private DispatcherTimer timer;
-        public event Action TestingFinish;
+        #endregion
 
+        #region Events
+        public event PropertyChangedEventHandler PropertyChanged;
+        public event Action TestingFinish;
+        #endregion
+
+        #region Commands
+        public ICommand NextQuestionCommand { get; set; }
+        public ICommand PreviousQuestionCommand { get; set; }
+        public ICommand SaveResult { get; set; }
+        #endregion
+
+        #region Constructor
         public TestingViewModel(int studentId, TestViewModel test)
         {
             Random random = new Random();
@@ -28,36 +36,30 @@ namespace StudentWpfClient.ViewModels
             this.Test = test;
             this.CurrentQuestionsNumber = 0;
             this.Questions = service.GetTestQuestions(test.Id)
-                        .Select(x => new QuestionControlViewModel(x)).OrderBy(x => random.Next())
+                        .Select(x => new QuestionControlViewModel(x))
+                        .OrderBy(x => random.Next())
                         .ToArray();
-            foreach (var item in Questions)
+            foreach (var question in Questions)
             {
-                item.AnswerSelected += UpdateLeftQuestionsCount;
+                question.AnswerSelected += UpdateLeftQuestionsCount;
             }
             this.LeftTime = test.Time;
-            UpdateLeftQuestionsCount();
-            //  установка таймера
-            timer = new DispatcherTimer();
-            timer.Tick += new EventHandler(TimerTick);
-            timer.Interval = new TimeSpan(0, 0, 1);
-            timer.Start();
+            this.UpdateLeftQuestionsCount();
 
+            this.timer = new DispatcherTimer();
+            this.timer.Tick += new EventHandler(TimerTick);
+            this.timer.Interval = new TimeSpan(0, 0, 1);
+            this.timer.Start();
 
             this.NextQuestionCommand = new SimpleCommand
             {
-                ExecuteDelegate = x =>
-                {
-                    CurrentQuestionsNumber++;
-                },
+                ExecuteDelegate = x => CurrentQuestionsNumber++,
                 CanExecuteDelegate = x => CurrentQuestionsNumber < QuestionsCount
             };
 
             this.PreviousQuestionCommand = new SimpleCommand
             {
-                ExecuteDelegate = x =>
-                {
-                    CurrentQuestionsNumber--;
-                },
+                ExecuteDelegate = x => CurrentQuestionsNumber--,
                 CanExecuteDelegate = x => CurrentQuestionsNumber > 1
             };
 
@@ -66,60 +68,9 @@ namespace StudentWpfClient.ViewModels
                 ExecuteDelegate = x => SaveResults()
             };
         }
+        #endregion
 
-        private void TimerTick(object sender, EventArgs e)
-        {
-            LeftTime -= new TimeSpan(0, 0, 1);
-            if (LeftTime.TotalSeconds == 0) SaveResults();
-        }
-
-        private void SaveResults()
-        {
-            MessageBoxResult result = MessageBoxResult.Yes;
-            if (LeftTime.TotalSeconds != 0)
-                result = ModernDialog.ShowMessage(LeftQuestionsCount > 0 ?
-                            "Ви не дали відповідь на всі питання. Завершити тест?" :
-                            "Завершити тест?",
-                            "Збереження результату",
-                            MessageBoxButton.YesNo);
-            else result = ModernDialog.ShowMessage("Час вичерпано",
-                            "Збереження результату",
-                            MessageBoxButton.OK);
-            if (result == MessageBoxResult.Yes || result == MessageBoxResult.OK)
-            {
-                TestResult = new ResultViewModel
-                {
-                    CorrectCount = Questions.Where(x => x.SelectedAnswer != null && x.SelectedAnswer.IsCorrect == true).Count(),
-                    StudentId = studentId,
-                    TestId = Test.Id,
-                    SpentTime = Test.Time - LeftTime,
-                    ResultDate = DateTime.Now
-                };
-                TestResult.Id = service.CreateResult(TestResult);
-                foreach (var question in Questions.Where(x => x.SelectedAnswer != null))
-                {
-                    ResultAnswerViewModel resultAnswer = new ResultAnswerViewModel
-                    {
-                        AnswerId = question.SelectedAnswer.Id,
-                        QuestionId = question.Question.Id,
-                        ResultId = TestResult.Id
-                    };
-                    service.CreateResultAnswer(resultAnswer);
-                }
-                if (TestingFinish != null) 
-                    TestingFinish();
-            }
-        }
-
-        protected void UpdateLeftQuestionsCount()
-        {
-            LeftQuestionsCount = Questions.Where(x => x.SelectedAnswer == null).Count();
-        }
-
-        public ICommand NextQuestionCommand { get; set; }
-        public ICommand PreviousQuestionCommand { get; set; }
-        public ICommand SaveResult { get; set; }
-
+        #region Properties
         private TestViewModel test;
         public TestViewModel Test
         {
@@ -154,7 +105,6 @@ namespace StudentWpfClient.ViewModels
         }
 
         private QuestionControlViewModel[] questions;
-
         public QuestionControlViewModel[] Questions
         {
             get { return this.questions; }
@@ -162,7 +112,7 @@ namespace StudentWpfClient.ViewModels
             {
                 Random random = new Random();
                 this.questions = value;
-               
+
                 QuestionsCount = value.Count();
                 if (value.Count() > 0)
                 {
@@ -172,10 +122,7 @@ namespace StudentWpfClient.ViewModels
             }
         }
 
-
-
         private QuestionControlViewModel currentQuestion;
-
         public QuestionControlViewModel CurrentQuestion
         {
             get { return this.currentQuestion; }
@@ -187,7 +134,6 @@ namespace StudentWpfClient.ViewModels
         }
 
         private int currentQuestionsNumber;
-
         public int CurrentQuestionsNumber
         {
             get { return this.currentQuestionsNumber; }
@@ -203,7 +149,6 @@ namespace StudentWpfClient.ViewModels
         }
 
         private int questionsCount;
-
         public int QuestionsCount
         {
             get { return this.questionsCount; }
@@ -215,7 +160,6 @@ namespace StudentWpfClient.ViewModels
         }
 
         private int leftQuestionsCount;
-
         public int LeftQuestionsCount
         {
             get { return this.leftQuestionsCount; }
@@ -225,6 +169,65 @@ namespace StudentWpfClient.ViewModels
                 this.OnPropertyChanged("LeftQuestionsCount");
             }
         }
+        #endregion
+
+        #region Private Methods
+        private void TimerTick(object sender, EventArgs e)
+        {
+            LeftTime -= new TimeSpan(0, 0, 1);
+            if (LeftTime.TotalSeconds == 0) SaveResults();
+        }
+
+        private void SaveResults()
+        {
+            MessageBoxResult result = MessageBoxResult.Yes;
+            if (LeftTime.TotalSeconds != 0)
+            {
+                result = ModernDialog.ShowMessage(LeftQuestionsCount > 0 ?
+                            "Ви не дали відповідь на всі питання. Завершити тест?" :
+                            "Завершити тест?",
+                            "Збереження результату",
+                            MessageBoxButton.YesNo);
+            }
+            else
+            {
+                result = ModernDialog.ShowMessage("Час вичерпано",
+                               "Збереження результату",
+                               MessageBoxButton.OK);
+            }
+            if (result == MessageBoxResult.Yes || result == MessageBoxResult.OK)
+            {
+                TestResult = new ResultViewModel
+                {
+                    CorrectCount = Questions
+                    .Where(x => x.SelectedAnswer != null && x.SelectedAnswer.IsCorrect == true)
+                    .Count(),
+                    StudentId = studentId,
+                    TestId = Test.Id,
+                    SpentTime = Test.Time - LeftTime,
+                    ResultDate = DateTime.Now
+                };
+                TestResult.Id = service.CreateResult(TestResult);
+                foreach (var question in Questions.Where(x => x.SelectedAnswer != null))
+                {
+                    ResultAnswerViewModel resultAnswer = new ResultAnswerViewModel
+                    {
+                        AnswerId = question.SelectedAnswer.Id,
+                        QuestionId = question.Question.Id,
+                        ResultId = TestResult.Id
+                    };
+                    service.CreateResultAnswer(resultAnswer);
+                }                
+                if (TestingFinish != null) TestingFinish();
+            }
+        }
+
+        private void UpdateLeftQuestionsCount()
+        {
+            LeftQuestionsCount = Questions
+                .Where(x => x.SelectedAnswer == null)
+                .Count();
+        }
 
         private void OnPropertyChanged(string propertyName)
         {
@@ -233,6 +236,6 @@ namespace StudentWpfClient.ViewModels
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
     }
 }

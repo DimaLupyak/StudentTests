@@ -1,38 +1,30 @@
-﻿using FirstFloor.ModernUI.Windows.Controls;
-using Microsoft.Win32;
-using StudentWpfClient.ServiceReference;
+﻿using StudentWpfClient.ServiceReference;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
-using System.Windows.Media.Imaging;
 
 namespace StudentWpfClient.ViewModels
 {
     public class QuestionControlViewModel : INotifyPropertyChanged
     {
+        #region Private Variables
         private StudentTestServiceClient service = new StudentTestServiceClient();
+        #endregion
 
+        #region Events
+        public event PropertyChangedEventHandler PropertyChanged;
         public event Action AnswerSelected;
+        #endregion
 
+        #region Constructor
         public QuestionControlViewModel(QuestionViewModel question)
         {    
             Question = question;
         }
+        #endregion
 
-        protected void OnAnswerSelected()
-        {
-            if(AnswerSelected != null)
-            {
-                AnswerSelected();
-            }
-        }
-
+        #region Properties
         private QuestionViewModel question;
         public QuestionViewModel Question
         {
@@ -71,6 +63,16 @@ namespace StudentWpfClient.ViewModels
                 this.OnPropertyChanged("Answers");
             }
         }
+        #endregion
+
+        #region Private Methods
+        private void OnAnswerSelected()
+        {
+            if (AnswerSelected != null)
+            {
+                AnswerSelected();
+            }
+        }
 
         private void OnPropertyChanged(string propertyName)
         {
@@ -79,9 +81,7 @@ namespace StudentWpfClient.ViewModels
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-        public event PropertyChangedEventHandler PropertyChanged;
-
-
+        #endregion
     }
 }
 
