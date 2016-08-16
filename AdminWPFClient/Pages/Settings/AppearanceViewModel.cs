@@ -15,8 +15,8 @@ namespace AdminWPFClient.Pages.Settings
     public class AppearanceViewModel
         : NotifyPropertyChanged
     {
-        private const string FontSmall = "small";
-        private const string FontLarge = "large";
+        private const string FontSmall = "малий";
+        private const string FontLarge = "великий";
 
         // 9 accent colors from metro design principles
         /*private Color[] accentColors = new Color[]{
@@ -52,32 +52,22 @@ namespace AdminWPFClient.Pages.Settings
             Color.FromRgb(0x6d, 0x87, 0x64),   // olive
             Color.FromRgb(0x64, 0x76, 0x87),   // steel
             Color.FromRgb(0x76, 0x60, 0x8a),   // mauve
-            Color.FromRgb(0x87, 0x79, 0x4e),   // taupe
+            Color.FromRgb(0x87, 0x79, 0x4e),   // taupe     
         };
 
         private Color selectedAccentColor;
-        private LinkCollection themes = new LinkCollection();
-        private Link selectedTheme;
         private string selectedFontSize;
 
         public AppearanceViewModel()
         {
-            // add the default themes
-            this.themes.Add(new Link { DisplayName = "dark", Source = AppearanceManager.DarkThemeSource });
-            this.themes.Add(new Link { DisplayName = "light", Source = AppearanceManager.LightThemeSource });
-
             this.SelectedFontSize = AppearanceManager.Current.FontSize == FontSize.Large ? FontLarge : FontSmall;
-            SyncThemeAndColor();
+            SyncColor();
 
             AppearanceManager.Current.PropertyChanged += OnAppearanceManagerPropertyChanged;
         }
 
-        private void SyncThemeAndColor()
+        private void SyncColor()
         {
-            // synchronizes the selected viewmodel theme with the actual theme used by the appearance manager.
-            this.SelectedTheme = this.themes.FirstOrDefault(l => l.Source.Equals(AppearanceManager.Current.ThemeSource));
-
-            // and make sure accent color is up-to-date
             this.SelectedAccentColor = AppearanceManager.Current.AccentColor;
         }
 
@@ -85,14 +75,9 @@ namespace AdminWPFClient.Pages.Settings
         {
             if (e.PropertyName == "ThemeSource" || e.PropertyName == "AccentColor")
             {
-                SyncThemeAndColor();
+                SyncColor();
             }
-        }
-
-        public LinkCollection Themes
-        {
-            get { return this.themes; }
-        }
+        }               
 
         public string[] FontSizes
         {
@@ -102,23 +87,7 @@ namespace AdminWPFClient.Pages.Settings
         public Color[] AccentColors
         {
             get { return this.accentColors; }
-        }
-
-        public Link SelectedTheme
-        {
-            get { return this.selectedTheme; }
-            set
-            {
-                if (this.selectedTheme != value)
-                {
-                    this.selectedTheme = value;
-                    OnPropertyChanged("SelectedTheme");
-
-                    // and update the actual theme
-                    AppearanceManager.Current.ThemeSource = value.Source;
-                }
-            }
-        }
+        }       
 
         public string SelectedFontSize
         {

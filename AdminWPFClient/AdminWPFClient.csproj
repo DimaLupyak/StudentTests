@@ -67,6 +67,9 @@
     <Compile Include="Content\GroupList.xaml.cs">
       <DependentUpon>GroupList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Content\LoadingControl.xaml.cs">
+      <DependentUpon>LoadingControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Content\QuestionControl.xaml.cs">
       <DependentUpon>QuestionControl.xaml</DependentUpon>
     </Compile>
@@ -75,6 +78,9 @@
     </Compile>
     <Compile Include="Content\ResultControl.xaml.cs">
       <DependentUpon>ResultControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\StudentsResults.xaml.cs">
+      <DependentUpon>StudentsResults.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\TestList.xaml.cs">
       <DependentUpon>TestList.xaml</DependentUpon>
@@ -85,6 +91,8 @@
     <Compile Include="Content\StudentInfo.xaml.cs">
       <DependentUpon>StudentInfo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\ResultsFilter.cs" />
+    <Compile Include="Converters\StudentsGroupFilter.cs" />
     <Compile Include="Converters\DataContextConvertor.cs" />
     <Compile Include="Converters\ImageConvertor.cs" />
     <Compile Include="Converters\IsCorrectConvertor.cs" />
@@ -98,6 +106,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="ValidationRules\AnswerValidationRule.cs" />
     <Compile Include="ValidationRules\GroupValidationRule.cs" />
@@ -120,6 +133,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Content\LoadingControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Content\QuestionControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -129,6 +146,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Content\ResultControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\StudentsResults.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -213,6 +234,10 @@
     </None>
     <None Include="Service References\ServiceReference\StudentTestService2.xsd">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

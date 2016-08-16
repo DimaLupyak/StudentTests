@@ -4,12 +4,12 @@
         xmlns:mui="http://firstfloorsoftware.com/ModernUI"
         Title="Student tests - Admin" IsTitleVisible="True"
                   
-        ContentSource="/Content/StudentInfo.xaml">
+        ContentSource="/Content/StudentsResults.xaml">
 
     <mui:ModernWindow.MenuLinkGroups>
         <mui:LinkGroup DisplayName="Перегляд">
             <mui:LinkGroup.Links>
-                <mui:Link DisplayName="Результати студентів" Source="/Content/StudentInfo.xaml" />
+                <mui:Link DisplayName="Результати студентів" Source="/Content/StudentsResults.xaml" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
         <mui:LinkGroup DisplayName="Редагування">

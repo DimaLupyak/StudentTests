@@ -11,14 +11,15 @@ using System.Threading.Tasks;
 namespace AdminClient.ViewModels
 {
     public class StudentsResultsViewModel : INotifyPropertyChanged
-    {        
+    {
         private StudentTestServiceClient service = new StudentTestServiceClient();
 
         public StudentsResultsViewModel()
         {
             Students = service.GetStudents();
             Tests = service.GetTests();
-            Results = service.GetResults().Select(x=> new ResultControlViewModel(x));
+            Results = service.GetResults().Select(x => new ResultControlViewModel(x));
+            Groups = service.GetGroups();
         }
         private StudentViewModel selectedStydent;
         public StudentViewModel SelectedStydent
@@ -27,8 +28,7 @@ namespace AdminClient.ViewModels
             set
             {
                 this.selectedStydent = value;
-                new Thread(() => Results = service.GetResults().Where(x => x.StudentId == value.Id)
-                    .Select(x => new ResultControlViewModel(x))).Start();                
+                FilterResults();
                 this.OnPropertyChanged("SelectedStydent");
             }
         }
@@ -39,11 +39,23 @@ namespace AdminClient.ViewModels
             set
             {
                 this.selectedTest = value;
-                new Thread(() => Results = service.GetResults().Where(x => x.TestId == value.Id)
-                    .Select(x => new ResultControlViewModel(x))).Start();
+                FilterResults();
                 this.OnPropertyChanged("SelectedTest");
             }
         }
+
+        private GroupViewModel selectedGroup;
+        public GroupViewModel SelectedGroup
+        {
+            get { return this.selectedGroup; }
+            set
+            {
+                this.selectedGroup = value;
+                FilterResults();
+                this.OnPropertyChanged("SelectedGroup");
+            }
+        }
+
         private IEnumerable<StudentViewModel> students;
         public IEnumerable<StudentViewModel> Students
         {
@@ -51,10 +63,23 @@ namespace AdminClient.ViewModels
             set
             {
                 this.students = value;
-                
+
                 this.OnPropertyChanged("Students");
             }
         }
+
+        private IEnumerable<GroupViewModel> groups;
+        public IEnumerable<GroupViewModel> Groups
+        {
+            get { return this.groups; }
+            set
+            {
+                this.groups = value;
+                this.OnPropertyChanged("Groups");
+            }
+        }
+
+
 
         private IEnumerable<TestViewModel> tests;
         public IEnumerable<TestViewModel> Tests
@@ -73,12 +98,41 @@ namespace AdminClient.ViewModels
             set
             {
                 this.results = value;
+                FilterResults();
                 this.OnPropertyChanged("Results");
             }
         }
+
+        private void FilterResults()
+        {
+            new Thread(() => FilteredResults = results.Where(x => IsSelect(x))).Start();
+        }
+
+        private bool IsSelect(ResultControlViewModel x)
+        {
+            if (selectedTest != null && x.Result.TestId != selectedTest.Id)
+                return false;
+            if (selectedGroup != null && selectedStydent == null && x.Student.GroupID != selectedGroup.Id)
+                return false;
+            if (selectedStydent != null && x.Result.StudentId != selectedStydent.Id)
+                return false;
+            return true;
+        }
+
+        private IEnumerable<ResultControlViewModel> filteredResults;
+        public IEnumerable<ResultControlViewModel> FilteredResults
+        {
+            get { return this.filteredResults; }
+            set
+            {
+                this.filteredResults = value;
+                this.OnPropertyChanged("FilteredResults");
+            }
+        }
+
         private void OnPropertyChanged(string propertyName)
         {
-            if(this.PropertyChanged != null)
+            if (this.PropertyChanged != null)
             {
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }

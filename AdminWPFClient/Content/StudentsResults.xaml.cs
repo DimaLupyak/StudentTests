@@ -19,16 +19,15 @@ using System.Windows.Shapes;
 namespace AdminWPFClient.Content
 {
     /// <summary>
-    /// Interaction logic for StudentsInfo.xaml
+    /// Interaction logic for StudentsResults.xaml
     /// </summary>
-    public partial class StudentsInfo : UserControl
+    public partial class StudentsResults : UserControl
     {
         private StudentsResultsViewModel viewModel;
-        public StudentsInfo()
+        public StudentsResults()
         {
             InitializeComponent();
-            this.Loaded += (s, e) => { new Thread(InitializeData).Start(); };
-            
+            this.Loaded += (s, e) => { new Thread(InitializeData).Start(); };            
         }
         void InitializeData()
         {
@@ -42,8 +41,14 @@ namespace AdminWPFClient.Content
         private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             var viewModel = this.DataContext as StudentsResultsViewModel;
+
+            if(e.NewValue == null)
+            {
+                viewModel.SelectedStydent = null;
+                viewModel.SelectedGroup = null;
+            }            
             var group = e.NewValue as GroupViewModel;
-            if(group!= null)
+            if (group != null)
             {
                 viewModel.SelectedStydent = null;
                 viewModel.SelectedGroup = group;
@@ -51,10 +56,26 @@ namespace AdminWPFClient.Content
             else
             {
                 var student = e.NewValue as StudentViewModel;
-                if(student != null)
+                if (student != null)
                 {
                     viewModel.SelectedGroup = null;
                     viewModel.SelectedStydent = student;
+                }
+            }
+        }
+
+        private void DataGrid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (sender != null)
+            {
+                DataGrid grid = sender as DataGrid;
+                if (grid != null && grid.SelectedItems != null && grid.SelectedItems.Count == 1)
+                {
+                    DataGridRow dgr = grid.ItemContainerGenerator.ContainerFromItem(grid.SelectedItem) as DataGridRow;
+                    if (dgr.IsMouseOver)
+                    {
+                        (dgr as DataGridRow).IsSelected = false;
+                    }
                 }
             }
         }

@@ -9,6 +9,8 @@
       d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <converters:DataContextConvertor x:Key="dataContextConvertor"/>
+        <converters:StudentsGroupFilter x:Key="studentsGroupFilter"/>
+        <converters:ResultsFilter x:Key="resultsFilter"/>
         <DataTemplate x:Key="DataTemplate_Result">
             <local:ResultControl DataContext="{Binding}" Margin="1,1,1,1"/>
         </DataTemplate>
@@ -25,19 +27,47 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <StackPanel>
-                <Expander Header="Тести">
+                <Expander Header="Тести" IsExpanded="true">
                     <ListBox ItemsSource="{Binding Path=Tests}"
                       DisplayMemberPath="Name"
                      SelectedItem="{Binding Path=SelectedTest, Mode=TwoWay}"/>
                 </Expander>
-                <Expander Header="Студенти">
-                    <ListBox ItemsSource="{Binding Path=Students}"
-                      DisplayMemberPath="Name"
-                     SelectedItem="{Binding Path=SelectedStydent, Mode=TwoWay}"/>
-                </Expander>
+                <Expander Header="Студенти" IsExpanded="true">
+                    <TreeView ItemsSource="{Binding Groups}" SelectedItemChanged="TreeView_SelectedItemChanged">
+                        <TreeView.ItemTemplate>
+                            <HierarchicalDataTemplate>
+                                <HierarchicalDataTemplate.ItemsSource>
+                                    <MultiBinding Converter= "{StaticResource studentsGroupFilter}">
+                                        <MultiBinding.Bindings>
+                                            <Binding Path ="DataContext.Students" RelativeSource="{RelativeSource AncestorType={x:Type UserControl}}"/>
+                                            <Binding Path="Id" />
+                                        </MultiBinding.Bindings>
+                                    </MultiBinding>
+                                </HierarchicalDataTemplate.ItemsSource>
+                                <TextBlock Text="{Binding Name}" />
+                                <HierarchicalDataTemplate.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" />
+                                    </DataTemplate>
+                                </HierarchicalDataTemplate.ItemTemplate>
+                            </HierarchicalDataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
+                </Expander>                
             </StackPanel>
         <GridSplitter  Grid.Column="1" Opacity="0"></GridSplitter>
-            <ItemsControl Grid.Column="2" ItemsSource="{Binding Results}" ItemTemplate="{StaticResource DataTemplate_Result}"/>
+            <ItemsControl Grid.Column="2" ItemTemplate="{StaticResource DataTemplate_Result}">
+                <ItemsControl.ItemsSource>
+                    <MultiBinding Converter= "{StaticResource resultsFilter}">
+                        <MultiBinding.Bindings>
+                            <Binding Path ="Results"/>
+                            <Binding Path="SelectedTest.Id" />
+                            <Binding Path="SelectedGroup.Id" />
+                            <Binding Path="SelectedStydent.Id" />
+                        </MultiBinding.Bindings>
+                    </MultiBinding>
+                </ItemsControl.ItemsSource>
+            </ItemsControl>
             
     </Grid>
     </StackPanel>
