@@ -69,9 +69,6 @@
     <Compile Include="Content\QuestionControl.xaml.cs">
       <DependentUpon>QuestionControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\ResultListItemControl.xaml.cs">
-      <DependentUpon>ResultListItemControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Content\ResultsListControl.xaml.cs">
       <DependentUpon>ResultsListControl.xaml</DependentUpon>
     </Compile>
@@ -118,10 +115,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Content\QuestionControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Content\ResultListItemControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

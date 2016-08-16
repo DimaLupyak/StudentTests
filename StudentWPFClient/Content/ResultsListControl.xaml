@@ -2,17 +2,26 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"              
+             xmlns:converters="clr-namespace:StudentWpfClient.Converters"
              xmlns:local="clr-namespace:StudentWpfClient.Content"
              mc:Ignorable="d" 
              d:DesignHeight="50" d:DesignWidth="300">
     <UserControl.Resources>
-        <DataTemplate x:Key="DataTemplate_ResultListItem">
-            <local:ResultListItemControl DataContext="{Binding}" Margin="1,1,1,1"/>
-        </DataTemplate>
+        <converters:TestIdToNameConvertor x:Key="testIdToNameConvertor"/>
     </UserControl.Resources>
     <StackPanel>
-        <TextBlock Text="Результати:" HorizontalAlignment="Center"/>
-        <ItemsControl ItemsSource="{Binding Results}" ItemTemplate="{StaticResource DataTemplate_ResultListItem}"/>
+        <DataGrid 
+                      AutoGenerateColumns="False" 
+                      IsReadOnly="True" 
+                      RowHeaderWidth="0" 
+                      ItemsSource ="{Binding Results}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Тест" Width="1*" Binding="{Binding TestId, Converter={StaticResource testIdToNameConvertor}}"/>
+                <DataGridTextColumn Header="Дата складання" Width="1*" Binding="{Binding ResultDate, StringFormat='{}{0:dd-MM-yyyy HH:mm}'}"/>                
+                <DataGridTextColumn Header="Затрачений час"  Binding="{Binding Path=SpentTime}"/>
+                <DataGridTextColumn Header=" Вірно "   Binding="{Binding Path=CorrectCount}"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </StackPanel>
 </UserControl>

@@ -67,15 +67,11 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Тест" Width="1*" Binding="{Binding Path=Test.Name}"/>
                     <DataGridTextColumn Header="Студент" Width="1*" Binding="{Binding Student.Name}"/>
-                    <DataGridTextColumn Header=" Вірно "   Binding="{Binding Path=Result.CorrectCount}">
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="TextBlock">
-                                <Setter Property="HorizontalAlignment" Value="Center" />
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                    </DataGridTextColumn>
+                        
                     <DataGridTextColumn Header="Дата складання"  Binding="{Binding Path=Result.ResultDate, StringFormat='{}{0:dd-MM-yyyy HH:mm}'}"/>
                     <DataGridTextColumn Header="Затрачено"  Binding="{Binding Path=Result.SpentTime}"/>
+                    <DataGridTextColumn Header=" Вірно "   Binding="{Binding Path=Result.CorrectCount}">                        
+                    </DataGridTextColumn>
                 </DataGrid.Columns>
                 <DataGrid.RowDetailsTemplate>
                     <DataTemplate>

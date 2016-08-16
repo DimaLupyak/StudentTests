@@ -18,7 +18,7 @@ namespace AdminClient.ViewModels
         {
             Students = service.GetStudents();
             Tests = service.GetTests();
-            Results = service.GetResults().Select(x => new ResultControlViewModel(x));
+            Results = service.GetResults().OrderBy(x => x.ResultDate).Reverse().Select(x => new ResultControlViewModel(x));
             Groups = service.GetGroups();
         }
         private StudentViewModel selectedStydent;

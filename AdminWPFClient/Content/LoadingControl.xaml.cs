@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace StudentWpfClient.Content
+namespace AdminWPFClient.Content
 {
     /// <summary>
-    /// Interaction logic for ResultListItemControl.xaml
+    /// Interaction logic for LoadingControl.xaml
     /// </summary>
-    public partial class ResultListItemControl : UserControl
+    public partial class LoadingControl : UserControl
     {
-        public ResultListItemControl()
+        public LoadingControl()
         {
             InitializeComponent();
         }

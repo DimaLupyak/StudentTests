@@ -88,9 +88,6 @@
     <Compile Include="Content\StudentList.xaml.cs">
       <DependentUpon>StudentList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\StudentInfo.xaml.cs">
-      <DependentUpon>StudentInfo.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Converters\ResultsFilter.cs" />
     <Compile Include="Converters\StudentsGroupFilter.cs" />
     <Compile Include="Converters\DataContextConvertor.cs" />
@@ -160,10 +157,6 @@
     <Page Include="Content\StudentList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Content\StudentInfo.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

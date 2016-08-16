@@ -17,7 +17,7 @@ namespace StudentWpfClient.ViewModels
 
         public ResultsListViewModel(int studentId)
         {
-            Results = service.GetResults().Where(x => x.StudentId == studentId);
+            Results = service.GetResults().Where(x => x.StudentId == studentId).OrderBy(x => x.ResultDate).Reverse();
         }
 
 
