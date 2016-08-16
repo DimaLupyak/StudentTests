@@ -4,12 +4,8 @@ using AdminWPFClient.ServiceReference;
 using FirstFloor.ModernUI.Windows.Controls;
 using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
@@ -18,126 +14,62 @@ namespace AdminWPFClient.ViewModels
 {
     public class QuestionControlViewModel : INotifyPropertyChanged
     {
+        #region Private Variables
         private StudentTestServiceClient service = new StudentTestServiceClient();
-        public delegate void EventHandler();
-        public event EventHandler DeleteEvent;
-        void OnDeleteEvent()
-        {
-            if (DeleteEvent != null) DeleteEvent();
-        }
+        #endregion
+
+        #region Events
+        public event PropertyChangedEventHandler PropertyChanged;
+        public event Action DeleteEvent;
+        #endregion
+
+        #region Commands
+        public ICommand UploadImageCommand { get; set; }
+        public ICommand UploadAnswerImageCommand { get; set; }
+        public ICommand QuestionDeleteCommand { get; set; }
+        public ICommand AnswerDeleteCommand { get; set; }
+        public ICommand AnswerImageDeleteCommand { get; set; }
+        public ICommand ImageDeleteCommand { get; set; }
+        #endregion
+
+        #region Constructor
         public QuestionControlViewModel(QuestionViewModel question)
         {
+            Question = question;
+
             this.AnswerImageDeleteCommand = new SimpleCommand
             {
-                ExecuteDelegate = x =>
-                {
-                    AnswerViewModel answer = x as AnswerViewModel;
-                    if (answer != null)
-                    {
-                        var result = ModernDialog.ShowMessage("Видалити зображення?", "Видалення зображення", MessageBoxButton.YesNo);
-                        if (result == MessageBoxResult.Yes)
-                        {
-                            answer.Image = null;
-                            service.UpdateAnswer(answer);
-                        }
-                    }
-                },
-                CanExecuteDelegate = x => true
+                ExecuteDelegate = x => AnswerImageDelete(x as AnswerViewModel)
             };
+
             this.ImageDeleteCommand = new SimpleCommand
             {
-                ExecuteDelegate = x =>
-                {
-                    if (image != null)
-                    {
-                        var result = ModernDialog.ShowMessage("Видалити зображення?", "Видалення зображення", MessageBoxButton.YesNo);
-                        if (result == MessageBoxResult.Yes)
-                        {
-                            question.Image = null;
-                            Image = null;
-                            service.UpdateQuestion(question);
-                        }
-                    }
-
-                },
-                CanExecuteDelegate = x => true
+                ExecuteDelegate = x => ImageDelete()
             };
 
             this.QuestionDeleteCommand = new SimpleCommand
             {
-                ExecuteDelegate = x =>
-                {
-                    QuestionControlViewModel questionControl = x as QuestionControlViewModel;
-                    if (questionControl != null)
-                    {
-                        var result = ModernDialog.ShowMessage("Всі дані пов'язані з даним питанням будуть видалені. Продовжити видалення?", "Видалення питання", MessageBoxButton.YesNo);
-                        if (result == MessageBoxResult.Yes)
-                        {
-                            service.DeleteQuestion(questionControl.Question);
-                            OnDeleteEvent();
-                        }
-                    }
-                },
-                CanExecuteDelegate = x => true
+                ExecuteDelegate = x => QuestionDelete(x as QuestionControlViewModel)
             };
+
             this.AnswerDeleteCommand = new SimpleCommand
             {
-                ExecuteDelegate = x =>
-                {
-                    if (x as AnswerViewModel != null)
-                    {
-                        var result = ModernDialog.ShowMessage("Всі дані пов'язані з даною відповіддю будуть видалені. Продовжити видалення?", "Видалення відповіді", MessageBoxButton.YesNo);
-                        if (result == MessageBoxResult.Yes)
-                        {
-                            service.DeleteAnswer(x as AnswerViewModel);
-                            Answers.Remove(x as AnswerViewModel);
-                        }
-                    }
-                },
-                CanExecuteDelegate = x => true
+                ExecuteDelegate = x => AnswerDelete(x as AnswerViewModel)
             };
+
             this.UploadImageCommand = new SimpleCommand
             {
-                ExecuteDelegate = x =>
-                {
-                    OpenFileDialog op = new OpenFileDialog();
-                    op.Title = "Select a picture";
-                    op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
-                      "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
-                      "Portable Network Graphic (*.png)|*.png";
-                    if (op.ShowDialog() == true)
-                    {
-                        Image = ImageHelper.ToByteArray(new BitmapImage(new Uri(op.FileName)));
-                    }
-                },
-                CanExecuteDelegate = x => true
+                ExecuteDelegate = x => UploadImage()
             };
+
             this.UploadAnswerImageCommand = new SimpleCommand
             {
-
-                ExecuteDelegate = x =>
-                {
-                    AnswerViewModel answer = x as AnswerViewModel;
-                    if (answer != null)
-                    {
-                        OpenFileDialog op = new OpenFileDialog();
-                        op.Title = "Select a picture";
-                        op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
-                          "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
-                          "Portable Network Graphic (*.png)|*.png";
-                        if (op.ShowDialog() == true)
-                        {
-                            answer.Image = ImageHelper.ToByteArray(new BitmapImage(new Uri(op.FileName)));
-                            if (answer.Id != 0)
-                                service.UpdateAnswer(answer);
-                        }
-                    }
-                },
-                CanExecuteDelegate = x => true
+                ExecuteDelegate = x => UploadAnswerImage(x as AnswerViewModel)
             };
-
-            Question = question;
         }
+        #endregion
+
+        #region Properties
         private QuestionViewModel question;
         public QuestionViewModel Question
         {
@@ -154,6 +86,7 @@ namespace AdminWPFClient.ViewModels
                 this.OnPropertyChanged("Question");
             }
         }
+
         private string text;
         public string Text
         {
@@ -192,23 +125,22 @@ namespace AdminWPFClient.ViewModels
                 this.OnPropertyChanged("Answers");
             }
         }
+        #endregion
 
+        #region Public Methods
         public void CreateAnswer(AnswerViewModel answer)
         {
             service.CreateAnswer(answer);
             Answers = new ObservableCollection<AnswerViewModel>(service.GetQuestionAnswers(question.Id));
         }
+
         public void UpdateAnswer(AnswerViewModel answer)
         {
             service.UpdateAnswer(answer);
         }
-        public ICommand UploadImageCommand { get; set; }
-        public ICommand UploadAnswerImageCommand { get; set; }
-        public ICommand QuestionDeleteCommand { get; set; }
-        public ICommand AnswerDeleteCommand { get; set; }
-        public ICommand AnswerImageDeleteCommand { get; set; }
-        public ICommand ImageDeleteCommand { get; set; }
+        #endregion
 
+        #region Private Methods
         private void OnPropertyChanged(string propertyName)
         {
             if (this.PropertyChanged != null)
@@ -216,8 +148,88 @@ namespace AdminWPFClient.ViewModels
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-        public event PropertyChangedEventHandler PropertyChanged;
 
+        private void AnswerImageDelete(AnswerViewModel answer)
+        {
+            if (answer != null)
+            {
+                var result = ModernDialog.ShowMessage("Видалити зображення?", "Видалення зображення", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {
+                    answer.Image = null;
+                    service.UpdateAnswer(answer);
+                }
+            }
+        }
+
+        private void ImageDelete()
+        {
+            if (image != null)
+            {
+                var result = ModernDialog.ShowMessage("Видалити зображення?", "Видалення зображення", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {
+                    question.Image = null;
+                    Image = null;
+                    service.UpdateQuestion(question);
+                }
+            }
+        }
+
+        private void QuestionDelete(QuestionControlViewModel questionControl)
+        {
+            if (questionControl != null)
+            {
+                var result = ModernDialog.ShowMessage("Всі дані пов'язані з даним питанням будуть видалені. Продовжити видалення?", "Видалення питання", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {
+                    service.DeleteQuestion(questionControl.Question);
+                    if (DeleteEvent != null) DeleteEvent();
+                }
+            }
+        }
+
+        private void AnswerDelete(AnswerViewModel answer)
+        {
+            var result = ModernDialog.ShowMessage("Всі дані пов'язані з даною відповіддю будуть видалені. Продовжити видалення?", "Видалення відповіді", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                service.DeleteAnswer(answer as AnswerViewModel);
+                Answers.Remove(answer as AnswerViewModel);
+            }
+        }
+
+        private void UploadImage()
+        {
+            OpenFileDialog op = new OpenFileDialog();
+            op.Title = "Select a picture";
+            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+              "Portable Network Graphic (*.png)|*.png";
+            if (op.ShowDialog() == true)
+            {
+                Image = ImageHelper.ToByteArray(new BitmapImage(new Uri(op.FileName)));
+            }
+        }
+
+        private void UploadAnswerImage(AnswerViewModel answer)
+        {
+            if (answer != null)
+            {
+                OpenFileDialog op = new OpenFileDialog();
+                op.Title = "Select a picture";
+                op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+                  "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+                  "Portable Network Graphic (*.png)|*.png";
+                if (op.ShowDialog() == true)
+                {
+                    answer.Image = ImageHelper.ToByteArray(new BitmapImage(new Uri(op.FileName)));
+                    if (answer.Id != 0)
+                        service.UpdateAnswer(answer);
+                }
+            }
+        }
+        #endregion
     }
 }
 

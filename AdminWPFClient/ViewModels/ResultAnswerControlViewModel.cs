@@ -1,23 +1,32 @@
 ﻿using AdminWPFClient.ServiceReference;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AdminWPFClient.ViewModels
 {
     public class ResultAnswerControlViewModel : INotifyPropertyChanged
     {
+        #region Private Variables
         private StudentTestServiceClient service = new StudentTestServiceClient();
+        #endregion
 
+        #region Events
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
+
+        #region Constructor
         public ResultAnswerControlViewModel(ResultAnswerViewModel result)
         {
-            this.Question = service.GetQuestions().Where(x => x.Id == result.QuestionId).FirstOrDefault();
-            this.Answer = service.GetQuestionAnswers(Question.Id).Where(x => x.Id == result.AnswerId).FirstOrDefault();
+            this.Question = service.GetQuestions()
+                .Where(x => x.Id == result.QuestionId)
+                .FirstOrDefault();
+            this.Answer = service.GetQuestionAnswers(Question.Id)
+                .Where(x => x.Id == result.AnswerId)
+                .FirstOrDefault();
         }
+        #endregion
 
+        #region Properties
         private QuestionViewModel question;
         public QuestionViewModel Question
         {
@@ -27,7 +36,8 @@ namespace AdminWPFClient.ViewModels
                 this.question = value;
                 this.OnPropertyChanged("Question");
             }
-        }
+        }        
+
         private AnswerViewModel answer;
         public AnswerViewModel Answer
         {
@@ -38,6 +48,9 @@ namespace AdminWPFClient.ViewModels
                 this.OnPropertyChanged("Answer");
             }
         }
+        #endregion
+
+        #region Private Methods
         private void OnPropertyChanged(string propertyName)
         {
             if (this.PropertyChanged != null)
@@ -45,6 +58,6 @@ namespace AdminWPFClient.ViewModels
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
     }
 }

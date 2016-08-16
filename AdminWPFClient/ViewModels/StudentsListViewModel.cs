@@ -1,49 +1,40 @@
 ﻿using AdminWPFClient.ServiceReference;
 using FirstFloor.ModernUI.Windows.Controls;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
 namespace AdminClient.ViewModels
 {
     public class StudentsListViewModel : INotifyPropertyChanged
-    {        
+    {
+        #region Private Variables
         private StudentTestServiceClient service = new StudentTestServiceClient();
+        #endregion
 
+        #region Events
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
+
+        #region Commands
+        public ICommand DeleteCommand { get; set; }
+        #endregion
+
+        #region Constructor
         public StudentsListViewModel()
         {
+            Students = new ObservableCollection<StudentViewModel>(service.GetStudents());
+            Groups = new ObservableCollection<GroupViewModel>(service.GetGroups());
+
             this.DeleteCommand = new SimpleCommand
             {
-                ExecuteDelegate = x => 
-                {
-                    if (x as StudentViewModel != null)
-                    {
-                        var result = ModernDialog.ShowMessage("Всі дані пов'язані з даним студентом будуть видалені. Продовжити видалення?", "Видалення студента", MessageBoxButton.YesNo);
-                        if (result == MessageBoxResult.Yes)
-                        {
-                            service.DeleteStudent(x as StudentViewModel);
-                            Students.Remove(x as StudentViewModel);
-                        }
-                    }
-                },
-                CanExecuteDelegate = x => true
-            };
-            Students = new ObservableCollection<StudentViewModel>(service.GetStudents());
-            Groups = new ObservableCollection<GroupViewModel>(service.GetGroups());
+                ExecuteDelegate = x => DeleteStudent(x as StudentViewModel)
+            };            
         }
+        #endregion
 
-        public void RefreshGroups()
-        {
-            Students = new ObservableCollection<StudentViewModel>(service.GetStudents());
-            Groups = new ObservableCollection<GroupViewModel>(service.GetGroups());
-        }
-
+        #region Properties
         private ObservableCollection<StudentViewModel> students;
         public ObservableCollection<StudentViewModel> Students
         {
@@ -65,29 +56,48 @@ namespace AdminClient.ViewModels
                 this.OnPropertyChanged("Groups");
             }
         }
+        #endregion
 
-
-        private void OnPropertyChanged(string propertyName)
+        #region Public Methods
+        public void RefreshGroups()
         {
-            if(this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            Students = new ObservableCollection<StudentViewModel>(service.GetStudents());
+            Groups = new ObservableCollection<GroupViewModel>(service.GetGroups());
         }
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public void CreateStudent(StudentViewModel student)
         {
             service.CreateStudent(student);
         }
+
         public void UpdateStudent(StudentViewModel student)
         {
             service.UpdateStudent(student);
         }
-        
-        public ICommand DeleteCommand { get; set; }
+        #endregion
 
+        #region Private Methods
+        private void DeleteStudent(StudentViewModel student)
+        {
+            if (student != null)
+            {
+                var result = ModernDialog.ShowMessage("Всі дані пов'язані з даним студентом будуть видалені. Продовжити видалення?", "Видалення студента", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {
+                    service.DeleteStudent(student);
+                    Students.Remove(student);
+                }
+            }
+        }
 
+        private void OnPropertyChanged(string propertyName)
+        {
+            if (this.PropertyChanged != null)
+            {
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+        #endregion
     }
 
 }

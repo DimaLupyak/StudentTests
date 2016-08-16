@@ -2,12 +2,9 @@
 using AdminWPFClient.ServiceReference;
 using FirstFloor.ModernUI.Windows.Controls;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -15,34 +12,37 @@ namespace AdminWPFClient.ViewModels
 {
     public class TestListViewModel : INotifyPropertyChanged
     {
+        #region Private Variables
         private StudentTestServiceClient service = new StudentTestServiceClient();
+        #endregion
 
+        #region Events
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
+
+        #region Commands
+        public ICommand DeleteCommand { get; set; }
+        public ICommand AddQuestionCommand { get; set; }
+        #endregion
+
+        #region Constructor
         public TestListViewModel()
-        {     
+        {
+            Tests = new ObservableCollection<TestViewModel>(service.GetTests());
+
             this.DeleteCommand = new SimpleCommand
             {
-                ExecuteDelegate = x =>
-                {
-                    if (x as TestViewModel != null)
-                    {
-                        var result = ModernDialog.ShowMessage("Всі дані пов'язані з даним тестом будуть видалені. Продовжити видалення?", "Видалення тесту", MessageBoxButton.YesNo);
-                        if (result == MessageBoxResult.Yes)
-                        {
-                            service.DeleteTest(x as TestViewModel);
-                            Tests.Remove(x as TestViewModel);
-                            SelectedTest = null;
-                        }
-                    }
-                },
-                CanExecuteDelegate = x => true
+                ExecuteDelegate = x => DeleteTest(x as TestViewModel)
             };
+
             this.AddQuestionCommand = new SimpleCommand()
             {
-                ExecuteDelegate = x => AddQuestion(),
-                CanExecuteDelegate = x => true
-            };
-            Tests = new ObservableCollection<TestViewModel>(service.GetTests());
+                ExecuteDelegate = x => AddQuestion()
+            };            
         }
+        #endregion
+
+        #region Properties
         private TestViewModel selectedTest;
         public TestViewModel SelectedTest
         {
@@ -59,8 +59,6 @@ namespace AdminWPFClient.ViewModels
                 }
                 else Questions = null;
                 NewQuestion = null;
-
-
             }
         }
 
@@ -75,22 +73,7 @@ namespace AdminWPFClient.ViewModels
                 service.UpdateTest(selectedTest);
                 this.OnPropertyChanged("SelectedTestTime");
             }
-        }
-
-        private void UpdateQuestions()
-        {
-            Questions = new ObservableCollection<QuestionControlViewModel>(service.GetTestQuestions(SelectedTest.Id)
-                        .Select(x => new QuestionControlViewModel(x)));
-            foreach (var item in questions)
-            {
-                item.DeleteEvent += UpdateQuestions;
-            }
-        }
-        private void UpdateGroups()
-        {
-            Groups = new ObservableCollection<AccessControlViewModel>(service.GetGroups()
-                .Select(x=>new AccessControlViewModel(x, SelectedTest.Id)));
-        }
+        }        
 
         private ObservableCollection<TestViewModel> tests;
         public ObservableCollection<TestViewModel> Tests
@@ -138,20 +121,37 @@ namespace AdminWPFClient.ViewModels
                 this.OnPropertyChanged("Questions");
             }
         }
+        #endregion
 
+        #region Public Methods
         public void CreateTest(TestViewModel test)
         {
             service.CreateTest(test);
             Tests = new ObservableCollection<TestViewModel>(service.GetTests());
         }
+        #endregion
+
+        #region Public Methods
+        private void UpdateQuestions()
+        {
+            Questions = new ObservableCollection<QuestionControlViewModel>(service.GetTestQuestions(SelectedTest.Id)
+                        .Select(x => new QuestionControlViewModel(x)));
+            foreach (var item in questions)
+            {
+                item.DeleteEvent += UpdateQuestions;
+            }
+        }
+
+        private void UpdateGroups()
+        {
+            Groups = new ObservableCollection<AccessControlViewModel>(service.GetGroups()
+                .Select(x => new AccessControlViewModel(x, SelectedTest.Id)));
+        }
+
         public void UpdateTest(TestViewModel test)
         {
             service.UpdateTest(test);
-        }
-        
-        
-        public ICommand DeleteCommand { get; set; }
-        public ICommand AddQuestionCommand { get; set; }
+        }   
 
         private void AddQuestion()
         {
@@ -172,6 +172,20 @@ namespace AdminWPFClient.ViewModels
             }
         }
 
+        private void DeleteTest(TestViewModel test)
+        {
+            if (test != null)
+            {
+                var result = ModernDialog.ShowMessage("Всі дані пов'язані з даним тестом будуть видалені. Продовжити видалення?", "Видалення тесту", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {
+                    service.DeleteTest(test);
+                    Tests.Remove(test);
+                    SelectedTest = null;
+                }
+            }
+        }
+
         private void OnPropertyChanged(string propertyName)
         {
             if (this.PropertyChanged != null)
@@ -179,7 +193,6 @@ namespace AdminWPFClient.ViewModels
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
     }
-
 }

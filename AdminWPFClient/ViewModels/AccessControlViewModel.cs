@@ -1,26 +1,29 @@
 ﻿using AdminWPFClient.ServiceReference;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AdminWPFClient.ViewModels
 {
     public class AccessControlViewModel : INotifyPropertyChanged
     {
+        #region Private Variables
         private StudentTestServiceClient service = new StudentTestServiceClient();
         private int testId;
+        #endregion
 
+        #region Events
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
+
+        #region Constructor
         public AccessControlViewModel(GroupViewModel group, int testId)
         {
             this.Group = group;
             this.testId = testId;
             this.IsAccess = service.IsAcceess(group.Id, testId);
         }
+        #endregion
 
-
+        #region Properties
         private GroupViewModel group;
         public GroupViewModel Group
         {
@@ -52,7 +55,9 @@ namespace AdminWPFClient.ViewModels
                 this.OnPropertyChanged("IsAccess");
             }
         }
+        #endregion
 
+        #region Private Methods
         private void OnPropertyChanged(string propertyName)
         {
             if (this.PropertyChanged != null)
@@ -60,6 +65,6 @@ namespace AdminWPFClient.ViewModels
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
     }
 }

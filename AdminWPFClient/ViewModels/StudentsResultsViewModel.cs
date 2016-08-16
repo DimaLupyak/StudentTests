@@ -1,26 +1,36 @@
 ﻿using AdminWPFClient.ServiceReference;
 using AdminWPFClient.ViewModels;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace AdminClient.ViewModels
 {
     public class StudentsResultsViewModel : INotifyPropertyChanged
     {
+        #region Private Variables
         private StudentTestServiceClient service = new StudentTestServiceClient();
+        #endregion
 
+        #region Events
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
+
+        #region Constructor
         public StudentsResultsViewModel()
         {
             Students = service.GetStudents();
             Tests = service.GetTests();
-            Results = service.GetResults().OrderBy(x => x.ResultDate).Reverse().Select(x => new ResultControlViewModel(x));
+            Results = service.GetResults()
+                .OrderBy(x => x.ResultDate)
+                .Reverse()
+                .Select(x => new ResultControlViewModel(x));
             Groups = service.GetGroups();
         }
+        #endregion
+
+        #region Properties
         private StudentViewModel selectedStydent;
         public StudentViewModel SelectedStydent
         {
@@ -32,6 +42,7 @@ namespace AdminClient.ViewModels
                 this.OnPropertyChanged("SelectedStydent");
             }
         }
+
         private TestViewModel selectedTest;
         public TestViewModel SelectedTest
         {
@@ -63,7 +74,6 @@ namespace AdminClient.ViewModels
             set
             {
                 this.students = value;
-
                 this.OnPropertyChanged("Students");
             }
         }
@@ -79,8 +89,6 @@ namespace AdminClient.ViewModels
             }
         }
 
-
-
         private IEnumerable<TestViewModel> tests;
         public IEnumerable<TestViewModel> Tests
         {
@@ -91,6 +99,7 @@ namespace AdminClient.ViewModels
                 this.OnPropertyChanged("Tests");
             }
         }
+
         private IEnumerable<ResultControlViewModel> results;
         public IEnumerable<ResultControlViewModel> Results
         {
@@ -101,23 +110,7 @@ namespace AdminClient.ViewModels
                 FilterResults();
                 this.OnPropertyChanged("Results");
             }
-        }
-
-        private void FilterResults()
-        {
-            new Thread(() => FilteredResults = results.Where(x => IsSelect(x))).Start();
-        }
-
-        private bool IsSelect(ResultControlViewModel x)
-        {
-            if (selectedTest != null && x.Result.TestId != selectedTest.Id)
-                return false;
-            if (selectedGroup != null && selectedStydent == null && x.Student.GroupID != selectedGroup.Id)
-                return false;
-            if (selectedStydent != null && x.Result.StudentId != selectedStydent.Id)
-                return false;
-            return true;
-        }
+        }        
 
         private IEnumerable<ResultControlViewModel> filteredResults;
         public IEnumerable<ResultControlViewModel> FilteredResults
@@ -129,6 +122,26 @@ namespace AdminClient.ViewModels
                 this.OnPropertyChanged("FilteredResults");
             }
         }
+        #endregion
+
+        #region Public Methods
+        private void FilterResults()
+        {
+            new Thread(() => FilteredResults = results.Where(x => IsSelect(x))).Start();
+        }
+        #endregion
+
+        #region Private Methods
+        private bool IsSelect(ResultControlViewModel x)
+        {
+            if (selectedTest != null && x.Result.TestId != selectedTest.Id)
+                return false;
+            if (selectedGroup != null && selectedStydent == null && x.Student.GroupID != selectedGroup.Id)
+                return false;
+            if (selectedStydent != null && x.Result.StudentId != selectedStydent.Id)
+                return false;
+            return true;
+        }
 
         private void OnPropertyChanged(string propertyName)
         {
@@ -137,6 +150,6 @@ namespace AdminClient.ViewModels
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
     }
 }
