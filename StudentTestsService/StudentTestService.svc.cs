@@ -11,6 +11,7 @@ namespace StudentTestsService
 {
     public class StudentTestService : IStudentTestService
     {
+        #region Create
         public void CreateAccess(int groupId, int testId)
         {
             AccessViewModel access = new AccessViewModel {GroupId = groupId, TestId = testId };
@@ -42,39 +43,18 @@ namespace StudentTestsService
             TestRepisitory.Instance.Create(test);
         }
 
-        public void DeleteAccess(int groupId, int testId)
+        public int CreateResult(ResultViewModel result)
         {
-             foreach (var item in AccessRepisitory.Instance.Read().Where(x => x.GroupId == groupId && x.TestId == testId))
-            {
-                AccessRepisitory.Instance.Destroy(item);
-            }
+            return ResultRepisitory.Instance.Create(result);
         }
 
-        public void DeleteAnswer(AnswerViewModel answer)
+        public void CreateResultAnswer(ResultAnswerViewModel resultAnswer)
         {
-            AnswerRepisitory.Instance.Destroy(answer);
+            ResultAnswerRepisitory.Instance.Create(resultAnswer);
         }
+        #endregion
 
-        public void DeleteGroup(GroupViewModel group)
-        {
-            GroupRepisitory.Instance.Destroy(group);
-        }
-
-        public void DeleteQuestion(QuestionViewModel question)
-        {
-            QuestionRepisitory.Instance.Destroy(question);
-        }
-
-        public void DeleteStudent(StudentViewModel student)
-        {
-            StudentRepisitory.Instance.Destroy(student);
-        }
-
-        public void DeleteTest(TestViewModel test)
-        {
-            TestRepisitory.Instance.Destroy(test);
-        }
-
+        #region Read
         public IEnumerable<GroupViewModel> GetGroups()
         {
             return GroupRepisitory.Instance.Read();
@@ -111,7 +91,7 @@ namespace StudentTestsService
                    join a in AccessRepisitory.Instance.Read() on t.Id equals a.TestId
                    join g in GroupRepisitory.Instance.Read() on a.GroupId equals g.Id
                    join s in StudentRepisitory.Instance.Read()
-                   .Where(x=>x.Id == studentId) on g.Id equals s.GroupID
+                   .Where(x => x.Id == studentId) on g.Id equals s.GroupID
                    select t;
         }
 
@@ -137,7 +117,9 @@ namespace StudentTestsService
         {
             return AccessRepisitory.Instance.Read().Where(x => x.GroupId == groupId && x.TestId == testId).Count() > 0;
         }
+        #endregion
 
+        #region Update
         public void UpdateAnswer(AnswerViewModel answer)
         {
             AnswerRepisitory.Instance.Update(answer);
@@ -162,17 +144,42 @@ namespace StudentTestsService
         {
             TestRepisitory.Instance.Update(test);
         }
+        #endregion
 
-
-        public int CreateResult(ResultViewModel result)
+        #region Delete
+        public void DeleteAccess(int groupId, int testId)
         {
-            return ResultRepisitory.Instance.Create(result);
+             foreach (var item in AccessRepisitory.Instance.Read().Where(x => x.GroupId == groupId && x.TestId == testId))
+            {
+                AccessRepisitory.Instance.Destroy(item);
+            }
         }
 
-
-        public void CreateResultAnswer(ResultAnswerViewModel resultAnswer)
+        public void DeleteAnswer(AnswerViewModel answer)
         {
-            ResultAnswerRepisitory.Instance.Create(resultAnswer);
+            AnswerRepisitory.Instance.Destroy(answer);
         }
+
+        public void DeleteGroup(GroupViewModel group)
+        {
+            GroupRepisitory.Instance.Destroy(group);
+        }
+
+        public void DeleteQuestion(QuestionViewModel question)
+        {
+            QuestionRepisitory.Instance.Destroy(question);
+        }
+
+        
+        public void DeleteStudent(StudentViewModel student)
+        {
+            StudentRepisitory.Instance.Destroy(student);
+        }
+
+        public void DeleteTest(TestViewModel test)
+        {
+            TestRepisitory.Instance.Destroy(test);
+        }
+        #endregion
     }
 }

@@ -10,8 +10,7 @@ namespace DataViewModels
 {
     public class StudentViewModel
     {
-        public int Id { get; set; }
-        
+        public int Id { get; set; }        
         public string Name { get; set; }
         public int GroupID { get; set; }
     }

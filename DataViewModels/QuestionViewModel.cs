@@ -13,6 +13,8 @@ namespace DataViewModels
         public byte[] Image { get; set; }
         public Nullable<int> TestId { get; set; }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         private string text;
         public string Text
         {
@@ -30,7 +32,6 @@ namespace DataViewModels
             {
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
+        }        
     }
 }
