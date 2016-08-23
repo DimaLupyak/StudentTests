@@ -202,6 +202,9 @@ namespace StudentWpfClient.ViewModels
                     CorrectCount = Questions
                     .Where(x => x.SelectedAnswer != null && x.SelectedAnswer.IsCorrect == true)
                     .Count(),
+                    CorrectPercent = Questions.Count() / 100 * Questions
+                    .Where(x => x.SelectedAnswer != null && x.SelectedAnswer.IsCorrect == true)
+                    .Count(),
                     StudentId = studentId,
                     TestId = Test.Id,
                     SpentTime = Test.Time - LeftTime,

@@ -57,6 +57,7 @@ namespace BusinessLogic
                                 StudentId = a.StudentId,
                                 TestId = a.TestId,
                                 CorrectCount = a.CorrectCount,
+                                CorrectPercent = 100 / (float)entities.Questions.Where(x => x.TestId == a.TestId).Count() * a.CorrectCount,
                                 SpentTime = a.SpentTime,
                                 ResultDate = a.ResultDate
                             }).ToList();

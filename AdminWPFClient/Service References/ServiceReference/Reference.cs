@@ -443,6 +443,9 @@ namespace AdminWPFClient.ServiceReference {
         private int CorrectCountField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private float CorrectPercentField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -476,6 +479,19 @@ namespace AdminWPFClient.ServiceReference {
                 if ((this.CorrectCountField.Equals(value) != true)) {
                     this.CorrectCountField = value;
                     this.RaisePropertyChanged("CorrectCount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public float CorrectPercent {
+            get {
+                return this.CorrectPercentField;
+            }
+            set {
+                if ((this.CorrectPercentField.Equals(value) != true)) {
+                    this.CorrectPercentField = value;
+                    this.RaisePropertyChanged("CorrectPercent");
                 }
             }
         }
@@ -568,6 +584,9 @@ namespace AdminWPFClient.ServiceReference {
         private int AnswerIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int QuestionIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -592,6 +611,19 @@ namespace AdminWPFClient.ServiceReference {
                 if ((this.AnswerIdField.Equals(value) != true)) {
                     this.AnswerIdField = value;
                     this.RaisePropertyChanged("AnswerId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
                 }
             }
         }
@@ -737,6 +769,18 @@ namespace AdminWPFClient.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/CreateAccess", ReplyAction="http://tempuri.org/IStudentTestService/CreateAccessResponse")]
         System.Threading.Tasks.Task CreateAccessAsync(int groupId, int testId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/CreateResult", ReplyAction="http://tempuri.org/IStudentTestService/CreateResultResponse")]
+        int CreateResult(AdminWPFClient.ServiceReference.ResultViewModel result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/CreateResult", ReplyAction="http://tempuri.org/IStudentTestService/CreateResultResponse")]
+        System.Threading.Tasks.Task<int> CreateResultAsync(AdminWPFClient.ServiceReference.ResultViewModel result);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/CreateResultAnswer", ReplyAction="http://tempuri.org/IStudentTestService/CreateResultAnswerResponse")]
+        void CreateResultAnswer(AdminWPFClient.ServiceReference.ResultAnswerViewModel resultAnswer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/CreateResultAnswer", ReplyAction="http://tempuri.org/IStudentTestService/CreateResultAnswerResponse")]
+        System.Threading.Tasks.Task CreateResultAnswerAsync(AdminWPFClient.ServiceReference.ResultAnswerViewModel resultAnswer);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentTestService/UpdateStudent", ReplyAction="http://tempuri.org/IStudentTestService/UpdateStudentResponse")]
         void UpdateStudent(AdminWPFClient.ServiceReference.StudentViewModel student);
@@ -966,6 +1010,22 @@ namespace AdminWPFClient.ServiceReference {
         
         public System.Threading.Tasks.Task CreateAccessAsync(int groupId, int testId) {
             return base.Channel.CreateAccessAsync(groupId, testId);
+        }
+        
+        public int CreateResult(AdminWPFClient.ServiceReference.ResultViewModel result) {
+            return base.Channel.CreateResult(result);
+        }
+        
+        public System.Threading.Tasks.Task<int> CreateResultAsync(AdminWPFClient.ServiceReference.ResultViewModel result) {
+            return base.Channel.CreateResultAsync(result);
+        }
+        
+        public void CreateResultAnswer(AdminWPFClient.ServiceReference.ResultAnswerViewModel resultAnswer) {
+            base.Channel.CreateResultAnswer(resultAnswer);
+        }
+        
+        public System.Threading.Tasks.Task CreateResultAnswerAsync(AdminWPFClient.ServiceReference.ResultAnswerViewModel resultAnswer) {
+            return base.Channel.CreateResultAnswerAsync(resultAnswer);
         }
         
         public void UpdateStudent(AdminWPFClient.ServiceReference.StudentViewModel student) {

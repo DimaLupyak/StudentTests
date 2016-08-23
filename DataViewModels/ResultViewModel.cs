@@ -14,5 +14,6 @@ namespace DataViewModels
         public int CorrectCount { get; set; }
         public System.TimeSpan SpentTime { get; set; }
         public System.DateTime ResultDate { get; set; }
+        public float CorrectPercent { get; set; }
     }
 }

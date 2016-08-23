@@ -22,6 +22,14 @@ namespace StudentWpfClient.Converters
             {
                 return value == null ? Visibility.Collapsed : Visibility.Visible;
             }
+            else if (request == "True")
+            {
+                return value as bool? == true ? Visibility.Visible : Visibility.Collapsed;
+            }
+            else if (request == "False")
+            {
+                return value as bool? == false ? Visibility.Visible : Visibility.Collapsed;
+            }
             throw new NotImplementedException();
         }
 

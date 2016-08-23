@@ -43,7 +43,7 @@
                 <DataGrid ItemsSource="{Binding Tests, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                       SelectedItem="{Binding Path=SelectedTest, Mode=TwoWay}"
                       AutoGenerateColumns="False"  RowEditEnding="DataGrid_RowEditEnding"
-                      RowStyle="{StaticResource DefaultRowStyle}">
+                      RowStyle="{StaticResource DefaultRowStyle}" CanUserDeleteRows="False">
                     <DataGrid.RowValidationRules>
                         <validation:TestValidationRule ValidationStep="UpdatedValue"/>
                     </DataGrid.RowValidationRules>

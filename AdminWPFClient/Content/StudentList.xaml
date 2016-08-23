@@ -29,7 +29,7 @@
             <DockPanel>
                 <DataGrid ItemsSource="{Binding Students, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                       AutoGenerateColumns="False"  RowEditEnding="DataGrid_RowEditEnding"
-                      RowStyle="{StaticResource DefaultRowStyle}">
+                      RowStyle="{StaticResource DefaultRowStyle}" CanUserDeleteRows="False">
                     <DataGrid.RowValidationRules>
                         <validation:StudentValidationRule ValidationStep="UpdatedValue"/>
                     </DataGrid.RowValidationRules>

@@ -15,12 +15,20 @@
                       AutoGenerateColumns="False" 
                       IsReadOnly="True" 
                       RowHeaderWidth="0" 
-                      ItemsSource ="{Binding Results}">
+                      ItemsSource ="{Binding Results}"
+                      CanUserDeleteRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Тест" Width="1*" Binding="{Binding TestId, Converter={StaticResource testIdToNameConvertor}}"/>
-                <DataGridTextColumn Header="Дата складання" Width="1*" Binding="{Binding ResultDate, StringFormat='{}{0:dd-MM-yyyy HH:mm}'}"/>                
+                <DataGridTextColumn Header="Дата складання" Width="1*" Binding="{Binding ResultDate, StringFormat='{}{0:dd-MM-yyyy HH:mm}'}"/>
                 <DataGridTextColumn Header="Затрачений час"  Binding="{Binding Path=SpentTime}"/>
-                <DataGridTextColumn Header=" Вірно "   Binding="{Binding Path=CorrectCount}"/>
+                <DataGridTextColumn Header=" Вірно ">
+                    <DataGridTextColumn.Binding>
+                        <MultiBinding StringFormat="{}{0} ({1:F1}%)">
+                            <Binding Path="CorrectCount" />
+                            <Binding Path="CorrectPercent" />
+                        </MultiBinding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
     </StackPanel>

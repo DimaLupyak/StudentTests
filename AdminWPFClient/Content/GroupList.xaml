@@ -28,7 +28,7 @@
         <DockPanel>
             <DataGrid ItemsSource="{Binding Groups, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                       AutoGenerateColumns="False"  RowEditEnding="DataGrid_RowEditEnding"
-                      RowStyle="{StaticResource DefaultRowStyle}">
+                      RowStyle="{StaticResource DefaultRowStyle}" CanUserDeleteRows="False">
                 <DataGrid.RowValidationRules>
                     <validation:GroupValidationRule ValidationStep="UpdatedValue"/>
                 </DataGrid.RowValidationRules>

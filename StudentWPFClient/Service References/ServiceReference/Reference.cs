@@ -443,6 +443,9 @@ namespace StudentWpfClient.ServiceReference {
         private int CorrectCountField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private float CorrectPercentField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -476,6 +479,19 @@ namespace StudentWpfClient.ServiceReference {
                 if ((this.CorrectCountField.Equals(value) != true)) {
                     this.CorrectCountField = value;
                     this.RaisePropertyChanged("CorrectCount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public float CorrectPercent {
+            get {
+                return this.CorrectPercentField;
+            }
+            set {
+                if ((this.CorrectPercentField.Equals(value) != true)) {
+                    this.CorrectPercentField = value;
+                    this.RaisePropertyChanged("CorrectPercent");
                 }
             }
         }
@@ -568,6 +584,9 @@ namespace StudentWpfClient.ServiceReference {
         private int AnswerIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int QuestionIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -592,6 +611,19 @@ namespace StudentWpfClient.ServiceReference {
                 if ((this.AnswerIdField.Equals(value) != true)) {
                     this.AnswerIdField = value;
                     this.RaisePropertyChanged("AnswerId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
                 }
             }
         }
