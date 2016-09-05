@@ -33,11 +33,13 @@ namespace BusinessLogic
         {
             using (StudentTestDBEntities entities = new StudentTestDBEntities())
             {
+                entities.Database.Connection.Open();
                 var student = new Student();
                 student.StudentName = item.Name;
                 student.GroupID = item.GroupID;
                 entities.Students.Add(student);
                 entities.SaveChanges();
+                entities.Database.Connection.Close();
                 return item.Id = student.StudentID;
             }
         }
@@ -46,6 +48,7 @@ namespace BusinessLogic
         {
             using (StudentTestDBEntities entities = new StudentTestDBEntities())
             {
+                entities.Database.Connection.Open();
                 var students = (from a in entities.Students
                             select new StudentViewModel
                             {
@@ -53,6 +56,7 @@ namespace BusinessLogic
                                 Name = a.StudentName,
                                 GroupID = a.GroupID
                             }).ToList();
+                entities.Database.Connection.Close();
                 return students;
             }
         }
@@ -61,6 +65,7 @@ namespace BusinessLogic
         {
             using (StudentTestDBEntities entities = new StudentTestDBEntities())
             {
+                entities.Database.Connection.Open();
                 var student = new Student();
                 student.StudentID = item.Id;
                 student.StudentName = item.Name;
@@ -68,6 +73,7 @@ namespace BusinessLogic
                 entities.Students.Attach(student);
                 entities.Entry(student).State = EntityState.Modified;
                 entities.SaveChanges();
+                entities.Database.Connection.Close();
             }
         }
 
@@ -75,11 +81,13 @@ namespace BusinessLogic
         {
             using (StudentTestDBEntities entities = new StudentTestDBEntities())
             {
+                entities.Database.Connection.Open();
                 var student = new Student();
                 student.StudentID = item.Id;
                 entities.Students.Attach(student);
                 entities.Students.Remove(student);
                 entities.SaveChanges();
+                entities.Database.Connection.Close();
             }
         }
         #endregion

@@ -19,14 +19,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:23235/StudentTestService.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost/StudentTestService/StudentTestService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="StudentTestService.disco" MetadataType="Disco" ID="95bbdd17-0e9f-4f24-a6f6-e377d76e6b10" SourceId="1" SourceUrl="http://localhost:23235/StudentTestService.svc?disco" />
-    <MetadataFile FileName="StudentTestService.wsdl" MetadataType="Wsdl" ID="945ee613-a5c6-47ac-87a4-3d9588c2b231" SourceId="1" SourceUrl="http://localhost:23235/StudentTestService.svc?wsdl" />
-    <MetadataFile FileName="StudentTestService.xsd" MetadataType="Schema" ID="91143fe1-709e-4c1c-9131-ba37de3b5594" SourceId="1" SourceUrl="http://localhost:23235/StudentTestService.svc?xsd=xsd0" />
-    <MetadataFile FileName="StudentTestService1.xsd" MetadataType="Schema" ID="1979637c-02cf-4975-806c-774569126441" SourceId="1" SourceUrl="http://localhost:23235/StudentTestService.svc?xsd=xsd1" />
-    <MetadataFile FileName="StudentTestService2.xsd" MetadataType="Schema" ID="1b0637ad-ee66-474e-a5d9-2273f0c2ddec" SourceId="1" SourceUrl="http://localhost:23235/StudentTestService.svc?xsd=xsd2" />
+    <MetadataFile FileName="StudentTestService3.xsd" MetadataType="Schema" ID="5eb70d2c-509f-4e1f-a6c2-dbac12489909" SourceId="1" SourceUrl="http://dmytroluv1.nice.com/StudentTestService/StudentTestService.svc?xsd=xsd0" />
+    <MetadataFile FileName="StudentTestService1.disco" MetadataType="Disco" ID="1d170b56-1e9a-4407-9b70-0c2855f01316" SourceId="1" SourceUrl="http://dmytroluv1.nice.com/StudentTestService/StudentTestService.svc?disco" />
+    <MetadataFile FileName="StudentTestService31.xsd" MetadataType="Schema" ID="21221b9b-ffa9-4f5b-9cf1-518f9d07305d" SourceId="1" SourceUrl="http://dmytroluv1.nice.com/StudentTestService/StudentTestService.svc?xsd=xsd2" />
+    <MetadataFile FileName="StudentTestService32.xsd" MetadataType="Schema" ID="8afbfaa0-cb40-4231-b606-02a6098ed7b6" SourceId="1" SourceUrl="http://dmytroluv1.nice.com/StudentTestService/StudentTestService.svc?xsd=xsd1" />
+    <MetadataFile FileName="StudentTestService1.wsdl" MetadataType="Wsdl" ID="a03533ac-ea8f-4d19-a8b5-617a2ffc5795" SourceId="1" SourceUrl="http://dmytroluv1.nice.com/StudentTestService/StudentTestService.svc?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

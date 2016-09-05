@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="StudentWpfClient.exe" version="1.0.0.0" publicKeyToken="bf1116b9b73612b7" language="neutral" processorArchitecture="msil" type="win32" />
+  <description asmv2:iconFile="testing.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="StudentWpfClient" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="StudentWpfClient.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the 
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward 
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FirstFloor.ModernUI.dll" size="250368">
+      <assemblyIdentity name="FirstFloor.ModernUI" version="1.0.9.0" publicKeyToken="BC9B0C37BF06C6A9" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>GaAWZV9ywy1r7Gefd7Fq+hZfGVO2yDO6wdxAyL3IemI=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.Windows.Shell.dll" size="167808">
+      <assemblyIdentity name="Microsoft.Windows.Shell" version="3.5.41019.1" publicKeyToken="31BF3856AD364E35" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>tuCzOAzUVHPzbT/YIrhVkbwvfQoUdTVdw16Xj0ElIsQ=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="StudentWpfClient.exe" size="327128">
+      <assemblyIdentity name="StudentWpfClient" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>qLv/pu4MB2p3NDrEsVqjMjV2aqQNI7r39bKf3bmsn0w=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="StudentWpfClient.exe.config" size="2072">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>LIUGf0OYazfYKkgK8k23BA1IDQPBq58IJyRuo2cWUDs=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="testing.ico" size="248894">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>mHIfb/3wry5R3CQpv6hyYYE2yZHJG+XHD7nlQmSMOEw=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=NICE_SYSTEMS\dmytrol" issuerKeyHash="e571ebcd0b3daf69153ff53a85e3f86e96b27858" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>aEamJf6f5cdsj8NldVdImEYZ81uSwqFb1zY9warP7JE=</DigestValue></Reference></SignedInfo><SignatureValue>YGjv0MKHjjuCUKbN02hgnjetIeWQDFRWMAIhU4h11iEV5rq8lwKpkgC76jwA5jzxszA23DSFAa9QkSt9WYUJ8MbhfsSrmzD4WSBYn+yxJrs9ZXS2Ri40FCZYopLBag2GI66EGlx/pUA6DV1GdpGqFqyvERBqEsqLst4Q3/ovJwY=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>rxwJxyZ95fyip2sJDlP1UwGRQVGapveyiW84adbKmbiZqBdor9zVgzdsUcsIYnQF8/7LhU2Zm0tDbNPxfzQpq+ljb6T/Vc6IAO8jdEKb3p61eZfS/pdsTcIHWpGKqF0k7LMsYPhiWKDB5olxRogbDUirdNj0l1K0MRtca1a5KYs=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="91eccfaac13d36d75ba1c2925bf319469848577565c38f6cc7e59ffe25a64668" Description="" Url=""><as:assemblyIdentity name="StudentWpfClient.exe" version="1.0.0.0" publicKeyToken="bf1116b9b73612b7" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=NICE_SYSTEMS\dmytrol</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>zZaf8NmzGaeoUoRHi9ne7jBpRC37w8t17IL27LeeWGA=</DigestValue></Reference></SignedInfo><SignatureValue>QSvd6UPpSdKqia0h9ijqPT0COlxemx6A2YJyX/fbDZesNhiInDLZS7Sfxawg1kFSwhDkjMBcDXmOEUZd+W28ZZNMd2leOZga7TnlSxwpVnhmew2VaFWsL8egoYcNeeHu6PuLe+/ojJdtRSpa73W+Y2s22Lwd7O9haAuE0uKsly0=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>rxwJxyZ95fyip2sJDlP1UwGRQVGapveyiW84adbKmbiZqBdor9zVgzdsUcsIYnQF8/7LhU2Zm0tDbNPxfzQpq+ljb6T/Vc6IAO8jdEKb3p61eZfS/pdsTcIHWpGKqF0k7LMsYPhiWKDB5olxRogbDUirdNj0l1K0MRtca1a5KYs=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB6TCCAVKgAwIBAgIQNZSheqSRwolDcHiZhZV+gDANBgkqhkiG9w0BAQsFADAzMTEwLwYDVQQDHigATgBJAEMARQBfAFMAWQBTAFQARQBNAFMAXABkAG0AeQB0AHIAbwBsMB4XDTE2MDgzMDEyMzg1MFoXDTE3MDgzMDE4Mzg1MFowMzExMC8GA1UEAx4oAE4ASQBDAEUAXwBTAFkAUwBUAEUATQBTAFwAZABtAHkAdAByAG8AbDCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEArxwJxyZ95fyip2sJDlP1UwGRQVGapveyiW84adbKmbiZqBdor9zVgzdsUcsIYnQF8/7LhU2Zm0tDbNPxfzQpq+ljb6T/Vc6IAO8jdEKb3p61eZfS/pdsTcIHWpGKqF0k7LMsYPhiWKDB5olxRogbDUirdNj0l1K0MRtca1a5KYsCAwEAATANBgkqhkiG9w0BAQsFAAOBgQBuz9zB0uztLosQWRCRd7rijDaCG4dYpLLyMb/b0IyxzTzuHqGMLtJo6d9otLIDCLnVmsnXu56qALS9hvrijheJPRm060x0R2+zK9shtnbCz//FYkA0oOFRMj+zv89Ml7Kq5SC0HBiMX1ZwpNs2TMU1iZ+qdA/xD0Uw/9HPsU2PVA==</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>

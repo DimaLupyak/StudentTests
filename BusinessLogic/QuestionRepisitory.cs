@@ -33,12 +33,14 @@ namespace BusinessLogic
         {
             using (StudentTestDBEntities entities = new StudentTestDBEntities())
             {
+                entities.Database.Connection.Open();
                 var question = new Question();
                 question.QuestionImage = item.Image;
                 question.TestId = item.TestId;
                 question.QuestionText = item.Text;
                 entities.Questions.Add(question);
                 entities.SaveChanges();
+                entities.Database.Connection.Close();
                 return item.Id = question.QuestionId;
             }
         }
@@ -47,6 +49,7 @@ namespace BusinessLogic
         {
             using (StudentTestDBEntities entities = new StudentTestDBEntities())
             {
+                entities.Database.Connection.Open();
                 var questions = (from a in entities.Questions
                             select new QuestionViewModel
                             {
@@ -55,6 +58,7 @@ namespace BusinessLogic
                                 TestId = a.TestId,
                                 Text = a.QuestionText
                             }).ToList();
+                entities.Database.Connection.Close();
                 return questions;
             }
         }
@@ -63,6 +67,7 @@ namespace BusinessLogic
         {
             using (StudentTestDBEntities entities = new StudentTestDBEntities())
             {
+                entities.Database.Connection.Open();
                 var question = new Question();
                 question.QuestionId = item.Id;
                 question.QuestionImage = item.Image;
@@ -71,6 +76,7 @@ namespace BusinessLogic
                 entities.Questions.Attach(question);
                 entities.Entry(question).State = EntityState.Modified;
                 entities.SaveChanges();
+                entities.Database.Connection.Close();
             }
         }
 
@@ -78,11 +84,13 @@ namespace BusinessLogic
         {
             using (StudentTestDBEntities entities = new StudentTestDBEntities())
             {
+                entities.Database.Connection.Open();
                 var question = new Question();
                 question.QuestionId = item.Id;
                 entities.Questions.Attach(question);
                 entities.Questions.Remove(question);
                 entities.SaveChanges();
+                entities.Database.Connection.Close();
             }
         }
         #endregion

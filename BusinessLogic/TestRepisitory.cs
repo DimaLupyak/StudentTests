@@ -33,11 +33,13 @@ namespace BusinessLogic
         {
             using (StudentTestDBEntities entities = new StudentTestDBEntities())
             {
+                entities.Database.Connection.Open();
                 var test = new Test();
                 test.TestName = item.Name;
                 test.TestTime = item.Time;
                 entities.Tests.Add(test);
                 entities.SaveChanges();
+                entities.Database.Connection.Close();
                 return item.Id = test.TestId;
             }
         }
@@ -46,6 +48,7 @@ namespace BusinessLogic
         {
             using (StudentTestDBEntities entities = new StudentTestDBEntities())
             {
+                entities.Database.Connection.Open();
                 var test = (from a in entities.Tests
                             select new TestViewModel
                             {
@@ -53,6 +56,7 @@ namespace BusinessLogic
                                 Name = a.TestName,
                                 Time = a.TestTime
                             }).ToList();
+                entities.Database.Connection.Close();
                 return test;
             }
         }
@@ -61,6 +65,7 @@ namespace BusinessLogic
         {
             using (StudentTestDBEntities entities = new StudentTestDBEntities())
             {
+                entities.Database.Connection.Open();
                 var test = new Test();
                 test.TestId = item.Id;
                 test.TestName = item.Name;
@@ -68,6 +73,7 @@ namespace BusinessLogic
                 entities.Tests.Attach(test);
                 entities.Entry(test).State = EntityState.Modified;
                 entities.SaveChanges();
+                entities.Database.Connection.Close();
             }
         }
 
@@ -75,11 +81,13 @@ namespace BusinessLogic
         {
             using (StudentTestDBEntities entities = new StudentTestDBEntities())
             {
+                entities.Database.Connection.Open();
                 var test = new Test();
                 test.TestId = item.Id;
                 entities.Tests.Attach(test);
                 entities.Tests.Remove(test);
                 entities.SaveChanges();
+                entities.Database.Connection.Close();
             }
         }
         #endregion

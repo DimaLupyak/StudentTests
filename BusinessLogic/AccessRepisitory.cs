@@ -31,11 +31,13 @@ namespace BusinessLogic
         {
             using (StudentTestDBEntities entities = new StudentTestDBEntities())
             {
+                entities.Database.Connection.Open();                
                 var access = new Access();
                 access.GroupId = item.GroupId;
                 access.TestId = item.TestId;
                 entities.Accesses.Add(access);
                 entities.SaveChanges();
+                entities.Database.Connection.Close();
                 return item.Id = access.AccessId;
             }
         }
@@ -44,6 +46,7 @@ namespace BusinessLogic
         {
             using (StudentTestDBEntities entities = new StudentTestDBEntities())
             {
+                entities.Database.Connection.Open();
                 var accesses = (from a in entities.Accesses
                             select new AccessViewModel
                             {
@@ -51,6 +54,7 @@ namespace BusinessLogic
                                 GroupId = a.GroupId,
                                 TestId = a.TestId
                             }).ToList();
+                entities.Database.Connection.Close();
                 return accesses;
             }
         }
@@ -59,6 +63,7 @@ namespace BusinessLogic
         {
             using (StudentTestDBEntities entities = new StudentTestDBEntities())
             {
+                entities.Database.Connection.Open();
                 var access = new Access();
                 access.AccessId = item.Id;
                 access.GroupId = item.GroupId;
@@ -66,6 +71,7 @@ namespace BusinessLogic
                 entities.Accesses.Attach(access);
                 entities.Entry(access).State = EntityState.Modified;
                 entities.SaveChanges();
+                entities.Database.Connection.Close();
             }
         }
 
@@ -73,11 +79,13 @@ namespace BusinessLogic
         {
             using (StudentTestDBEntities entities = new StudentTestDBEntities())
             {
+                entities.Database.Connection.Open();
                 var access = new Access();
                 access.AccessId = item.Id;
                 entities.Accesses.Attach(access);
                 entities.Accesses.Remove(access);
                 entities.SaveChanges();
+                entities.Database.Connection.Close();
             }
         }
         #endregion

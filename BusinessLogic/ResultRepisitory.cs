@@ -33,6 +33,7 @@ namespace BusinessLogic
         {
             using (StudentTestDBEntities entities = new StudentTestDBEntities())
             {
+                entities.Database.Connection.Open();
                 var result = new Result();
                 result.StudentId = item.StudentId;
                 result.TestId = item.TestId;
@@ -42,6 +43,7 @@ namespace BusinessLogic
                 entities.Results.Add(result);
                 entities.SaveChanges();
                 item.Id = result.TestResultId;
+                entities.Database.Connection.Close();
                 return item.Id;
             }
         }
@@ -50,6 +52,7 @@ namespace BusinessLogic
         {
             using (StudentTestDBEntities entities = new StudentTestDBEntities())
             {
+                entities.Database.Connection.Open();
                 var results = (from a in entities.Results
                             select new ResultViewModel
                             {
@@ -61,6 +64,7 @@ namespace BusinessLogic
                                 SpentTime = a.SpentTime,
                                 ResultDate = a.ResultDate
                             }).ToList();
+                entities.Database.Connection.Close();
                 return results;
             }
         }
@@ -69,6 +73,7 @@ namespace BusinessLogic
         {
             using (StudentTestDBEntities entities = new StudentTestDBEntities())
             {
+                entities.Database.Connection.Open();
                 var result = new Result();
                 result.TestResultId = item.Id;
                 result.StudentId = item.StudentId;
@@ -79,6 +84,7 @@ namespace BusinessLogic
                 entities.Results.Attach(result);
                 entities.Entry(result).State = EntityState.Modified;
                 entities.SaveChanges();
+                entities.Database.Connection.Close();
             }
         }
 
@@ -86,11 +92,13 @@ namespace BusinessLogic
         {
             using (StudentTestDBEntities entities = new StudentTestDBEntities())
             {
+                entities.Database.Connection.Open();
                 var result = new Result();
                 result.TestResultId = item.Id;
                 entities.Results.Attach(result);
                 entities.Results.Remove(result);
                 entities.SaveChanges();
+                entities.Database.Connection.Close();
             }
         }
         #endregion

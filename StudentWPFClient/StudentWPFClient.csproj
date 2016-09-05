@@ -13,7 +13,8 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
-    <PublishUrl>publish\</PublishUrl>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>D:\Programming\Study Projects\StudentTests\Deploy\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -23,10 +24,10 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -50,6 +51,18 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>testing.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>3FE65F1D6C26E8D958A15B5AF0D02B53DE089E63</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>StudentWpfClient_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FirstFloor.ModernUI, Version=1.0.9.0, Culture=neutral, PublicKeyToken=bc9b0c37bf06c6a9, processorArchitecture=MSIL">
@@ -201,14 +214,14 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Service References\ServiceReference\StudentTestService.wsdl" />
-    <None Include="Service References\ServiceReference\StudentTestService.xsd">
+    <None Include="Service References\ServiceReference\StudentTestService1.wsdl" />
+    <None Include="Service References\ServiceReference\StudentTestService3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceReference\StudentTestService1.xsd">
+    <None Include="Service References\ServiceReference\StudentTestService31.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceReference\StudentTestService2.xsd">
+    <None Include="Service References\ServiceReference\StudentTestService32.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceReference\StudentWpfClient.ServiceReference.AnswerViewModel.datasource">
@@ -232,29 +245,19 @@
     <None Include="Service References\ServiceReference\StudentWpfClient.ServiceReference.TestViewModel.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="StudentWpfClient_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\ServiceReference\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ServiceReference\StudentTestService.disco" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Service References\ServiceReference\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Service References\ServiceReference\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Service References\ServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="Service References\ServiceReference\StudentTestService1.disco" />
     <Content Include="testing.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -273,6 +276,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ServiceReference\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

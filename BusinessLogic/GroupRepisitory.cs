@@ -33,10 +33,12 @@ namespace BusinessLogic
         {
             using (StudentTestDBEntities entities = new StudentTestDBEntities())
             {
+                entities.Database.Connection.Open();
                 var group = new Group();
                 group.GroupName = item.Name;
                 entities.Groups.Add(group);
                 entities.SaveChanges();
+                entities.Database.Connection.Close();
                 return item.Id = group.GroupID;
             }
         }
@@ -45,12 +47,14 @@ namespace BusinessLogic
         {
             using (StudentTestDBEntities entities = new StudentTestDBEntities())
             {
+                entities.Database.Connection.Open();
                 var groups = (from a in entities.Groups
                             select new GroupViewModel
                             {
                                 Id = a.GroupID,
                                 Name = a.GroupName
                             }).ToList();
+                entities.Database.Connection.Close();
                 return groups;
             }
         }
@@ -59,12 +63,14 @@ namespace BusinessLogic
         {
             using (StudentTestDBEntities entities = new StudentTestDBEntities())
             {
+                entities.Database.Connection.Open();
                 var group = new Group();
                 group.GroupID = item.Id;
                 group.GroupName = item.Name;
                 entities.Groups.Attach(group);
                 entities.Entry(group).State = EntityState.Modified;
                 entities.SaveChanges();
+                entities.Database.Connection.Close();
             }
         }
 
@@ -72,11 +78,13 @@ namespace BusinessLogic
         {
             using (StudentTestDBEntities entities = new StudentTestDBEntities())
             {
+                entities.Database.Connection.Open();
                 var group = new Group();
                 group.GroupID = item.Id;
                 entities.Groups.Attach(group);
                 entities.Groups.Remove(group);
                 entities.SaveChanges();
+                entities.Database.Connection.Close();
             }
         }
         #endregion

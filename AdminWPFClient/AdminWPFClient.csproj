@@ -221,19 +221,19 @@
     <None Include="Service References\ServiceReference\AdminWPFClient.ServiceReference.TestViewModel.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\ServiceReference\StudentTestService.wsdl" />
-    <None Include="Service References\ServiceReference\StudentTestService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceReference\StudentTestService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceReference\StudentTestService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceReference\StudentTestService1.wsdl" />
+    <None Include="Service References\ServiceReference\StudentTestService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference\StudentTestService31.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference\StudentTestService32.xsd">
+      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -241,9 +241,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\ServiceReference\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ServiceReference\StudentTestService.disco" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\ServiceReference\configuration91.svcinfo" />
@@ -261,6 +258,7 @@
   <ItemGroup>
     <Content Include="admintesting.ico" />
     <Content Include="Assets\PlaceHolder.png" />
+    <None Include="Service References\ServiceReference\StudentTestService1.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
