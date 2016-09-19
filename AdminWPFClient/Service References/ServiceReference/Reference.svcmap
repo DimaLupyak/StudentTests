@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="33526452-67c7-4a02-9756-e18a63a89443" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="9a532786-c4f0-4cdd-9889-13ee051bc768" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
-    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
     <EnableDataBinding>true</EnableDataBinding>
     <ExcludedTypes />
     <ImportXmlTypes>false</ImportXmlTypes>
@@ -19,14 +18,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost/StudentTestService/StudentTestService.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:23235/StudentTestService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="StudentTestService3.xsd" MetadataType="Schema" ID="5eb70d2c-509f-4e1f-a6c2-dbac12489909" SourceId="1" SourceUrl="http://dmytroluv1.nice.com/StudentTestService/StudentTestService.svc?xsd=xsd0" />
-    <MetadataFile FileName="StudentTestService1.disco" MetadataType="Disco" ID="1d170b56-1e9a-4407-9b70-0c2855f01316" SourceId="1" SourceUrl="http://dmytroluv1.nice.com/StudentTestService/StudentTestService.svc?disco" />
-    <MetadataFile FileName="StudentTestService31.xsd" MetadataType="Schema" ID="21221b9b-ffa9-4f5b-9cf1-518f9d07305d" SourceId="1" SourceUrl="http://dmytroluv1.nice.com/StudentTestService/StudentTestService.svc?xsd=xsd2" />
-    <MetadataFile FileName="StudentTestService32.xsd" MetadataType="Schema" ID="8afbfaa0-cb40-4231-b606-02a6098ed7b6" SourceId="1" SourceUrl="http://dmytroluv1.nice.com/StudentTestService/StudentTestService.svc?xsd=xsd1" />
-    <MetadataFile FileName="StudentTestService1.wsdl" MetadataType="Wsdl" ID="a03533ac-ea8f-4d19-a8b5-617a2ffc5795" SourceId="1" SourceUrl="http://dmytroluv1.nice.com/StudentTestService/StudentTestService.svc?wsdl" />
+    <MetadataFile FileName="StudentTestService.disco" MetadataType="Disco" ID="cce7dfd3-350d-42d3-a0ff-4575835cfd88" SourceId="1" SourceUrl="http://localhost:23235/StudentTestService.svc?disco" />
+    <MetadataFile FileName="StudentTestService.wsdl" MetadataType="Wsdl" ID="6d2cf840-5bd3-4541-8b08-b06eeef95f74" SourceId="1" SourceUrl="http://localhost:23235/StudentTestService.svc?wsdl" />
+    <MetadataFile FileName="StudentTestService.xsd" MetadataType="Schema" ID="e2cd7a2a-9312-43fa-9bc5-c81e560c978b" SourceId="1" SourceUrl="http://localhost:23235/StudentTestService.svc?xsd=xsd0" />
+    <MetadataFile FileName="StudentTestService1.xsd" MetadataType="Schema" ID="3b5ebd95-368e-427a-84b0-109095b3189c" SourceId="1" SourceUrl="http://localhost:23235/StudentTestService.svc?xsd=xsd1" />
+    <MetadataFile FileName="StudentTestService2.xsd" MetadataType="Schema" ID="83f77c6a-4697-432f-8735-c7637416318b" SourceId="1" SourceUrl="http://localhost:23235/StudentTestService.svc?xsd=xsd2" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

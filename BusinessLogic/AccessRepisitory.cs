@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using StudentTestsDataBaseEntities;
 using System.Data;
+using System.Data.Entity;
 
 namespace BusinessLogic
 {

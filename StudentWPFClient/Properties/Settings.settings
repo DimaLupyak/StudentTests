@@ -2,11 +2,11 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="StudentWpfClient.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="ChosenAccent" Type="System.Windows.Media.Color" Scope="User">
-      <Value Profile="(Default)">#00000000</Value>
-    </Setting>
     <Setting Name="ChosenFontSize" Type="FirstFloor.ModernUI.Presentation.FontSize" Scope="User">
       <Value Profile="(Default)">Large</Value>
+    </Setting>
+    <Setting Name="ChosenAccent" Type="System.Windows.Media.Color" Scope="User">
+      <Value Profile="(Default)">#00A20025</Value>
     </Setting>
   </Settings>
 </SettingsFile>

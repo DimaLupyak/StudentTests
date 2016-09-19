@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using StudentTestsDataBaseEntities;
 using System.Data;
+using System.Data.Entity;
 
 namespace BusinessLogic
 {

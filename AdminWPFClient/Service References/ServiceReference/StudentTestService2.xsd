@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/DataViewModels" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DataViewModels" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:23235/StudentTestService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="ArrayOfStudentViewModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="StudentViewModel" nillable="true" type="tns:StudentViewModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfStudentViewModel" nillable="true" type="tns:ArrayOfStudentViewModel" />
+  <xs:complexType name="StudentViewModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="GroupID" type="xs:int" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="StudentViewModel" nillable="true" type="tns:StudentViewModel" />
+  <xs:complexType name="ArrayOfGroupViewModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="GroupViewModel" nillable="true" type="tns:GroupViewModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfGroupViewModel" nillable="true" type="tns:ArrayOfGroupViewModel" />
+  <xs:complexType name="GroupViewModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GroupViewModel" nillable="true" type="tns:GroupViewModel" />
+  <xs:complexType name="ArrayOfTestViewModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TestViewModel" nillable="true" type="tns:TestViewModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTestViewModel" nillable="true" type="tns:ArrayOfTestViewModel" />
+  <xs:complexType name="TestViewModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Time" type="ser:duration" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TestViewModel" nillable="true" type="tns:TestViewModel" />
+  <xs:complexType name="ArrayOfQuestionViewModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="QuestionViewModel" nillable="true" type="tns:QuestionViewModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfQuestionViewModel" nillable="true" type="tns:ArrayOfQuestionViewModel" />
+  <xs:complexType name="QuestionViewModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Image" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="TestId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Text" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QuestionViewModel" nillable="true" type="tns:QuestionViewModel" />
+  <xs:complexType name="ArrayOfAnswerViewModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AnswerViewModel" nillable="true" type="tns:AnswerViewModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAnswerViewModel" nillable="true" type="tns:ArrayOfAnswerViewModel" />
+  <xs:complexType name="AnswerViewModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Image" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="IsCorrect" type="xs:boolean" />
+      <xs:element minOccurs="0" name="QuestionId" type="xs:int" />
+      <xs:element minOccurs="0" name="Text" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AnswerViewModel" nillable="true" type="tns:AnswerViewModel" />
+  <xs:complexType name="ArrayOfResultViewModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ResultViewModel" nillable="true" type="tns:ResultViewModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfResultViewModel" nillable="true" type="tns:ArrayOfResultViewModel" />
+  <xs:complexType name="ResultViewModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CorrectCount" type="xs:int" />
+      <xs:element minOccurs="0" name="CorrectPercent" type="xs:float" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="ResultDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="SpentTime" type="ser:duration" />
+      <xs:element minOccurs="0" name="StudentId" type="xs:int" />
+      <xs:element minOccurs="0" name="TestId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultViewModel" nillable="true" type="tns:ResultViewModel" />
+  <xs:complexType name="ArrayOfResultAnswerViewModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ResultAnswerViewModel" nillable="true" type="tns:ResultAnswerViewModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfResultAnswerViewModel" nillable="true" type="tns:ArrayOfResultAnswerViewModel" />
+  <xs:complexType name="ResultAnswerViewModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AnswerId" type="xs:int" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="QuestionId" type="xs:int" />
+      <xs:element minOccurs="0" name="ResultId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultAnswerViewModel" nillable="true" type="tns:ResultAnswerViewModel" />
+</xs:schema>

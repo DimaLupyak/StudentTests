@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>StudentTestsDataBaseEntities</RootNamespace>
     <AssemblyName>StudentTestsDataBaseEntities</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -31,8 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -50,44 +50,44 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Access.cs">
-      <DependentUpon>StudentTestDataModel.tt</DependentUpon>
+      <DependentUpon>StudentTestsDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Answer.cs">
-      <DependentUpon>StudentTestDataModel.tt</DependentUpon>
+      <DependentUpon>StudentTestsDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Group.cs">
-      <DependentUpon>StudentTestDataModel.tt</DependentUpon>
+      <DependentUpon>StudentTestsDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Question.cs">
-      <DependentUpon>StudentTestDataModel.tt</DependentUpon>
+      <DependentUpon>StudentTestsDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Result.cs">
-      <DependentUpon>StudentTestDataModel.tt</DependentUpon>
+      <DependentUpon>StudentTestsDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ResultAnswer.cs">
-      <DependentUpon>StudentTestDataModel.tt</DependentUpon>
+      <DependentUpon>StudentTestsDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Student.cs">
-      <DependentUpon>StudentTestDataModel.tt</DependentUpon>
+      <DependentUpon>StudentTestsDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="StudentTestDataModel.Context.cs">
+    <Compile Include="StudentTestsDataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>StudentTestDataModel.Context.tt</DependentUpon>
+      <DependentUpon>StudentTestsDataModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="StudentTestDataModel.cs">
+    <Compile Include="StudentTestsDataModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>StudentTestDataModel.tt</DependentUpon>
+      <DependentUpon>StudentTestsDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="StudentTestDataModel.Designer.cs">
+    <Compile Include="StudentTestsDataModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>StudentTestDataModel.edmx</DependentUpon>
+      <DependentUpon>StudentTestsDataModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Test.cs">
-      <DependentUpon>StudentTestDataModel.tt</DependentUpon>
+      <DependentUpon>StudentTestsDataModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -96,22 +96,22 @@
   <ItemGroup>
     <None Include="App.Config" />
     <None Include="packages.config" />
-    <EntityDeploy Include="StudentTestDataModel.edmx">
+    <EntityDeploy Include="StudentTestsDataModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>StudentTestDataModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>StudentTestsDataModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="StudentTestDataModel.Context.tt">
+    <None Include="StudentTestsDataModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>StudentTestDataModel.edmx</DependentUpon>
-      <LastGenOutput>StudentTestDataModel.Context.cs</LastGenOutput>
+      <DependentUpon>StudentTestsDataModel.edmx</DependentUpon>
+      <LastGenOutput>StudentTestsDataModel.Context.cs</LastGenOutput>
     </None>
-    <None Include="StudentTestDataModel.edmx.diagram">
-      <DependentUpon>StudentTestDataModel.edmx</DependentUpon>
+    <None Include="StudentTestsDataModel.edmx.diagram">
+      <DependentUpon>StudentTestsDataModel.edmx</DependentUpon>
     </None>
-    <None Include="StudentTestDataModel.tt">
+    <None Include="StudentTestsDataModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>StudentTestDataModel.edmx</DependentUpon>
-      <LastGenOutput>StudentTestDataModel.cs</LastGenOutput>
+      <DependentUpon>StudentTestsDataModel.edmx</DependentUpon>
+      <LastGenOutput>StudentTestsDataModel.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
